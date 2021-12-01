@@ -8,7 +8,16 @@ import rootSaga from './sagas'
 
 const initState: AppState = {
   product: {
-    inCart: [],
+    inCart: [
+      {
+        id: '23123122s',
+        title: 'book1'
+      },
+      {
+        id: '23123127s',
+        title: 'book2'
+      }
+    ],
   },
 }
 

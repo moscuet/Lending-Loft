@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import { Product, AppState } from '../types'
 import { addProduct, removeProduct } from '../redux/actions'
 
-const names = ['Apple', 'Orange', 'Avocado', 'Banana', 'Cucumber', 'Carrot']
+import NavBar from '../components/nabBar/NavBar'
+
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -14,20 +15,20 @@ export default function Home() {
   const handleAddProduct = () => {
     const product: Product = {
       id: (+new Date()).toString(),
-      name: names[Math.floor(Math.random() * names.length)],
-      price: +(Math.random() * 10).toFixed(2),
+      title:'bbok1'
     }
     dispatch(addProduct(product))
   }
 
   return (
     <>
+      <NavBar />
       <h1>Home page</h1>
       {products.length <= 0 && <div>No products in cart</div>}
       <ul>
         {products.map((p) => (
           <li key={p.id}>
-            <Link to={`/products/${p.id}`}>{`${p.name} - $${p.price}`}</Link>
+            <Link to={`/products/${p.id}`}>{`${p.title}`}</Link>
 
             {'  '}
 

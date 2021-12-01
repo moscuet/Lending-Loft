@@ -4,9 +4,16 @@ export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 // A product
 export type Product = {
-  id: string
-  name: string
-  price: number
+  id:string
+  title: string
+  // ISBN: string
+  // publisherName: string
+  // authors: string[]
+  // publishedYear: number
+  // genres: string[]
+  // description: string
+  // edition: string
+  // pageCount: number
 }
 
 export type AddProductAction = {
