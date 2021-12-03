@@ -17,7 +17,7 @@ interface RouterProps {
 }
 
 type State = {
-  username: string,
+  useremail: string,
   password: string,
   loading: boolean,
   message: string
@@ -29,7 +29,7 @@ export default class Login extends Component<RouterProps, State> {
     this.handleLogin = this.handleLogin.bind(this);
 
     this.state = {
-      username: "",
+      useremail: "",
       password: "",
       loading: false,
       message: ""
@@ -38,23 +38,23 @@ export default class Login extends Component<RouterProps, State> {
 
   validationSchema() {
     return Yup.object().shape({
-      username: Yup.string()
+      useremail: Yup.string()
         .required("This field is required!")
         .email('Email is invalid'),
       password: Yup.string().required("This field is required!"),
     });
   }
 
-  handleLogin(formValue: { username: string; password: string }) {
-    const { username, password } = formValue;
-
+  handleLogin(formValue: { useremail: string; password: string }) {
+    const { useremail, password } = formValue;
+    console.log( 'from login form useremail and pass',useremail, password )
     this.setState({
       message: "",
       loading: true
     });
 
 
-    AuthService.login(username, password).then(
+    AuthService.login(useremail, password).then(
       () => {
         this.props.history.push("/profile");
         window.location.reload();
@@ -79,7 +79,7 @@ export default class Login extends Component<RouterProps, State> {
     const { loading, message } = this.state;
 
     const initialValues = {
-      username: "",
+      useremail: "",
       password: "",
     };
 
@@ -99,10 +99,10 @@ export default class Login extends Component<RouterProps, State> {
           >
             <Form>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <Field name="username" type="text" className="form-control" />
+                <label htmlFor="useremail">useremail</label>
+                <Field name="useremail" type="text" className="form-control" />
                 <ErrorMessage
-                  name="username"
+                  name="useremail"
                   component="div"
                   className="alert alert-danger"
                 />
