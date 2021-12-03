@@ -6,8 +6,8 @@ import { Product, AppState } from '../types'
 import { addProduct, removeProduct } from '../redux/actions'
 
 import NavBar from '../components/nabBar/NavBar'
-
-
+import RegisterForm from '../components/form/Form2'
+import LoginForm from '../components/form/LoginForm'
 export default function Home() {
   const dispatch = useDispatch()
   const products = useSelector((state: AppState) => state.product.inCart)
@@ -37,6 +37,8 @@ export default function Home() {
         ))}
       </ul>
       <button onClick={handleAddProduct}>Add product</button>
+      <RegisterForm/>
+      <LoginForm history={[]} />
     </>
   )
 }

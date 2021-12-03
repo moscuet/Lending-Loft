@@ -1,0 +1,94 @@
+import { Dispatch  } from 'redux'
+
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  SET_MESSAGE,
+  // AUTH_ACTION
+} from "../../types";
+  
+import AuthService from "../../services/authService";
+  
+  
+export const register = (firstName: string, lastName: string, email: string, password: string ,phoneNumber:string, address: string) => (dispatch:Dispatch) => {
+  return AuthService.register(firstName,lastName,email,phoneNumber,address,password).then(
+    (response) => {
+      dispatch({
+        type: REGISTER_SUCCESS,
+      });
+  
+      dispatch({
+        type: SET_MESSAGE,
+        payload: response.data.message,
+      });
+  
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+  
+      dispatch({
+        type: REGISTER_FAIL,
+      });
+  
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+  
+      return Promise.reject();
+    }
+  );
+};
+  
+export const login = (username:string, password:string) => (dispatch:Dispatch) => {
+  return AuthService.login(username, password).then(
+    (data) => {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: { user: data },
+      });
+  
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+  
+      dispatch({
+        type: LOGIN_FAIL,
+      });
+  
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+  
+      return Promise.reject();
+    }
+  );
+};
+  
+export const logout = () => (dispatch:Dispatch) => {
+  AuthService.logout();
+  
+  dispatch({
+    type: LOGOUT,
+  });
+};
+
+// function dispatch(arg0: { type: string; }) {
+//   throw new Error('Function not implemented.');
+// }
