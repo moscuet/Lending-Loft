@@ -52,8 +52,8 @@ export default class Login extends Component<RouterProps, State> {
 
     AuthService.login(useremail, password).then(
       () => {
-        this.props.history.push("/profile");
-        window.location.reload();
+        // this.props.history.push("/profile");
+        // window.location.reload();
       },
       error => {
         const resMessage =

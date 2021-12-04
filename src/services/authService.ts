@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/api/auths/";
+const API_URL = "http://localhost:3002/api/auths/";
 class  AuthService {
   login  (useremail: string, password: string) {
     console.log('from authservice/login: ', useremail, password)
@@ -10,11 +10,12 @@ class  AuthService {
         password
       })
       .then(response => {
-        console.log(response.data.accessToken)
+        console.log('accesstoke',response.data.accessToken)
         if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
 
+          localStorage.setItem("customer", JSON.stringify(response.data));
+          console.log('#### successful login oobject return', JSON.stringify(response.data._doc))
+        }
         return response.data;
       });
   }
