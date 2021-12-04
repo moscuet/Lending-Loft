@@ -22,13 +22,14 @@ class  AuthService {
   logout () {
     localStorage.removeItem("user");
   }
-  register (firstName: string, lastName: string, email: string, phoneNumber:string, address: string, password: string ){
-    console.log('form submit request to authservice',firstName,lastName,email,phoneNumber,address,password)
+  
+  register (firstName: string, lastName: string, useremail: string, phoneNumber:string, address: string, password: string ){
+    console.log('form submit request to authservice',firstName,lastName,useremail,phoneNumber,address,password)
     return axios
-      .post('http://localhost:3001/api/auths/signup', {
+      .post('http://localhost:3002/api/auths/signup', {
         firstName,
         lastName, 
-        email, 
+        useremail, 
         phoneNumber, 
         address, 
         password

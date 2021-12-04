@@ -42,39 +42,41 @@ export default class Register extends Component<Props, State> {
     return Yup.object().shape({
       firstName: Yup.string().required('First name is required'),
       lastName: Yup.string().required('Last name is required'),
-      email: Yup.string()
+      useremail: Yup.string()
         .required('Email is required')
         .email('Email is invalid'),
       phoneNumber:Yup.string()
-        .matches(new RegExp('[0-9]{7}'))
+        .matches(new RegExp('[0-9]{10}'))
         .required('phone number is required'),
       address: Yup.string()
         .required('address is required')
         .max(255, 'Password must not exceed 255 characters'),
       password: Yup.string()
         .required('Password is required')
-        .min(6, 'Password must be at least 6 characters')
+        .min(4, 'Password must be at least 6 characters')
         .max(40, 'Password must not exceed 40 characters'),
       confirmPassword: Yup.string()
         .required('Confirm Password is required')
         .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
-      // acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
+      acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
     });
   }
 
-  handleRegister(formValue: { firstName: string, lastName: string, email: string, phoneNumber:string, password: string , address: string}) {
-    const { firstName, lastName, email, phoneNumber, address, password } = formValue;
-    console.log('form data', formValue, 'firstname',firstName, 'lastName',lastName, 'email', email, 'phoneNumber',phoneNumber,'address', address, 'pass',password)
-     
+  handleRegister(formValue: { firstName: string, lastName: string, useremail: string, phoneNumber:string, password: string , address: string}) {
+    const { firstName, lastName, useremail, phoneNumber, address, password } = formValue;
+    console.log('form data', formValue, 'firstname',firstName, 'lastName',lastName, 'email', useremail, 'phoneNumber',phoneNumber,'address', address, 'pass',password)
+    console.log("hello from frontend form register")
     this.setState({
       message: "",
       successful: false
     });
 
+    console.log(formValue)
+
     AuthService.register(
       firstName, 
       lastName, 
-      email, 
+      useremail, 
       phoneNumber, 
       address, 
       password
@@ -107,7 +109,7 @@ export default class Register extends Component<Props, State> {
     const initialValues = {
       firstName: '',
       lastName: '',
-      email: '',
+      useremail: '',
       phoneNumber: '',
       address: '',
       password: '',
@@ -151,10 +153,10 @@ export default class Register extends Component<Props, State> {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="email"> Emaill </label>
-                    <Field name="email" type="email" className="form-control" />
+                    <label htmlFor="useremail">useremail</label>
+                    <Field name="useremail" type="text" className="form-control" />
                     <ErrorMessage
-                      name="email"
+                      name="useremail"
                       component="div"
                       className="alert alert-danger"
                     />
@@ -168,6 +170,7 @@ export default class Register extends Component<Props, State> {
                       className="alert alert-danger"
                     />
                   </div>
+                  
                   <div className="form-group">
                     <label htmlFor="address"> Address </label>
                     <Field name="address" type="address" className="form-control" />
@@ -194,7 +197,7 @@ export default class Register extends Component<Props, State> {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="password"> Confirm Password </label>
+                    <label htmlFor="confirmPassword"> Confirm Password </label>
                     <Field
                       name="confirmPassword"
                       type="password"
