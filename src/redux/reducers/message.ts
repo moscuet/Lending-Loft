@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { SET_MESSAGE, CLEAR_MESSAGE } from "../../types";
 
 const initialState = {};
