@@ -2082,6 +2082,13 @@
   dependencies:
     "redux-thunk" "*"
 
+"@types/redux@^3.6.0":
+  "integrity" "sha1-8evh5UEVGAcuT9/KXHbhbnTBOZo="
+  "resolved" "https://registry.npmjs.org/@types/redux/-/redux-3.6.0.tgz"
+  "version" "3.6.0"
+  dependencies:
+    "redux" "*"
+
 "@types/resolve@0.0.8":
   "integrity" "sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ=="
   "resolved" "https://registry.npmjs.org/@types/resolve/-/resolve-0.0.8.tgz"
@@ -10009,7 +10016,7 @@
   "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.4.0.tgz"
   "version" "2.4.0"
 
-"redux@^4", "redux@^4.0.0", "redux@^4.0.4", "redux@^4.1.2":
+"redux@*", "redux@^4", "redux@^4.0.0", "redux@^4.0.4", "redux@^4.1.2":
   "integrity" "sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.1.2.tgz"
   "version" "4.1.2"

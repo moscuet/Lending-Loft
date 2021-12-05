@@ -21,7 +21,7 @@ class  AuthService {
   }
 
   logout () {
-    localStorage.removeItem("user");
+    localStorage.removeItem("customer");
   }
   
   register (firstName: string, lastName: string, useremail: string, phoneNumber:string, address: string, password: string ){
@@ -38,9 +38,9 @@ class  AuthService {
       
   }
   // /api/auth'/signup
-  getCurrentUser () {
-    const userStr = localStorage.getItem("user");
-    if (userStr) return JSON.parse(userStr);
+  getCurrentCustomer () {
+    const customerStr = localStorage.getItem("customer");
+    if (customerStr ) return JSON.parse(customerStr );
 
     return null;
   }

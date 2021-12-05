@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import AuthService from "../../services/authService";
+import AuthService from "../services/authService";
 //const history = createBrowserHistory({})
 
 interface RouterProps {
@@ -52,8 +52,8 @@ export default class Login extends Component<RouterProps, State> {
 
     AuthService.login(useremail, password).then(
       () => {
-        // this.props.history.push("/profile");
-        // window.location.reload();
+        this.props.history.push("/profile");
+        window.location.reload();
       },
       error => {
         const resMessage =
@@ -70,7 +70,7 @@ export default class Login extends Component<RouterProps, State> {
       }
     );
   }
-
+  
   render() {
     const { loading, message } = this.state;
 

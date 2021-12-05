@@ -7,15 +7,30 @@ export const payload = 'payload'
 export type Product = {
   id:string
   title: string
-  // ISBN: string
-  // publisherName: string
-  // authors: string[]
-  // publishedYear: number
-  // genres: string[]
-  // description: string
-  // edition: string
-  // pageCount: number
+  ISBN: string
+  publisherName: string
+  authors: string[]
+  publishedYear: number
+  genres: string[]
+  description: string
+  edition: string
+  pageCount: number
 }
+
+
+export type TCustomer = {
+  id: string
+  firstName: string
+  lastName: string
+  useremail: string
+  phoneNumber: number
+  address: string
+  password: string
+  rolse: string[]
+}
+
+
+
 
 export type AddProductAction = {
   type: typeof ADD_PRODUCT
