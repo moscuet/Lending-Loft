@@ -5,6 +5,8 @@ import  auth  from "../services/authService";
 const Profile: React.FC = () : ReactElement=> {
   const currentCustomer = auth.getCurrentCustomer();
 
+  console.log('currentCustomer',currentCustomer)
+
   return (
     <div className="container">
       <header className="jumbotron">
@@ -17,15 +19,15 @@ const Profile: React.FC = () : ReactElement=> {
         {currentCustomer.accessToken.substr(currentCustomer.accessToken.length - 20)}
       </p>
       <p>
-        <strong>Id:</strong> {currentCustomer.id}
+        <strong>Id:</strong> {currentCustomer._id}
       </p>
       <p>
         <strong>Email:</strong> {currentCustomer.useremail}
       </p>
       <strong>Authorities:</strong>
       <ul>
-        {currentCustomer.roles &&
-          currentCustomer.roles.map((role: string, index: number) => <li key={index}>{role}</li>)}
+        {/* {currentCustomer.roles &&
+          currentCustomer.roles.map((role: string, index: number) => <li key={index}>{role}</li>)} */}
       </ul>
     </div>
   );

@@ -14,7 +14,7 @@ class  AuthService {
         if (response.data.accessToken) {
 
           localStorage.setItem("customer", JSON.stringify(response.data));
-          console.log('#### successful login oobject return', JSON.stringify(response.data._doc))
+          console.log('#### successful login oobject received.', JSON.stringify(response.data))
         }
         return response.data;
       });

@@ -1,38 +1,39 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Routes as Switch, Route, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+//import {useHistory} from 'react-router-dom'
+import { createBrowserHistory } from 'history';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import  AuthService from "./services/authService";
 import {TCustomer }from './types';
-
 import Login from "./components/LoginForm";
 import Register from "./components/RegisterForm";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import UserBoard from "./components/UserBoard";
 import AdminBoard from "./components/AdminBoard";
-
 import EventBus from "./common/EventBus";
 
+
 const App: React.FC = () => {
-  const [showModeratorBoard, setShowModeratorBoard] = useState<boolean>(false);
   const [showAdminBoard, setShowAdminBoard] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<TCustomer | undefined>(undefined);
 
 
-  let history = useHistory();
+  const history = createBrowserHistory();
+
+
 
   useEffect(() => {
     const user = AuthService.getCurrentCustomer();
 
     if (user) {
+      console.log(user)
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      //setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
     EventBus.on("logout", logOut);
@@ -44,7 +45,6 @@ const App: React.FC = () => {
 
   const logOut = () => {
     AuthService.logout();
-    setShowModeratorBoard(false);
     setShowAdminBoard(false);
     setCurrentUser(undefined);
   };
@@ -61,14 +61,6 @@ const App: React.FC = () => {
               Home
             </Link>
           </li>
-
-          {showModeratorBoard && (
-            <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Moderator Board
-              </Link>
-            </li>
-          )}
 
           {showAdminBoard && (
             <li className="nav-item">
@@ -109,7 +101,7 @@ const App: React.FC = () => {
             </li>
 
             <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
+              <Link to={"/signup"} className="nav-link">
                 Sign Up
               </Link>
             </li>
@@ -120,11 +112,11 @@ const App: React.FC = () => {
       <div className="container mt-3">
         <Switch>
           <Route  path="/" element={<Home />} />
-          <Route  path="/" element={<Register />} />
-          <Route  path="/" element={<Login history = {history }  />} />
+          <Route  path="/signup" element={<Register />} />
+          <Route  path="/signin" element={<Login history = {history}  />} />
           <Route  path="/" element={<UserBoard/>} />
           <Route  path="/" element={<AdminBoard/>} />
-          <Route  path="/" element={<Profile/>} />
+          <Route  path="/profile" element={<Profile/>} />
         </Switch>
       </div>
     </div>
