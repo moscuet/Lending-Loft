@@ -12,20 +12,14 @@ class  AuthService {
       .then(response => {
         console.log('accesstoke',response.data.accessToken)
         if (response.data.accessToken) {
-
           localStorage.setItem("user", JSON.stringify(response.data));
-          console.log('#### successful login oobject received.', JSON.stringify(response.data))
         }
         return response.data;
       });
   }
 
   logout () {
-
-    localStorage.removeItem("customer");
-    const userStr = localStorage.getItem("user");
-    console.log('user from authservice/auths/logout', userStr )
-
+    localStorage.removeItem("user");
   }
   
   register (firstName: string, lastName: string, useremail: string, phoneNumber:string, address: string, password: string ){

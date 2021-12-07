@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import UserBoard from "./components/UserBoard";
 import AdminBoard from "./components/AdminBoard";
+import authService from "./services/authService";
 import EventBus from "./common/EventBus";
 
 
@@ -26,12 +27,13 @@ const App: React.FC = () => {
   const history = createBrowserHistory();
 
 
-
   useEffect(() => {
     const user = AuthService.getCurrentCustomer();
 
     if (user) {
-      setCurrentUser(user);
+      setCurrentUser({...user});
+      console.log('user from home', user)
+      console.log(user)
       //setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
@@ -43,7 +45,7 @@ const App: React.FC = () => {
   }, []);
 
   const logOut = () => {
-    AuthService.logout();
+    authService.logout();
     setShowAdminBoard(false);
     setCurrentUser(undefined);
   };
@@ -77,7 +79,7 @@ const App: React.FC = () => {
             </li>
           )}
         </div>
-
+         
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">

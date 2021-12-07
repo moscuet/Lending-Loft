@@ -15,7 +15,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
 
 
   const { isLoggedIn } = useSelector((state:AppState) => state.auth);
-  const message = useSelector((state:AppState) => state.message);
+  // const message = useSelector((state:AppState) => state.message);
 
 
   const [userState, setUserState] = useState({
@@ -23,7 +23,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
     password: "",
     loading: false,
     isLoggedIn,
-    message
+    message:''
 
   })
 
@@ -53,8 +53,10 @@ const  Signin = (props:RouterProps) : ReactElement => {
       window.location.reload();
 
     } catch(error){
+      console.log(error)
       setUserState({...userState,
         loading: false,
+        message: 'invalid email and password'
       });
     }
   }
@@ -112,10 +114,10 @@ const  Signin = (props:RouterProps) : ReactElement => {
               </button>
             </div>
 
-            {message && (
+            {userState.message && (
               <div className="form-group">
                 <div className="alert alert-danger" role="alert">
-                  {message}
+                  {userState.message}
                 </div>
               </div>
             )}
