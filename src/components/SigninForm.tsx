@@ -1,9 +1,9 @@
-import { Component } from "react";
+import React, { useState,  ReactElement } from "react";
+//import { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import AuthService from "../services/authService";
-//const history = createBrowserHistory({})
 
 interface RouterProps {
     history: {
@@ -12,29 +12,25 @@ interface RouterProps {
    
 }
 
+// type State = {
+//   useremail: string,
+//   password: string,
+//   loading: boolean,
+//   message: string
+// };
+// type propstype =  State & RouterProps
 
+const  Signin = (props:RouterProps) : ReactElement => {
 
-type State = {
-  useremail: string,
-  password: string,
-  loading: boolean,
-  message: string
-};
+  const [state, setState] = useState({
+    useremail: "",
+    password: "",
+    loading: false,
+    message: ""
+  })
+   
 
-export default class Signin extends Component<RouterProps, State> {
-  constructor(props: RouterProps) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-
-    this.state = {
-      useremail: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
-
-  validationSchema() {
+  function validationSchema() {
     return Yup.object().shape({
       useremail: Yup.string()
         .required("This field is required!")
@@ -43,10 +39,10 @@ export default class Signin extends Component<RouterProps, State> {
     });
   }
 
-  handleLogin(formValue: { useremail: string; password: string }) {
+  function handleLogin(formValue: { useremail: string; password: string }) {
     const { useremail, password } = formValue;
     console.log( 'from login form useremail and pass',useremail, password )
-    this.setState({
+    setState({ ...state,
       message: "",
       loading: true
     });
@@ -54,7 +50,7 @@ export default class Signin extends Component<RouterProps, State> {
 
     AuthService.login(useremail, password).then(
       () => {
-        this.props.history.push("/profile");
+        props.history.push("/profile");
         window.location.reload();
       },
       error => {
@@ -65,7 +61,7 @@ export default class Signin extends Component<RouterProps, State> {
           error.message ||
           error.toString();
 
-        this.setState({
+        setState({...state,
           loading: false,
           message: resMessage
         });
@@ -73,69 +69,70 @@ export default class Signin extends Component<RouterProps, State> {
     );
   }
   
-  render() {
-    const { loading, message } = this.state;
+  
+  const { loading, message } = state;
 
-    const initialValues = {
-      useremail: "",
-      password: "",
-    };
+  const initialValues = {
+    useremail: "",
+    password: "",
+  };
 
-    return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          {/* <img
+  return (
+    <div className="col-md-12">
+      <div className="card card-container">
+        {/* <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
             className="profile-img-card"
           /> */}
 
-          <Formik
-            initialValues={initialValues}
-            validationSchema={this.validationSchema}
-            onSubmit={this.handleLogin}
-          >
-            <Form>
-              <div className="form-group">
-                <label htmlFor="useremail">useremail</label>
-                <Field name="useremail" type="text" className="form-control" />
-                <ErrorMessage
-                  name="useremail"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleLogin}
+        >
+          <Form>
+            <div className="form-group">
+              <label htmlFor="useremail">useremail</label>
+              <Field name="useremail" type="text" className="form-control" />
+              <ErrorMessage
+                name="useremail"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <Field name="password" type="password" className="form-control" />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <Field name="password" type="password" className="form-control" />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
 
-              <div className="form-group">
-                <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-                  {loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
-                  <span>Login</span>
-                </button>
-              </div>
+            <div className="form-group">
+              <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                {loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                <span>Login</span>
+              </button>
+            </div>
 
-              {message && (
-                <div className="form-group">
-                  <div className="alert alert-danger" role="alert">
-                    {message}
-                  </div>
+            {message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {message}
                 </div>
-              )}
-            </Form>
-          </Formik>
-        </div>
+              </div>
+            )}
+          </Form>
+        </Formik>
       </div>
-    );
-  }
+    </div>
+  )
 }
+
+export default Signin
