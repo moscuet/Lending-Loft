@@ -17,7 +17,7 @@ export default function Home() {
   const [content, setContent] = useState<string>("");
 
 
-  const products = useSelector((state: AppState) => state.product.inCart)
+  const products = useSelector((state: AppState) => state.order.inCart)
 
 
   useEffect(() => {

@@ -1,34 +1,33 @@
 import React, { useState,  ReactElement } from "react";
-//import { Component } from "react";
+import {  useSelector, useDispatch } from "react-redux";
+import {AppState}  from '../types'
+import { Navigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import AuthService from "../services/authService";
+import {login} from '../redux/actions/auth'
 
 interface RouterProps {
     history: {
         push(url: string): void;
     };
-   
 }
-
-// type State = {
-//   useremail: string,
-//   password: string,
-//   loading: boolean,
-//   message: string
-// };
-// type propstype =  State & RouterProps
-
 const  Signin = (props:RouterProps) : ReactElement => {
 
-  const [state, setState] = useState({
+
+  const { isLoggedIn } = useSelector((state:AppState) => state.auth);
+  const message = useSelector((state:AppState) => state.message);
+
+
+  const [userState, setUserState] = useState({
     useremail: "",
     password: "",
     loading: false,
-    message: ""
+    isLoggedIn,
+    message
+
   })
-   
+
+
 
   function validationSchema() {
     return Yup.object().shape({
@@ -39,44 +38,36 @@ const  Signin = (props:RouterProps) : ReactElement => {
     });
   }
 
-  function handleLogin(formValue: { useremail: string; password: string }) {
+  const dispatch = useDispatch()
+
+  const  handleSignin = async(formValue: { useremail: string; password: string }) => {
     const { useremail, password } = formValue;
     console.log( 'from login form useremail and pass',useremail, password )
-    setState({ ...state,
-      message: "",
+    setUserState({ ...userState,
       loading: true
     });
+    
+    try {
+      await dispatch(login(useremail, password ))
+      props.history.push("/profile");
+      window.location.reload();
 
-
-    AuthService.login(useremail, password).then(
-      () => {
-        props.history.push("/profile");
-        window.location.reload();
-      },
-      error => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        setState({...state,
-          loading: false,
-          message: resMessage
-        });
-      }
-    );
+    } catch(error){
+      setUserState({...userState,
+        loading: false,
+      });
+    }
   }
-  
-  
-  const { loading, message } = state;
 
   const initialValues = {
     useremail: "",
     password: "",
   };
 
+  if (isLoggedIn) {
+    <Navigate to="/profile" replace={true} />
+
+  }
   return (
     <div className="col-md-12">
       <div className="card card-container">
@@ -89,7 +80,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleLogin}
+          onSubmit={handleSignin}
         >
           <Form>
             <div className="form-group">
@@ -113,8 +104,8 @@ const  Signin = (props:RouterProps) : ReactElement => {
             </div>
 
             <div className="form-group">
-              <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-                {loading && (
+              <button type="submit" className="btn btn-primary btn-block" disabled={userState.loading}>
+                {userState.loading && (
                   <span className="spinner-border spinner-border-sm"></span>
                 )}
                 <span>Login</span>
@@ -134,5 +125,6 @@ const  Signin = (props:RouterProps) : ReactElement => {
     </div>
   )
 }
+ 
 
 export default Signin

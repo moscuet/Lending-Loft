@@ -31,7 +31,6 @@ const App: React.FC = () => {
     const user = AuthService.getCurrentCustomer();
 
     if (user) {
-      console.log(user)
       setCurrentUser(user);
       //setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
@@ -57,7 +56,7 @@ const App: React.FC = () => {
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
+            <Link to={"/"} className="nav-link">
               Home
             </Link>
           </li>
@@ -87,7 +86,7 @@ const App: React.FC = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
+              <a href="/signin" className="nav-link" onClick={logOut}>
                 LogOut
               </a>
             </li>
@@ -95,7 +94,7 @@ const App: React.FC = () => {
         ) : (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
+              <Link to={"/signin"} className="nav-link">
                 Login
               </Link>
             </li>
@@ -112,7 +111,7 @@ const App: React.FC = () => {
       <div className="container mt-3">
         <Switch>
           <Route  path="/" element={<Home />} />
-          <Route  path="/signup" element={<Signup />} />
+          <Route  path="/signup" element={<Signup history ={history} />} />
           <Route  path="/signin" element={<Signin history = {history}  />} />
           <Route  path="/" element={<UserBoard/>} />
           <Route  path="/" element={<AdminBoard/>} />

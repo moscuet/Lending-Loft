@@ -13,7 +13,7 @@ class  AuthService {
         console.log('accesstoke',response.data.accessToken)
         if (response.data.accessToken) {
 
-          localStorage.setItem("customer", JSON.stringify(response.data));
+          localStorage.setItem("user", JSON.stringify(response.data));
           console.log('#### successful login oobject received.', JSON.stringify(response.data))
         }
         return response.data;
@@ -21,7 +21,11 @@ class  AuthService {
   }
 
   logout () {
+
     localStorage.removeItem("customer");
+    const userStr = localStorage.getItem("user");
+    console.log('user from authservice/auths/logout', userStr )
+
   }
   
   register (firstName: string, lastName: string, useremail: string, phoneNumber:string, address: string, password: string ){
@@ -39,8 +43,9 @@ class  AuthService {
   }
   // /api/auth'/signup
   getCurrentCustomer () {
-    const customerStr = localStorage.getItem("customer");
-    if (customerStr ) return JSON.parse(customerStr );
+    const userStr = localStorage.getItem("user");
+    console.log('user from authservice/auths/getCurrentcustomer', userStr )
+    if (userStr ) return JSON.parse(userStr );
 
     return null;
   }

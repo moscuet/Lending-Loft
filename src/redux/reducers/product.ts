@@ -1,16 +1,16 @@
 import {
-  ProductState,
+  OrderState,
   ProductActions,
   ADD_PRODUCT,
   REMOVE_PRODUCT,
 } from '../../types'
 
 export default function product(
-  state: ProductState = {
+  state: OrderState = {
     inCart: [],
   },
   action: ProductActions
-): ProductState {
+): OrderState {
   switch (action.type) {
   case ADD_PRODUCT: {
     const { product } = action.payload

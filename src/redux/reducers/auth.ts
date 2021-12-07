@@ -15,9 +15,9 @@ const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 
-type stateT = typeof initialState
+export type UserState = typeof initialState
 
-export default function (state = initialState, action:AUTH_ACTION):stateT  {
+export default function (state = initialState, action:AUTH_ACTION):any  {
   const { type, payload }= action;
   
   switch (type) {
@@ -35,7 +35,7 @@ export default function (state = initialState, action:AUTH_ACTION):stateT  {
     return {
       ...state,
       isLoggedIn: true,
-      user: payload.username,
+      user: payload,
     };
   case LOGIN_FAIL:
     return {

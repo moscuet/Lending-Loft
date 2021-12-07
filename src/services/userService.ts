@@ -12,7 +12,6 @@ const getCustomerBoard = () => {
   return axios.get(API_URL + "customer", { headers: authHeader() });
 };
 
-
 const getAdminBoard = () => {
   return axios.get(API_URL + "admin", { headers: authHeader() });
 };

@@ -6,11 +6,11 @@ const history = createBrowserHistory()
 
 const Profile: React.FC = () : ReactElement=> {
   const currentCustomer = auth.getCurrentCustomer();
+  console.log('cuurent customer', currentCustomer)
   if(!currentCustomer) {
     history.push('/signin')
-    //locatio
+    window.location.reload();
   }
-  console.log('currentCustomer',currentCustomer)
   
   return (
     <div className="container">

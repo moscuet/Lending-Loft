@@ -2,15 +2,25 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import thunk from 'redux-thunk'
 
+
+
+
 import { AppState } from '../types'
 import createRootReducer from './reducers'
 import rootSaga from './sagas'
 
+
 const initState: AppState = {
-  product: {
-    inCart: [
+  auth:{
+    isLoggedIn: false,
+    user:{}
+  },
+  message:'',
+  order: {
+    inCart:  [
         
     ],
+
   },
 }
 
@@ -29,7 +39,8 @@ export default function makeStore(initialState = initState) {
     createRootReducer(),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
-  )
+  ) 
+
 
   sagaMiddleware.run(rootSaga)
 
