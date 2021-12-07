@@ -21,7 +21,7 @@ type State = {
   message: string
 };
 
-export default class Login extends Component<RouterProps, State> {
+export default class Signin extends Component<RouterProps, State> {
   constructor(props: RouterProps) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);

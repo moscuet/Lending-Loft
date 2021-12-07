@@ -1,12 +1,17 @@
 import React, {ReactElement} from "react";
 import  auth  from "../services/authService";
+import { createBrowserHistory } from "history";
 
+const history = createBrowserHistory()
 
 const Profile: React.FC = () : ReactElement=> {
   const currentCustomer = auth.getCurrentCustomer();
-
+  if(!currentCustomer) {
+    history.push('/signin')
+    //locatio
+  }
   console.log('currentCustomer',currentCustomer)
-
+  
   return (
     <div className="container">
       <header className="jumbotron">

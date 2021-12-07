@@ -6,10 +6,10 @@ import { useDispatch } from 'react-redux'
 import { Product, AppState } from '../types'
 import { addProduct, removeProduct } from '../redux/actions'
 
-import userService from '..//services/userService'
+import userService from '../services/userService'
 import NavBar from '../components/nabBar/NavBar'
 //import RegisterForm from '../components/RegisterForm'
-import LoginForm from '../components/LoginForm'
+import SigninForm from '../components/SigninForm'
 export default function Home() {
   
   const dispatch = useDispatch()
@@ -75,7 +75,7 @@ export default function Home() {
       </ul>
       <button onClick={handleAddProduct}>Add product</button>
       {/* <RegisterForm/> */}
-      <LoginForm history={[]} />
+      <SigninForm history={[]} />
     </>
   )
 }

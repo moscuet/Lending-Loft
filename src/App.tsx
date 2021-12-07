@@ -9,8 +9,8 @@ import "./App.css";
 
 import  AuthService from "./services/authService";
 import {TCustomer }from './types';
-import Login from "./components/LoginForm";
-import Register from "./components/RegisterForm";
+import Signin from "./components/SigninForm";
+import Signup from "./components/SignupForm";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import UserBoard from "./components/UserBoard";
@@ -112,8 +112,8 @@ const App: React.FC = () => {
       <div className="container mt-3">
         <Switch>
           <Route  path="/" element={<Home />} />
-          <Route  path="/signup" element={<Register />} />
-          <Route  path="/signin" element={<Login history = {history}  />} />
+          <Route  path="/signup" element={<Signup />} />
+          <Route  path="/signin" element={<Signin history = {history}  />} />
           <Route  path="/" element={<UserBoard/>} />
           <Route  path="/" element={<AdminBoard/>} />
           <Route  path="/profile" element={<Profile/>} />
