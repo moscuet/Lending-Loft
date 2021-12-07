@@ -5,7 +5,7 @@ import {
   REMOVE_PRODUCT,
 } from '../../types'
 
-export default function product(
+export default function order(
   state: OrderState = {
     inCart: [],
   },
