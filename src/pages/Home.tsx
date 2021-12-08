@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { Product, AppState } from '../types'
-import { addProduct, removeProduct } from '../redux/actions'
+import { removeProduct } from '../redux/actions'
 import userService from '../services/userService'
 
 
@@ -35,22 +35,22 @@ export default function Home() {
 
   console.log(content,message)
 
-  const handleAddProduct = () => {
-    const product: Product = {
-      _id: (+new Date()).toString(),
-      title: 'bbok1',
-      ISBN: "",
-      publisherName: "",
-      authors: [],
-      publishedYear: 0,
-      genres: [],
-      description: "",
-      edition: "",
-      pageCount: 0,
-      img:''
-    }
-    dispatch(addProduct(product))
-  }
+  // const handleAddProduct = () => {
+  //   const product: Product = {
+  //     _id: (+new Date()).toString(),
+  //     title: 'bbok1',
+  //     ISBN: "",
+  //     publisherName: "",
+  //     authors: [],
+  //     publishedYear: 0,
+  //     genres: [],
+  //     description: "",
+  //     edition: "",
+  //     pageCount: 0,
+  //     img:''
+  //   }
+  //   dispatch(addProduct(product))
+  // }
 
 
 
@@ -71,7 +71,7 @@ export default function Home() {
           </li>
         ))}
       </ul>
-      <button onClick={handleAddProduct}>Add product</button>
+      {/* <button onClick={handleAddProduct}>Add product</button> */}
     </>
   )
 }

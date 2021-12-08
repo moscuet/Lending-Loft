@@ -5,10 +5,11 @@ import thunk from 'redux-thunk'
 
 
 
-import { AppState } from '../types'
+import { AppState, Product } from '../types'
 import createRootReducer from './reducers'
 import rootSaga from './sagas'
 
+const initialCart:Product[] = JSON.parse(localStorage.getItem('inCart') || '[]') 
 
 const initState: AppState = {
   auth:{
@@ -17,12 +18,10 @@ const initState: AppState = {
   },
   message:'',
   order: {
-    inCart:  [
-        
-    ],
-
+    inCart: initialCart
   },
 }
+
 
 export default function makeStore(initialState = initState) {
   const sagaMiddleware = createSagaMiddleware()

@@ -18,7 +18,10 @@ export default function order(
       return state
     }
     // Always return new state (e.g, new object) if changed
-    return { ...state, inCart: [...state.inCart, product] }
+    const updatedCart = [...state.inCart,product]
+    localStorage.setItem('inCart', JSON.stringify(updatedCart));
+
+    return { ...state, inCart: updatedCart }
   }
 
   case REMOVE_PRODUCT: {
@@ -26,6 +29,7 @@ export default function order(
     const index = state.inCart.findIndex((p) => p._id === product._id)
     if (index >= 0) {
       state.inCart.splice(index, 1)
+      localStorage.setItem('inCart', JSON.stringify([...state.inCart]));
       return { ...state, inCart: [...state.inCart] }
     }
     return state
