@@ -12,6 +12,7 @@ class  AuthService {
       .then(response => {
         console.log('accesstoke',response.data.accessToken)
         if (response.data.accessToken) {
+
           localStorage.setItem("user", JSON.stringify(response.data));
         }
         return response.data;
@@ -20,6 +21,7 @@ class  AuthService {
 
   logout () {
     localStorage.removeItem("user");
+    console.log('logout')
   }
   
   register (firstName: string, lastName: string, useremail: string, phoneNumber:string, address: string, password: string ){

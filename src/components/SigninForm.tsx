@@ -15,8 +15,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
 
 
   const { isLoggedIn } = useSelector((state:AppState) => state.auth);
-  // const message = useSelector((state:AppState) => state.message);
-
+  //const message = useSelector((state:AppState) => state.message);
 
   const [userState, setUserState] = useState({
     useremail: "",
@@ -24,9 +23,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
     loading: false,
     isLoggedIn,
     message:''
-
   })
-
 
 
   function validationSchema() {
@@ -53,7 +50,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
       window.location.reload();
 
     } catch(error){
-      console.log(error)
+      console.log('error',error)
       setUserState({...userState,
         loading: false,
         message: 'invalid email and password'

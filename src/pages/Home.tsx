@@ -7,7 +7,7 @@ import { Product, AppState } from '../types'
 import { addProduct, removeProduct } from '../redux/actions'
 
 import userService from '../services/userService'
-import NavBar from '../components/nabBar/NavBar'
+//import NavBar from '../components/nabBar/NavBar'
 //import RegisterForm from '../components/RegisterForm'
 import SigninForm from '../components/SigninForm'
 export default function Home() {
@@ -55,7 +55,6 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
       <h1>Home page</h1>
       <div>
         <h3>{content}</h3>

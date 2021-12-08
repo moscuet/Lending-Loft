@@ -7,18 +7,6 @@ import { Navigate } from 'react-router-dom'
 
 import AuthService from '../services/authService'
 
-// type State = {
-//     firstName: string
-//     lastName: string
-//     email: string
-//     phoneNumber: string
-//     address: string
-//     password: string
-//     confirmPassword: string
-//     acceptTerms: boolean
-//     successful: boolean,
-//     message: string
-// };
 interface RouterProps {
   history: {
     push(url: string): void
@@ -76,22 +64,7 @@ const Signup = (props: RouterProps): ReactElement => {
   }) {
     const { firstName, lastName, useremail, phoneNumber, address, password } =
       formValue
-    console.log(
-      'form data',
-      formValue,
-      'firstname',
-      firstName,
-      'lastName',
-      lastName,
-      'email',
-      useremail,
-      'phoneNumber',
-      phoneNumber,
-      'address',
-      address,
-      'pass',
-      password
-    )
+    
     console.log('hello from frontend form register')
     setState({ ...state, successful: false })
 
