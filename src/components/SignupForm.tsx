@@ -1,37 +1,21 @@
-import React, { useState,  ReactElement } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import {  useSelector } from "react-redux";
-import {AppState}  from '../types'
-import { Navigate } from "react-router-dom";
+import React, { useState, ReactElement } from 'react'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import { useSelector } from 'react-redux'
+import { AppState } from '../types'
+import { Navigate } from 'react-router-dom'
 
+import AuthService from '../services/authService'
 
-import AuthService from "../services/authService";
-
-
-// type State = {
-//     firstName: string
-//     lastName: string
-//     email: string
-//     phoneNumber: string
-//     address: string
-//     password: string
-//     confirmPassword: string     
-//     acceptTerms: boolean
-//     successful: boolean,
-//     message: string
-// };
 interface RouterProps {
   history: {
-      push(url: string): void;
-  };
+    push(url: string): void
+  }
 }
 
-const  Signup = (props: RouterProps) : ReactElement => {
-
-  const { isLoggedIn } = useSelector((state:AppState) => state.auth);
-  const message = useSelector((state:AppState) => state.message);
-
+const Signup = (props: RouterProps): ReactElement => {
+  const { isLoggedIn } = useSelector((state: AppState) => state.auth)
+  //const message = useSelector((state: AppState) => state.message)
 
   const [state, setState] = useState({
     firstName: '',
@@ -41,6 +25,7 @@ const  Signup = (props: RouterProps) : ReactElement => {
     address: '',
     password: '',
     confirmPassword: '',
+    message: '',
     acceptTerms: false,
     successful: false,
   })
@@ -52,7 +37,7 @@ const  Signup = (props: RouterProps) : ReactElement => {
       useremail: Yup.string()
         .required('Email is required')
         .email('Email is invalid'),
-      phoneNumber:Yup.string()
+      phoneNumber: Yup.string()
         .matches(new RegExp('[0-9]{10}'))
         .required('phone number is required'),
       address: Yup.string()
@@ -66,38 +51,44 @@ const  Signup = (props: RouterProps) : ReactElement => {
         .required('Confirm Password is required')
         .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
       acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
-    });
+    })
   }
 
-  function handleRegister(formValue: { firstName: string, lastName: string, useremail: string, phoneNumber:string, password: string , address: string}) {
-    const { firstName, lastName, useremail, phoneNumber, address, password } = formValue;
-    console.log('form data', formValue, 'firstname',firstName, 'lastName',lastName, 'email', useremail, 'phoneNumber',phoneNumber,'address', address, 'pass',password)
-    console.log("hello from frontend form register")
-    setState({...state,
-      successful: false
-    });
+  function handleRegister(formValue: {
+    firstName: string
+    lastName: string
+    useremail: string
+    phoneNumber: string
+    password: string
+    address: string
+  }) {
+    const { firstName, lastName, useremail, phoneNumber, address, password } =
+      formValue
+    
+    console.log('hello from frontend form register')
+    setState({ ...state, successful: false })
 
     AuthService.register(
-      firstName, 
-      lastName, 
-      useremail, 
-      phoneNumber, 
-      address, 
+      firstName,
+      lastName,
+      useremail,
+      phoneNumber,
+      address,
       password
     ).then(
-      response => {
-        setState({...state,
-          successful: true
-        });
-        props.history.push("/signin");
-        window.location.reload();
+      (response) => {
+        setState({ ...state, successful: true })
+        props.history.push('/signin')
+        window.location.reload()
       },
-      error => {
-        setState({...state,
+      (error) => {
+        setState({
+          ...state,
           successful: false,
-        });
+          message: `Email ${useremail} already registered`,
+        })
       }
-    );
+    )
   }
 
   const initialValues = {
@@ -108,10 +99,9 @@ const  Signup = (props: RouterProps) : ReactElement => {
     address: '',
     password: '',
     confirmPassword: '',
-  };
+  }
   if (isLoggedIn) {
-    <Navigate to="/profile" replace={true} />
-
+    ;<Navigate to="/profile" replace={true} />
   }
 
   return (
@@ -133,7 +123,11 @@ const  Signup = (props: RouterProps) : ReactElement => {
               <div>
                 <div className="form-group">
                   <label htmlFor="firstName">FirstName</label>
-                  <Field name="firstName" type="text" className="form-control" />
+                  <Field
+                    name="firstName"
+                    type="text"
+                    className="form-control"
+                  />
                   <ErrorMessage
                     name="firstName"
                     component="div"
@@ -152,7 +146,11 @@ const  Signup = (props: RouterProps) : ReactElement => {
 
                 <div className="form-group">
                   <label htmlFor="useremail">useremail</label>
-                  <Field name="useremail" type="text" className="form-control" />
+                  <Field
+                    name="useremail"
+                    type="text"
+                    className="form-control"
+                  />
                   <ErrorMessage
                     name="useremail"
                     component="div"
@@ -161,24 +159,31 @@ const  Signup = (props: RouterProps) : ReactElement => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="phoneNumber"> PhoneNumber</label>
-                  <Field name="phoneNumber" type="text" className="form-control" />
+                  <Field
+                    name="phoneNumber"
+                    type="text"
+                    className="form-control"
+                  />
                   <ErrorMessage
                     name="phoneNumber"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-                  
+
                 <div className="form-group">
                   <label htmlFor="address"> Address </label>
-                  <Field name="address" type="address" className="form-control" />
+                  <Field
+                    name="address"
+                    type="address"
+                    className="form-control"
+                  />
                   <ErrorMessage
                     name="address"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-
 
                 <div className="form-group">
                   <label htmlFor="password"> Password </label>
@@ -209,20 +214,24 @@ const  Signup = (props: RouterProps) : ReactElement => {
                 </div>
 
                 <div className="form-group">
-                  <button  type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                  <button type="submit" className="btn btn-primary btn-block">
+                    Sign Up
+                  </button>
                 </div>
               </div>
             )}
 
-            {message && (
+            {state.message && (
               <div className="form-group">
                 <div
                   className={
-                    state.successful ? "alert alert-success" : "alert alert-danger"
+                    state.successful
+                      ? 'alert alert-success'
+                      : 'alert alert-danger'
                   }
                   role="alert"
                 >
-                  {message}
+                  {state.message}
                 </div>
               </div>
             )}
@@ -230,7 +239,7 @@ const  Signup = (props: RouterProps) : ReactElement => {
         </Formik>
       </div>
     </div>
-  );
+  )
 }
 
 export default Signup

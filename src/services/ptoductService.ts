@@ -1,13 +1,12 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:3002/api/auths/";
-class  AuthService {
-  login  (useremail: string, password: string) {
-    console.log('from authservice/login: ', useremail, password)
+class  productService {
+  getAllBook  () {
+    console.log('from aproductservice/lgettallbooks: ')
     return axios
       .post(API_URL + "signin", {
-        useremail,
-        password
+        
       })
       .then(response => {
         console.log('accesstoke',response.data.accessToken)
@@ -47,4 +46,4 @@ class  AuthService {
   }
 }
 
-export default new AuthService();
+export default new productService();

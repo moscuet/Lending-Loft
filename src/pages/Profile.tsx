@@ -6,7 +6,7 @@ const history = createBrowserHistory()
 
 const Profile: React.FC = () : ReactElement=> {
   const currentCustomer = auth.getCurrentCustomer();
-  console.log('cuurent customer', currentCustomer)
+  
   if(!currentCustomer) {
     history.push('/signin')
     window.location.reload();

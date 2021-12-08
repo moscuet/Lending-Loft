@@ -18,7 +18,6 @@ const BoardUser: React.FC = () => {
             error.response.data.message) ||
           error.message ||
           error.toString();
-
         setContent(_content);
 
         if (error.response && error.response.status === 401) {
