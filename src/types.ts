@@ -23,6 +23,15 @@ export type TUserState = {
     loading: boolean,
 }
 
+
+// author Type
+
+export type Author ={
+  firstName: string
+  lastName: string
+  biography: string,
+  _id: string
+}
 // product type
 
 export type Product = {
@@ -30,7 +39,7 @@ export type Product = {
   title: string
   ISBN: string
   publisherName: string
-  authors: string[]
+  authors: Author[]
   publishedYear: number
   genres: string[]
   description: string
