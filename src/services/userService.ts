@@ -4,7 +4,7 @@ import authHeader from './authHeader';
 
 const API_URL = 'http://localhost:3002/api/books/';
 
-const getSingleBook = (id:string) => {
+const getSingleBook = (id:string|undefined) => {
   return axios.get(API_URL + `${id}`);
 };
 

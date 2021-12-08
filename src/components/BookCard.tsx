@@ -1,8 +1,12 @@
 import React, {  ReactElement } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { Product} from '../types'
 import { Card, Button } from "react-bootstrap";
+import { addProduct } from '../redux/actions';
 export default function BookCard(book:Product):ReactElement {
   const {title,img,authors} = book
+  const dispatch= useDispatch()
   
   return (
     <div>
@@ -13,10 +17,12 @@ export default function BookCard(book:Product):ReactElement {
         <Card.Body>
           <Card.Title>{`${title}`}</Card.Title>
           <Card.Text> {`Author: ${authors.map(a => a.firstName+' '+ a.lastName).join(',')}`}</Card.Text>
-          <Button variant="primary">Add to cart</Button>
+          <Button variant="primary" onClick={() => dispatch(addProduct(book))}>Add to cart</Button>
         </Card.Body>
       </Card>
     </div>
   )
 }
+
+//<button onClick={() => dispatch(removeProduct(p))}>Remove</button>
 
