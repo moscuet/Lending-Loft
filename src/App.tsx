@@ -38,8 +38,8 @@ const App: React.FC = () => {
         <Route  path="/" element={<Home />} />
         <Route  path="/signup" element={<Signup history ={history} />} />
         <Route  path="/signin" element={<Signin history = {history}  />} />
-        <Route  path="/" element={<UserBoard/>} />
-        <Route  path="/" element={<AdminBoard/>} />
+        <Route  path="user" element={<UserBoard/>} />
+        <Route  path="/admin" element={<AdminBoard/>} />
         <Route  path="/profile" element={<Profile/>} />
       </Switch>
     </div>

@@ -5,19 +5,16 @@ import { useDispatch } from 'react-redux'
 
 import { Product, AppState } from '../types'
 import { addProduct, removeProduct } from '../redux/actions'
-
 import userService from '../services/userService'
-//import NavBar from '../components/nabBar/NavBar'
-//import RegisterForm from '../components/RegisterForm'
-import SigninForm from '../components/SigninForm'
+
+
+import BooksComp from '../components/BooksComp'
 export default function Home() {
-  
   const dispatch = useDispatch()
 
-  const [content, setContent] = useState<string>("");
-
-
   const products = useSelector((state: AppState) => state.order.inCart)
+  const [content, setContent] = useState<Product | undefined>(undefined);
+  const [message, setMessage] = useState('');
 
 
   useEffect(() => {
@@ -31,15 +28,16 @@ export default function Home() {
           error.message ||
           error.toString();
 
-        setContent(_content);
+        setMessage(_content);
       }
     );
   }, []);
 
+  console.log(content,message)
 
   const handleAddProduct = () => {
     const product: Product = {
-      id: (+new Date()).toString(),
+      _id: (+new Date()).toString(),
       title: 'bbok1',
       ISBN: "",
       publisherName: "",
@@ -48,23 +46,24 @@ export default function Home() {
       genres: [],
       description: "",
       edition: "",
-      pageCount: 0
+      pageCount: 0,
+      img:''
     }
     dispatch(addProduct(product))
   }
 
+
+
   return (
     <>
       <h1>Home page</h1>
-      <div>
-        <h3>{content}</h3>
-      </div>
-
+      <BooksComp />
+   
       {products.length <= 0 && <div>No products in cart</div>}
       <ul>
         {products.map((p) => (
-          <li key={p.id}>
-            <Link to={`/products/${p.id}`}>{`${p.title}`}</Link>
+          <li key={p._id}>
+            <Link to={`/products/${p._id}`}>{`${p.title}`}</Link>
 
             {'  '}
 
@@ -73,8 +72,6 @@ export default function Home() {
         ))}
       </ul>
       <button onClick={handleAddProduct}>Add product</button>
-      {/* <RegisterForm/> */}
-      <SigninForm history={[]} />
     </>
   )
 }

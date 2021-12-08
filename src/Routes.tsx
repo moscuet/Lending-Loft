@@ -5,7 +5,7 @@ import { Routes as Switch, Route } from 'react-router-dom' // updated to latest
 //https://stackoverflow.com/questions/63124161/attempted-import-error-switch-is-not-exported-from-react-router-dom
 
 import Home from './pages/Home'
-import Product from './pages/Product'
+import Product from './components/Product'
 
 const Routes = () => (
   <Switch>

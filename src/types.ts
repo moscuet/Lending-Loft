@@ -26,7 +26,7 @@ export type TUserState = {
 // product type
 
 export type Product = {
-  id:string
+  _id:string
   title: string
   ISBN: string
   publisherName: string
@@ -35,7 +35,8 @@ export type Product = {
   genres: string[]
   description: string
   edition: string
-  pageCount: number
+  pageCount: number,
+  img:string
 }
 
 
