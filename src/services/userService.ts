@@ -4,6 +4,11 @@ import authHeader from './authHeader';
 
 const API_URL = 'http://localhost:3002/api/books/';
 
+const getSingleBook = (id:string) => {
+  return axios.get(API_URL + `${id}`);
+};
+
+
 const getPublicContent = () => {
   return axios.get(API_URL + "all");
 };
@@ -17,6 +22,7 @@ const getAdminBoard = () => {
 };
 
 export default {
+  getSingleBook ,
   getPublicContent,
   getCustomerBoard,
   getAdminBoard,

@@ -51,6 +51,7 @@ export default function NavBar():ReactElement {
       <Navbar.Toggle className="coloring" />
       <Navbar.Collapse>
         <Nav>
+          <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="#about">About Us</Nav.Link>
           <Nav.Link href="#contact">Contact Us</Nav.Link>
           <NavDropdown title="Book catagories">
