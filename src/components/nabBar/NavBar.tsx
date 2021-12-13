@@ -2,6 +2,7 @@ import React, {ReactElement} from 'react'
 //import { createBrowserHistory } from 'history';
 import { useState, useEffect } from "react";
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { createBrowserHistory } from 'history';
 
 import authService from "../../services/authService";
 import EventBus from "../../common/EventBus";
@@ -13,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './navBar.css'
 
 export default function NavBar():ReactElement {
+  const history = createBrowserHistory()
 
   const [showAdminBoard, setShowAdminBoard] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<TCustomer | undefined>(undefined);
@@ -33,10 +35,11 @@ export default function NavBar():ReactElement {
   }, []);
 
   const logOut = () => {
-
     authService.logout();
     setShowAdminBoard(false);
     setCurrentUser(undefined);
+    history.push('/')
+    window.location.reload();
   };
 
 
@@ -52,7 +55,6 @@ export default function NavBar():ReactElement {
       <Navbar.Collapse>
         <Nav>
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="#about">About Us</Nav.Link>
           <Nav.Link href="#contact">Contact Us</Nav.Link>
           <NavDropdown title="Book catagories">
             <NavDropdown.Item href="#catagory/action">Action and adventure</NavDropdown.Item>
@@ -69,7 +71,7 @@ export default function NavBar():ReactElement {
           {currentUser ? (
             <>
               <Nav.Link href="/profile">Profile</Nav.Link>
-              <Nav.Link href="/" onClick = {logOut}>logout</Nav.Link>
+              <Nav.Link onClick = {logOut}>logout</Nav.Link>
             </>
           ): 
             (<>
@@ -77,7 +79,7 @@ export default function NavBar():ReactElement {
               <Nav.Link href="signup">Sign Up</Nav.Link>
             </>)
           }
-          <Nav.Link href="#cart">Cart</Nav.Link>
+          <Nav.Link href="cart">Cart</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

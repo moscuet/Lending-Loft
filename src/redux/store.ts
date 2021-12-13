@@ -4,17 +4,17 @@ import thunk from 'redux-thunk'
 
 
 
-
-import { AppState, Product } from '../types'
+import { AppState, Product, USER_DATA } from '../types'
 import createRootReducer from './reducers'
 import rootSaga from './sagas'
 
 const initialCart:Product[] = JSON.parse(localStorage.getItem('inCart') || '[]') 
-
+const initialUser:USER_DATA = JSON.parse(localStorage.getItem('user') || '[]') 
+console.log('initialUser',initialUser)
 const initState: AppState = {
   auth:{
-    isLoggedIn: false,
-    user:{}
+    isLoggedIn: initialUser? true : false,
+    user:initialUser
   },
   message:'',
   order: {

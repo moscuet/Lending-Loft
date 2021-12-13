@@ -46,12 +46,12 @@ const  BooksComp = () => {
   console.log('message',message)
 
   return (
-    <div>
-      <ul>
+    <div style={{width: "100%"}} >
+      <h2 style={{textAlign:"center"}}> All books </h2>
+      <ul style= {{display:"flex", flexWrap:"wrap"}}>
         {content.map((book) => (
           <li key={book._id}>
             <BookCard {...book}/>
-            {/* <Link to={`products/${book._id}`}><BookCard {...book}/></Link> */}
           </li>
         ))}
       </ul>

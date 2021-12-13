@@ -56,7 +56,7 @@ export const login = (username:string, password:string) => (dispatch:Dispatch) =
         type: LOGIN_SUCCESS,
         payload: data ,
       });
-  
+      console.log('Data from auth action',data)
       return Promise.resolve();
     },
     (error) => {
@@ -88,7 +88,3 @@ export const logout = () => (dispatch:Dispatch) => {
     type: LOGOUT,
   });
 };
-
-// function dispatch(arg0: { type: string; }) {
-//   throw new Error('Function not implemented.');
-// }

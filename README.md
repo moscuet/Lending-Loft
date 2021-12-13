@@ -1,3 +1,13 @@
+  ##
+1. import { useSelector } from 'react-redux';
+2. import { useState, useEffect, FunctionComponent } from 'react';
+3. import { createBrowserHistory } from 'history';
+  
+  const history = createBrowserHistory()
+  history.push('/')
+
+
+
 # Fast Track React app template with TypeScript & Redux 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
