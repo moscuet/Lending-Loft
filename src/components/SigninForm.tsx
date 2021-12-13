@@ -1,7 +1,7 @@
 import React, { useState,  ReactElement } from "react";
 import {  useSelector, useDispatch } from "react-redux";
 import {AppState}  from '../types'
-import { Navigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {login} from '../redux/actions/auth'
@@ -13,7 +13,6 @@ interface RouterProps {
 }
 const  Signin = (props:RouterProps) : ReactElement => {
 
-
   const { isLoggedIn } = useSelector((state:AppState) => state.auth);
   //const message = useSelector((state:AppState) => state.message);
 
@@ -21,7 +20,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
     useremail: "",
     password: "",
     loading: false,
-    isLoggedIn,
+    isLoggedIn:false,
     message:''
   })
 
@@ -39,16 +38,19 @@ const  Signin = (props:RouterProps) : ReactElement => {
 
   const  handleSignin = async(formValue: { useremail: string; password: string }) => {
     const { useremail, password } = formValue;
-    console.log( 'from login form useremail and pass',useremail, password )
     setUserState({ ...userState,
       loading: true
     });
     
     try {
       await dispatch(login(useremail, password ))
-      props.history.push("/profile");
+      setUserState({ ...userState,
+        loading: false,
+        isLoggedIn:true,
+      });
+      props.history.push("/");
       window.location.reload();
-
+ 
     } catch(error){
       console.log('error',error)
       setUserState({...userState,
@@ -64,7 +66,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
   };
 
   if (isLoggedIn) {
-    <Navigate to="/profile" replace={true} />
+    <Redirect to="/login" />
 
   }
   return (

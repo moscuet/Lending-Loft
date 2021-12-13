@@ -1,11 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from 'react'
+//import {useParams } from "react-router-dom";
+//import { createBrowserHistory } from 'history';
+//import { Switch, Route } from 'react-router';
+
+//import { createBrowserHistory } from 'history';
+import { useState, useEffect } from "react";
+import { Nav, Navbar} from 'react-bootstrap'
 
 import userService from "../services/userService";
 import EventBus from "../common/EventBus";
+//import AddBook from './AddBook';
+//import Cart from './Cart';
+//import AddBook from './AddBook';
+import { useLocation } from 'react-router-dom'
 
 const BoardUser: React.FC = () => {
-  const [content, setContent] = useState<string>("");
+  
 
+  let { pathname} = useLocation()
+
+
+  const [content, setContent] = useState<string>("");
+  console.log(content)
   useEffect(() => {
     userService.getAdminBoard().then(
       (response) => {
@@ -27,11 +43,20 @@ const BoardUser: React.FC = () => {
     );
   }, []);
 
+
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
+    <div>
+      <Navbar bg="white" 
+        sticky="top" expand="sm" collapseOnSelect>
+        <Navbar.Toggle className="coloring" />
+        <Navbar.Collapse>
+          <Nav>
+            <Nav.Link href=':userId'>users account</Nav.Link>
+            <Nav.Link href={`${pathname}/addbook`}>Add Book</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    
     </div>
   );
 };

@@ -35,7 +35,7 @@ export type Author ={
 // product type
 
 export type Product = {
-  _id:string
+  _id?:string
   title: string
   ISBN: string
   publisherName: string
@@ -108,6 +108,7 @@ export type LOGIN_DATA ={
 
 export type USER_DATA =  {
   id?: any | null,
+  _id?: any | null,
   firstName?: string | null,
   lastName?: string | null,
   useremail?: string,

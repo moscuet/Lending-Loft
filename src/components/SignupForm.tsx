@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useSelector } from 'react-redux'
 import { AppState } from '../types'
-import { Navigate } from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 
 import AuthService from '../services/authService'
 
@@ -101,7 +101,7 @@ const Signup = (props: RouterProps): ReactElement => {
     confirmPassword: '',
   }
   if (isLoggedIn) {
-    ;<Navigate to="/profile" replace={true} />
+    ;<Redirect  to="/profile" />
   }
 
   return (

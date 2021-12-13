@@ -9,7 +9,7 @@ export default function BookCard(book:Product):ReactElement {
   const dispatch= useDispatch()
   
   return (
-    <div>
+    <div style={{width: "100%"}}>
       <Card style={{ width: '18rem' }}>
         <Card.Link href = {`books/${book._id}`}  > 
           <Card.Img variant="top" src={`${img}`} />

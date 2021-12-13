@@ -9,8 +9,7 @@ import { addProduct } from '../redux/actions';
 const SingleBook =() => {
  
   const dispatch= useDispatch()
-
-  const { id } = useParams();
+  const id:string = useParams() || '';
   const [book, setBook] = useState<Product>({
     _id:'',
     title:'',
