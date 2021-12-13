@@ -6,10 +6,16 @@ import { Product } from '../types';
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../redux/actions';
 
+
+
+type QuizParams = {
+  id: string;
+};
 const SingleBook =() => {
- 
+  const { id } = useParams<QuizParams>();
+
   const dispatch= useDispatch()
-  const id:string = useParams() || '';
+  
   const [book, setBook] = useState<Product>({
     _id:'',
     title:'',
@@ -25,10 +31,11 @@ const SingleBook =() => {
   });
   //const [message, setMessage] = useState<string>();
 
-  
+  //const idd = "61b212af25af464060152bf0"
   useEffect(() => {
     userService.getSingleBook(id).then(
       (response) => {
+        console.log(response)
         if(response)setBook(response.data);
       },
       (error) => {

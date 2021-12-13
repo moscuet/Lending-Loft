@@ -25,3 +25,5 @@ const AdminRoute = ({ component, ...rest }:any) => {
 };
 
 export default AdminRoute;
+
+

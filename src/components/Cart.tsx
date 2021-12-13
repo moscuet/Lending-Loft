@@ -12,7 +12,6 @@ import {  removeProduct } from '../redux/actions'
 function Cart() {
   const cartItems =  useSelector((state: AppState) => state.order.inCart)
 
-  console.log(cartItems)
   const dispatch = useDispatch()
 
   return (
@@ -22,8 +21,7 @@ function Cart() {
       <ul>
         {cartItems.map((p) => (
           <li key={p._id}>
-            <Link to={`/products/${p._id}`}>{`${p.title}`}</Link>
-
+            <Link to={`/books/${p._id}`}>{`${p.title}`}</Link>
             <button onClick={() => dispatch(removeProduct(p))}>Remove</button>
           </li>
         ))}

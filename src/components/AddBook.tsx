@@ -4,14 +4,17 @@ import * as Yup from 'yup'
 //import { useSelector } from 'react-redux'
 //import { AppState } from '../types'
 //import { Navigate } from 'react-router-dom'
-
+import {useHistory} from 'react-router-dom'
 import productService from '../services/productService'
-interface RouterProps {
-  history: {
-    push(url: string): void
-  }
-}
-const  AddBook= (props: RouterProps): ReactElement => {
+// interface RouterProps {
+//   history: {
+//     push(url: string): void
+//   }
+// }
+const  AddBook= (): ReactElement => {
+
+  const history = useHistory()
+
   const initialValues = {
     ISBN: '',
     title: '',
@@ -61,7 +64,7 @@ const  AddBook= (props: RouterProps): ReactElement => {
     productService.addBook( formValue).then(
       (response) => {
         setState({ ...state, successful: true , loading:true})
-        props.history.push('/addbook')
+        history.push('/admin')
         window.location.reload()
 
       },
@@ -126,7 +129,7 @@ const  AddBook= (props: RouterProps): ReactElement => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="author">Author Name</label>
+                  <label htmlFor="author" placeholder = 'ex:61a9759da3eb1c07c18c3e71'>Author Id ex:61a9759da3eb1c07c18c3e71</label>
                   <Field
                     name="author"
                     type="text"

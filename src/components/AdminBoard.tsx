@@ -2,28 +2,29 @@ import React from 'react'
 //import {useParams } from "react-router-dom";
 //import { createBrowserHistory } from 'history';
 //import { Switch, Route } from 'react-router';
-
 //import { createBrowserHistory } from 'history';
 import { useState, useEffect } from "react";
-import { Nav, Navbar} from 'react-bootstrap'
 
+import AddBook from './AddBook';
+import Users from './Users'
 import userService from "../services/userService";
 import EventBus from "../common/EventBus";
 //import AddBook from './AddBook';
 //import Cart from './Cart';
 //import AddBook from './AddBook';
-import { useLocation } from 'react-router-dom'
 
 const BoardUser: React.FC = () => {
   
 
-  let { pathname} = useLocation()
+  const [ content, setContent] = useState('')
 
+  const [ showUser, setShowUser] = useState(true)
+  const [ showAddUser, setShowAddUser] = useState(false)
 
-  const [content, setContent] = useState<string>("");
-  console.log(content)
+  
+
   useEffect(() => {
-    userService.getAdminBoard().then(
+    userService.getCustomerBoard().then(
       (response) => {
         setContent(response.data);
       },
@@ -43,20 +44,31 @@ const BoardUser: React.FC = () => {
     );
   }, []);
 
+  console.log(content)
+  const handleShowUser = (event:React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setShowUser(true)
+    setShowAddUser(false)
+  }
+  const handleAddBook = (event:React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setShowUser(false)
+    setShowAddUser(true)
+  }
+
 
   return (
     <div>
-      <Navbar bg="white" 
-        sticky="top" expand="sm" collapseOnSelect>
-        <Navbar.Toggle className="coloring" />
-        <Navbar.Collapse>
-          <Nav>
-            <Nav.Link href=':userId'>users account</Nav.Link>
-            <Nav.Link href={`${pathname}/addbook`}>Add Book</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    
+      <button onClick = {handleShowUser }>User</button> <button onClick = {handleAddBook}>Add Book</button>
+      { showUser && (
+        <Users />
+      )
+      }
+      { showAddUser && (
+        <AddBook/>
+      )
+      }
+      
     </div>
   );
 };

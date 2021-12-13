@@ -24,7 +24,6 @@ const  Signin = (props:RouterProps) : ReactElement => {
     message:''
   })
 
-
   function validationSchema() {
     return Yup.object().shape({
       useremail: Yup.string()
@@ -126,6 +125,5 @@ const  Signin = (props:RouterProps) : ReactElement => {
     </div>
   )
 }
- 
 
 export default Signin

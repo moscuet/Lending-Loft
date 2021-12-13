@@ -1,13 +1,11 @@
-
 // Action types
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 export const payload = 'payload'
 // A product
 
-
 export type TCustomer = {
-  id: string
+  id?: string
   firstName: string
   lastName: string
   useremail: string
@@ -18,12 +16,10 @@ export type TCustomer = {
 }
 
 export type TUserState = {
-     useremail: string,
+    useremail: string,
     password: string,
     loading: boolean,
 }
-
-
 // author Type
 
 export type Author ={
@@ -48,7 +44,6 @@ export type Product = {
   img:string
 }
 
-
 export type AddProductAction = {
   type: typeof ADD_PRODUCT
   payload: {
@@ -63,7 +58,6 @@ export type RemoveProductAction = {
 }
 // Use this union in reducer
 export type ProductActions = AddProductAction | RemoveProductAction
-
 
 export type OrderState = {
   inCart: Product[]
@@ -82,8 +76,6 @@ export const LOGOUT = "LOGOUT";
 export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
-
-
 // message type 
 
 export type SetMessage = {
@@ -94,11 +86,9 @@ export type ClearMessage = {
   type: typeof CLEAR_MESSAGE
 }
 
-
 export type MesssageActions = SetMessage | ClearMessage
 
 export type MessageState = string
-
 
 // auth type
 export type LOGIN_DATA ={
@@ -117,8 +107,6 @@ export type USER_DATA =  {
   roles?:string
 }
 
-
-
 export type  AUTH_ACTION = {
   type: typeof REGISTER_SUCCESS | typeof REGISTER_FAIL | typeof LOGIN_SUCCESS | typeof LOGIN_FAIL | typeof LOGOUT  ,
   payload: LOGIN_DATA |  USER_DATA
@@ -128,9 +116,6 @@ export type AuthState = {
   isLoggedIn: boolean,
   user: USER_DATA
 }
-
-
-
 
 export type AppState = {
   auth: AuthState

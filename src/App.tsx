@@ -17,10 +17,8 @@ import Signup from "./components/SignupForm";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import UserBoard from "./components/UserBoard";
-//import AdminBoard from "./components/AdminBoard";
 import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
-
 
 const App: React.FC = () => {
   const history = createBrowserHistory();
@@ -33,20 +31,20 @@ const App: React.FC = () => {
    
   const order = useSelector((state: { order: {cart:[]} }) => state.order)
   console.log('order',order)
-  return <div>
+  return <div >
     <NavBar />
-    <div style={{width: "100%"}} >
+    <div style={{padding: '5px 10% 0 10% ' , border:'2px solid red'}} >
       <Switch>
         <AdminRoute
           path='/admin'
           component={AdminBoard}
         />
-
         <Route  path="/signup"> <Signup history ={history}/> </Route>
         <Route  path="/signin">  <Signin history = {history}/> </Route>
         <Route  path="/user">  <UserBoard/>  </Route> 
         <Route  path="/books/:id">  <SingleBook/> </Route> 
         <Route  path="/profile">  <Profile/> </Route> 
+        <Route  path="/cart/:id" > <SingleBook/>  </Route>
         <Route  path="/cart" >  <Cart/> </Route>
         <Route  path="/">  <Home /> </Route> 
       </Switch>
