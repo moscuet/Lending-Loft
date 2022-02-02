@@ -3,7 +3,7 @@ import React, {  useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 //import {useHistory} from 'react-router-dom'
 import { createBrowserHistory } from 'history';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -11,12 +11,15 @@ import { clearMessage } from "./redux/actions";
 
 import AdminRoute from './components/Routing/AdminRoute'
 import AdminBoard from './components/AdminBoard'
+
+import UserRoute from './components/Routing/UserRoute'
+import UserBoard from './components/userBoard/UserBoard'
+
 import NavBar from './components/nabBar/NavBar'
 import Signin from "./components/SigninForm";
 import Signup from "./components/SignupForm";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import UserBoard from "./components/UserBoard";
 import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
 
@@ -29,8 +32,7 @@ const App: React.FC = () => {
     });
   }, [dispatch, history]);
    
-  const order = useSelector((state: { order: {cart:[]} }) => state.order)
-  console.log('order',order)
+  //const order = useSelector((state: { order: {cart:[]} }) => state.order)
   return <div >
     <NavBar />
     <div style={{padding: '5px 10% 0 10% ' , border:'2px solid red'}} >
@@ -38,6 +40,10 @@ const App: React.FC = () => {
         <AdminRoute
           path='/admin'
           component={AdminBoard}
+        />
+        <UserRoute
+          path='/user'
+          component={UserBoard}
         />
         <Route  path="/signup"> <Signup history ={history}/> </Route>
         <Route  path="/signin">  <Signin history = {history}/> </Route>
@@ -50,7 +56,5 @@ const App: React.FC = () => {
       </Switch>
     </div>
   </div>
-  
 };
-
 export default App;

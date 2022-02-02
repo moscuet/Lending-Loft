@@ -6,7 +6,6 @@ import { createBrowserHistory } from 'history';
 
 import authService from "../../services/authService";
 import EventBus from "../../common/EventBus";
-import {TCustomer }from '../../types';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,14 +16,23 @@ export default function NavBar():ReactElement {
   const history = createBrowserHistory()
 
   const [showAdminBoard, setShowAdminBoard] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<TCustomer | undefined>(undefined);
+  const [showUserBoard, setShowUserBoard] = useState<boolean>(false);
 
+  const logOut = () => {
+    authService.logout();
+    setShowAdminBoard(false);
+    setShowUserBoard(false);
+    history.push('/')
+    window.location.reload();
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const user = authService.getCurrentCustomer();
 
     if (user) {
-      setCurrentUser({...user});
       setShowAdminBoard(user.roles.includes("admin"));
+      setShowUserBoard(user.roles.includes("user"));
     }
 
     EventBus.on("logout", logOut);
@@ -32,15 +40,9 @@ export default function NavBar():ReactElement {
     return () => {
       EventBus.remove("logout", logOut);
     };
-  }, []);
+  }, );
 
-  const logOut = () => {
-    authService.logout();
-    setShowAdminBoard(false);
-    setCurrentUser(undefined);
-    history.push('/')
-    window.location.reload();
-  };
+
 
 
   return (
@@ -66,20 +68,25 @@ export default function NavBar():ReactElement {
             <NavDropdown.Item href="#products/promo">Others</NavDropdown.Item>
           </NavDropdown>
           {showAdminBoard && (
-            <Nav.Link href="/admin">Admin</Nav.Link>
-          )}
-          {currentUser ? (
             <>
-              <Nav.Link href="/profile">Profile</Nav.Link>
+              <Nav.Link href="/admin">Admin</Nav.Link>
+              <Nav.Link onClick={logOut}>logout</Nav.Link>
+            </>
+          )}
+          {showUserBoard && (
+            <>
+              <Nav.Link href="/user">User</Nav.Link>
               <Nav.Link onClick = {logOut}>logout</Nav.Link>
             </>
-          ): 
-            (<>
-              <Nav.Link href="/signin">signin</Nav.Link>
-              <Nav.Link href="/signup">Sign Up</Nav.Link>
-            </>)
+          )
           }
-          <Nav.Link href="/cart">Cart</Nav.Link>
+          { !(showUserBoard || showAdminBoard ) &&
+             (<>
+               <Nav.Link href="/signin">signin</Nav.Link>
+               <Nav.Link href="/signup">Sign Up</Nav.Link>
+             </>)
+          }
+          <Nav.Link href="/cart"></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

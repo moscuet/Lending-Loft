@@ -1,4 +1,5 @@
 import axios from "axios";
+//import { USER_DATA } from "../types";
 
 const API_URL = "http://localhost:3002/api/auths/";
 class  AuthService {
@@ -10,10 +11,8 @@ class  AuthService {
         password
       })
       .then(response => {
-        console.log('accesstoke',response.data.accessToken)
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
-          
         }
         return response.data;
       });
@@ -24,7 +23,6 @@ class  AuthService {
   }
   
   register (firstName: string, lastName: string, useremail: string, phoneNumber:string, address: string, password: string ){
-    console.log('form submit request to authservice',firstName,lastName,useremail,phoneNumber,address,password)
     return axios
       .post('http://localhost:3002/api/auths/signup', {
         firstName,
@@ -36,6 +34,7 @@ class  AuthService {
       })
       
   }
+
   // /api/auth'/signup
   getCurrentCustomer () {
     const userStr = localStorage.getItem("user");

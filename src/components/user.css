@@ -1,5 +1,33 @@
 .admin__usersList ol li {
+    margin-bottom: 10px;
     text-align: center;
     display: grid;
     grid-template-columns: 3fr 2fr 1fr;
+}
+
+.admin__booksList ol li {
+    margin-bottom: 10px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 3fr 2fr;
+
+}
+
+
+.book__img {
+    display: flex;
+    justify-content: center;
+}
+
+.admin__booksList ol li button, .admin__usersList ol li button {
+    height:40px;
+    border-radius: 2px;
+    background: red;
+}
+
+.admin__booksList ol li .editButton {
+  background: blue;
+  padding: 0px 15px;
+  margin-left: 5px;
+
 }

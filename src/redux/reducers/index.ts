@@ -8,7 +8,7 @@ const createRootReducer = () =>
   combineReducers({
     auth,
     message,
-    order,
+    order
   })
 
 export default createRootReducer

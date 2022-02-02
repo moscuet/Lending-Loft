@@ -16,22 +16,22 @@ export type TCustomer = {
 }
 
 export type TUserState = {
-    useremail: string,
-    password: string,
-    loading: boolean,
+  useremail: string
+  password: string
+  loading: boolean
 }
 // author Type
 
-export type Author ={
+export type Author = {
   firstName: string
   lastName: string
-  biography: string,
+  biography: string
   _id: string
 }
 // product type
 
 export type Product = {
-  _id?:string
+  _id?: string
   title: string
   ISBN: string
   publisherName: string
@@ -40,8 +40,8 @@ export type Product = {
   genres: string[]
   description: string
   edition: string
-  pageCount: number,
-  img:string
+  pageCount: number
+  img: string
 }
 
 export type AddProductAction = {
@@ -67,16 +67,19 @@ export type OrderState = {
 
 // authentication types
 
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAIL = "REGISTER_FAIL";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAIL = "LOGIN_FAIL";
-export const LOGOUT = "LOGOUT";
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+export const REGISTER_FAIL = 'REGISTER_FAIL'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAIL = 'LOGIN_FAIL'
+export const LOGOUT = 'LOGOUT'
 
-export const SET_MESSAGE = "SET_MESSAGE";
-export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+export const USERUPDATE_FAIL = 'UPDATEUSER_FAIL'
+export const USERUPDATE_SUCCESS = 'UPDATEUSER_SUCCESS'
 
-// message type 
+export const SET_MESSAGE = 'SET_MESSAGE'
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
+
+// message type
 
 export type SetMessage = {
   type: typeof SET_MESSAGE
@@ -91,29 +94,37 @@ export type MesssageActions = SetMessage | ClearMessage
 export type MessageState = string
 
 // auth type
-export type LOGIN_DATA ={
-  useremail:string
+export type LOGIN_DATA = {
+  useremail: string
   passpword: string
 }
 
-export type USER_DATA =  {
-  id?: any | null,
-  _id?: any | null,
-  firstName?: string | null,
-  lastName?: string | null,
-  useremail?: string,
+export type USER_DATA = {
+  id?: any | null
+  _id?: any | null
+  firstName?: string | null
+  lastName?: string | null
+  useremail?: string
+  phoneNumber: number
   address?: string
-  password?: string,
-  roles?:string
+  password?: string
+  roles?: string
 }
 
-export type  AUTH_ACTION = {
-  type: typeof REGISTER_SUCCESS | typeof REGISTER_FAIL | typeof LOGIN_SUCCESS | typeof LOGIN_FAIL | typeof LOGOUT  ,
-  payload: LOGIN_DATA |  USER_DATA
+export type AUTH_ACTION = {
+  type:
+    | typeof REGISTER_SUCCESS
+    | typeof REGISTER_FAIL
+    | typeof LOGIN_SUCCESS
+    | typeof LOGIN_FAIL
+    | typeof LOGOUT
+    | typeof USERUPDATE_FAIL
+    | typeof USERUPDATE_SUCCESS
+  payload: LOGIN_DATA | USER_DATA
 }
 
 export type AuthState = {
-  isLoggedIn: boolean,
+  isLoggedIn: boolean
   user: USER_DATA
 }
 
@@ -121,4 +132,27 @@ export type AppState = {
   auth: AuthState
   message: MessageState
   order: OrderState
+}
+
+// \borrow
+export type Book = {
+  ISBN: string
+  title: string
+  publisherName: string
+  authors: Author[]
+  publishedYear: number
+  genres: string[]
+  description: string
+  edition: string
+  pageCount: number
+  img: string
+  _id: string
+}
+
+export type Borrow = {
+  bookId: [Book]
+  customerId: string
+  borrowDate: Date
+  returnDate: Date
+  isReturned: Boolean
 }

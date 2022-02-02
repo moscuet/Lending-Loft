@@ -6,6 +6,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   AUTH_ACTION,
+  USERUPDATE_FAIL,
+  USERUPDATE_SUCCESS
   // USER_DATA
 } from "../../types";
   
@@ -40,6 +42,7 @@ export default function (state = initialState, action:AUTH_ACTION):any  {
     };
     console.log('login sucess from auth/redcer: state',state)
     return state
+
   case LOGIN_FAIL:
     return {
       ...state,
@@ -52,6 +55,17 @@ export default function (state = initialState, action:AUTH_ACTION):any  {
       isLoggedIn: false,
       user: null,
     };
+
+  case USERUPDATE_SUCCESS:
+    return {
+      ...state, user:{...user,...payload}
+    };
+
+  case USERUPDATE_FAIL:
+    return {
+      ...state
+    };
+
   default:
     return state;
   }

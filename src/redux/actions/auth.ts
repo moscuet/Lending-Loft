@@ -7,10 +7,15 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
+  USER_DATA,
+  USERUPDATE_SUCCESS,
+  USERUPDATE_FAIL
   // AUTH_ACTION
 } from "../../types";
   
 import AuthService from "../../services/authService";
+import userService from "../../services/userService";
+
   
   
 export const register = (firstName: string, lastName: string, email: string, password: string ,phoneNumber:string, address: string) => (dispatch:Dispatch) => {
@@ -56,7 +61,6 @@ export const login = (username:string, password:string) => (dispatch:Dispatch) =
         type: LOGIN_SUCCESS,
         payload: data ,
       });
-      console.log('Data from auth action',data)
       return Promise.resolve();
     },
     (error) => {
@@ -81,6 +85,44 @@ export const login = (username:string, password:string) => (dispatch:Dispatch) =
   );
 };
   
+
+
+export const updateUser = (user:USER_DATA, id:string) => (dispatch:Dispatch) => {
+  return userService.updateUser(user, id).then(
+    (data) => {
+      dispatch({
+        type: USERUPDATE_SUCCESS,
+        payload:user
+      });
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+  
+      dispatch({
+        type: USERUPDATE_FAIL,
+        payload:user
+      });
+  
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+  
+      return Promise.reject();
+    }
+  );
+};
+  
+
+
+
+
 export const logout = () => (dispatch:Dispatch) => {
   AuthService.logout();
   
@@ -88,3 +130,6 @@ export const logout = () => (dispatch:Dispatch) => {
     type: LOGOUT,
   });
 };
+
+
+

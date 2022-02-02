@@ -4,14 +4,12 @@ import { useSelector } from 'react-redux'
 import { Product, AppState } from '../types'
 import userService from '../services/userService'
 
-
 import BooksComp from '../components/BooksComp'
 export default function Home() {
 
   const products = useSelector((state: AppState) => state.order.inCart)
   const [content, setContent] = useState<Product | undefined>(undefined);
   const [message, setMessage] = useState('');
-
 
   useEffect(() => {
     userService.getPublicContent().then(

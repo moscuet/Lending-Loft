@@ -91,6 +91,8 @@ const Signup = (props: RouterProps): ReactElement => {
     )
   }
 
+
+  
   const initialValues = {
     firstName: '',
     lastName: '',

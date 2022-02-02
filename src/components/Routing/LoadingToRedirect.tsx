@@ -3,8 +3,7 @@ import { createBrowserHistory } from 'history';
 
 const LoadingToRedirect = () => {
   const history = createBrowserHistory();
-  const [count, setCount] = useState(100);
-
+  const [count, setCount] = useState(3);
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((currentCount) => --currentCount);

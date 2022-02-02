@@ -1,28 +1,25 @@
 import React from 'react'
-//import {useParams } from "react-router-dom";
-//import { createBrowserHistory } from 'history';
-//import { Switch, Route } from 'react-router';
-//import { createBrowserHistory } from 'history';
 import { useState, useEffect } from "react";
 
 import AddBook from './AddBook';
+import AddAuthor from './AddAuthor';
 import Users from './Users'
+import Books from './Books'
+import Authors from './Authors'
 import userService from "../services/userService";
 import EventBus from "../common/EventBus";
-//import AddBook from './AddBook';
-//import Cart from './Cart';
-//import AddBook from './AddBook';
 
-const BoardUser: React.FC = () => {
-  
+const AdminBoard: React.FC = () => {
 
   const [ content, setContent] = useState('')
 
   const [ showUser, setShowUser] = useState(true)
-  const [ showAddUser, setShowAddUser] = useState(false)
+  const [ showBooks, setShowBooks] = useState(false)
+  const [ showAuthors, setShowAuthors] = useState(false)
+  const [ showAddBook, setShowAddBook] = useState(false)
+  const [ showAddAuthor, setShowAddAuthor] = useState(false)
 
   
-
   useEffect(() => {
     userService.getCustomerBoard().then(
       (response) => {
@@ -48,29 +45,61 @@ const BoardUser: React.FC = () => {
   const handleShowUser = (event:React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setShowUser(true)
-    setShowAddUser(false)
+    setShowBooks(false)
+    setShowAuthors(false)
+    setShowAddBook(false)
+    setShowAddAuthor(false)
   }
+  const handleShowBooks = (event:React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setShowUser(false)
+    setShowBooks(true)
+    setShowAuthors(false)
+    setShowAddBook(false)
+    setShowAddAuthor(false)
+  }
+  const handleShowAuthors = (event:React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setShowUser(false)
+    setShowBooks(false)
+    setShowAuthors(true)
+    setShowAddBook(false)
+    setShowAddAuthor(false)
+  }
+
   const handleAddBook = (event:React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setShowUser(false)
-    setShowAddUser(true)
+    setShowBooks(false)
+    setShowAuthors(false)
+    setShowAddBook(true)
+    setShowAddAuthor(false)
+  }
+  const handleAddAuthor = (event:React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setShowUser(false)
+    setShowBooks(false)
+    setShowAuthors(false)
+    setShowAddBook(false)
+    setShowAddAuthor(true)
   }
 
 
   return (
     <div>
-      <button onClick = {handleShowUser }>User</button> <button onClick = {handleAddBook}>Add Book</button>
-      { showUser && (
-        <Users />
-      )
-      }
-      { showAddUser && (
-        <AddBook/>
-      )
-      }
-      
+      <button onClick = {handleShowUser }>User</button>
+      <button onClick = {handleShowBooks }>Books</button> 
+      <button onClick = {handleShowAuthors }>Authors</button> 
+      <button onClick = {handleAddBook}>Add Book</button>
+      <button onClick = {handleAddAuthor}>Add Author</button>
+
+      { showUser && (<Users />)}
+      { showBooks && (<Books/>)}
+      { showAuthors && (<Authors/>)}
+      { showAddBook && (<AddBook/>)}
+      { showAddAuthor && (<AddAuthor/>)}
     </div>
   );
 };
 
-export default BoardUser;
+export default AdminBoard;

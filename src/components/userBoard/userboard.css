@@ -1,0 +1,16 @@
+.user__borrowList ol li {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin-bottom: 10px;
+}
+
+.user__borrowList img {
+    max-width:100%;
+    max-height:30px;
+}
+
+.userboard-container .active {
+    background-color: azure;
+    color: green;
+}

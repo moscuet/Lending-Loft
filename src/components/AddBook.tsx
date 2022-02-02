@@ -1,24 +1,21 @@
 import React, { useState, ReactElement } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-//import { useSelector } from 'react-redux'
-//import { AppState } from '../types'
-//import { Navigate } from 'react-router-dom'
+
 import {useHistory} from 'react-router-dom'
 import productService from '../services/productService'
-// interface RouterProps {
-//   history: {
-//     push(url: string): void
-//   }
-// }
+
 const  AddBook= (): ReactElement => {
 
-  const history = useHistory()
 
+  const history = useHistory()
+  console.log(history)
+  
+  
   const initialValues = {
     ISBN: '',
     title: '',
-    publisherName: 'string',
+    publisherName: '',
     author: '',
     publishedYear: 0,
     genres: '',
@@ -27,8 +24,10 @@ const  AddBook= (): ReactElement => {
     pageCount: 0,
     img: ''
   }
+
   const [state, setState] = useState({...initialValues,successful: false, loading:false,message:''})
   
+
   function validationSchema() {
     return Yup.object().shape({
       ISBN: Yup.string().required('ISBN required'),
@@ -46,8 +45,11 @@ const  AddBook= (): ReactElement => {
       img: Yup.string().required('image link required')
     })
   }
-
-  function handleRegister(formValue: {
+  
+  function handleAddMore (){
+    setState({ ...state, successful:false, message:''})
+  }
+  function handleAddBook(formValue: {
     ISBN: string
     title: string
     publisherName: string
@@ -60,18 +62,21 @@ const  AddBook= (): ReactElement => {
     img: string
   }) {
     console.log('hello from frontend form register', formValue)
- 
+    setState({ ...state, loading:true})
+
     productService.addBook( formValue).then(
       (response) => {
-        setState({ ...state, successful: true , loading:true})
-        history.push('/admin')
-        window.location.reload()
+        setState({ ...state, successful: true , loading:false, message:'Book added'})
+        // setState({ ...state, successful: true , loading:true})
+        // history.push('/admin')
+        // window.location.reload()
 
       },
       (error) => {
         setState({
           ...state,
           successful: false,
+          message:'Book not added'
         })
         console.log(error)
       }
@@ -84,7 +89,7 @@ const  AddBook= (): ReactElement => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleRegister}
+          onSubmit={handleAddBook}
         >
           <Form>
             {!state.successful && (
@@ -223,14 +228,26 @@ const  AddBook= (): ReactElement => {
               </div>
             )}
 
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
-                {state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Add Book</span>
-              </button>
-            </div>
+            {!state.successful && (
+              <div className="form-group">
+                <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
+                  {state.loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span>Add Book</span>
+                </button>
+              </div>
+            )
+            }
+
+            {state.successful && (
+              <div className="form-group">
+                <button className="btn btn-primary btn-block" onClick = {handleAddMore} >
+                  <span>Add more</span>
+                </button>
+              </div>
+            )
+            }     
           
 
             {state.message && (
@@ -252,10 +269,6 @@ const  AddBook= (): ReactElement => {
       </div>
     </div>
   )
-
-
-  
-  
 }
 
 export default AddBook

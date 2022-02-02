@@ -10,7 +10,6 @@ export default function Users() {
   const [ message, setMessage] = useState('')
 
   console.log(message)
-
   useEffect(() => {
     userService.getCustomerBoard().then(
       (response) => {
