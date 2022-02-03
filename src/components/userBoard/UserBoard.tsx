@@ -1,55 +1,35 @@
 import React from 'react'
-import { useState, useEffect } from "react";
-
-import userService from "../../services/userService";
-import EventBus from "../../common/EventBus";
+//import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom"
+// import userService from "../../services/userService";
+// import EventBus from "../../common/EventBus";
 
 import './userboard.css'
 import BorrowList from './BorrowList'
 import Setting from './Setting'
 
+import { Switch , Route} from 'react-router';
+
+
+
 const AdminBoard: React.FC = () => {
 
-  const [ content, setContent] = useState('')
-  const [ showComponent, setShowComponent] = useState('borrow-list')
-
-  console.log(content)
-
-  useEffect(() => {
-    userService.getCustomerBoard().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        setContent(_content);
-
-        if (error.response && error.response.status === 401) {
-          EventBus.dispatch("logout");
-        }
-      }
-    );
-  }, []);
-
-  const handleShowComponent= (event:React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setShowComponent(event.currentTarget.name)
-  }
 
 
-
+  const path = '/user';
   return (
     <div className='userboard-container'>
-      <button className = {`${showComponent === 'borrow-list'? 'active': ''}`} name = 'borrow-list' onClick = {handleShowComponent }>Borrow List</button> <button className = {`${showComponent === 'setting'? 'active': ''}`} name = 'setting' onClick = {handleShowComponent}>Setting</button>
-      { (showComponent === 'borrow-list') && (<BorrowList />)}
-      { (showComponent === 'setting') && (<Setting />)}
+      <NavLink to = {`${path}/setting`}>setting</NavLink>
+      <NavLink to = {`${path}/borrow`}>Borrow</NavLink>
+      <div>
+        <Switch>
+          <Route exact path={`${path}/borrow`} component={BorrowList} />
+          <Route exact path={`${path}/setting`}component={Setting} />
+        </Switch>
+      </div>
     </div>
   );
 };
+
 
 export default AdminBoard;

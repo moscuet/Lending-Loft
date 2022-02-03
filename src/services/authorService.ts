@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Author } from "../types";
 
 const API_URL = "http://localhost:3002/api/";
 class  authorService {
@@ -15,6 +16,9 @@ class  authorService {
   }
   deleteAuthor(id:string){
     return  axios.delete(API_URL +'authors/' + id)
+  }
+  updateAuthor(author:Author){
+    return axios.put(API_URL +'authors/' + author._id, author)
   }
 }
 

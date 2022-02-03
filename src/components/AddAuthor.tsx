@@ -7,6 +7,8 @@ import authorService from '../services/authorService'
 
 const  Addid= (): ReactElement => {
 
+  const authorlist:string[] = ['dfdfa','1133','13133']
+  console.log(authorlist)
 
   const history = useHistory()
   console.log(history)
@@ -155,10 +157,6 @@ const  Addid= (): ReactElement => {
       </div>
     </div>
   )
-
-
-  
-  
 }
 
 export default Addid

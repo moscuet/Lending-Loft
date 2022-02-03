@@ -4,44 +4,32 @@ import React, { useEffect, useState } from 'react';
 import authorService from '../services/authorService';
 import { Author } from '../types';
 
-export default function EditAuthor(id:{eId:string}) {
+export default function EditAuthor(props:{eId:string, editStatus:()=>void} ){
 
-  //   const initialValues = {
-  //     firstName: '',
-  //     lastName: '',
-  //     biography: ''
-  //   }
 
   const [state, setState] = useState({successful: false, loading:false,message:''})
-  const [message, setMessage] = useState('')
 
   const [author, setAuthor] = useState<Author>({
     firstName: '',
     lastName: '',
-    biography: 'hello',
+    biography: '',
     _id: ''
   })
 
   // delete later
-  console.log(message)
-  console.log('hello')
   useEffect(() => {
-    console.log('hell2')
-    authorService.getAuthorById(id.eId).then( res =>{
+    setState({...state,loading:true})
+    authorService.getAuthorById(props.eId).then( res =>{
       setAuthor(res.data)
-      console.log('hello3', res.data, author)
-
-
+      setState({...state,loading:false})
+    },
+    (error)=>{
+      console.log('error',error)
     })
-    console.log('Author after useeffect', author)
-    setMessage('')
-    setState(state)
-    console.log('hello4')
+  }, [props.eId]);
 
-  }, [id.eId]);
 
   function validationSchema() {
-
     return Yup.object().shape({
       firstName: Yup.string().required('First Name is required'),
       lastName: Yup.string().required('LastName is required'),
@@ -49,14 +37,22 @@ export default function EditAuthor(id:{eId:string}) {
     })
   }
 
-  function handleSubmit (){
-
+  function handleSubmit (formValue:{firstName:string, lastName:string, biography:string,_id:string}){
+    authorService.updateAuthor(formValue).then(res=>{
+      setState({...state, successful:true, message: 'Updater Author'})
+      props.editStatus()
+    },
+    (error)=>{
+      console.log(error)
+    }
+    )
   }
   console.log('hello5', author)
   return (
     <div className="col-md-12">
       <div className="card card-container">
         <Formik
+          enableReinitialize
           initialValues={author}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}

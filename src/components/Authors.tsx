@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 import authorService from '../services/authorService'
-import productService from '../services/productService'
 
 import { Author }from '../types'
 
@@ -30,7 +29,7 @@ export default function Authors() {
         setMessage(_Authors);
       }
     );
-  }, []);
+  }, [isEdit]);
   const handleDeleteAuthor = (id:string) =>{
     authorService.deleteAuthor(id).then(
       res =>{
@@ -41,12 +40,12 @@ export default function Authors() {
   const handleEditAuthor = (id:string) =>{
     setIsEdit(true)
     setEditId(id)
+  }
 
-    productService.deleteBook(id).then(
-      res =>{
-        const updatAuthor = authors.filter( author =>  author._id !== id)
-        setAuthors(updatAuthor)
-      })
+  const handleEditStatus = () => {
+    setTimeout(() => {
+      setIsEdit(!isEdit)
+    }, 1000);
   }
 
 
@@ -54,7 +53,7 @@ export default function Authors() {
     <div>
       {
         !isEdit && (
-          <div className = 'admin__booksList'>
+          <div className = 'admin__authorsList'>
             <ol >
               <li>
                 <div> Name</div>
@@ -77,9 +76,8 @@ export default function Authors() {
         )
       }
       {
-        isEdit &&(<EditAuthor eId={editId} />)
+        isEdit &&(<EditAuthor eId={editId} editStatus = {handleEditStatus} />)
       }
     </div>
   )
 }
-

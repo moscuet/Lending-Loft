@@ -4,15 +4,16 @@ import * as Yup from 'yup'
 import React, { useState } from 'react'
 import { useSelector , useDispatch} from 'react-redux'
 import { AppState, USER_DATA } from '../../types'
-//import userService from '../../services/userService'
 import { updateUser } from '../../redux/actions'
+import { setTimeout } from 'timers'
 
 const  Setting:React.FC =  () => {
   const user:USER_DATA  = useSelector( (state:AppState) =>state.auth.user)
   
   const [ state, setState] = useState({
     message:'',
-    successful:false
+    successful:false,
+    loading:false
   })
 
   function validationSchema() {
@@ -33,24 +34,18 @@ const  Setting:React.FC =  () => {
   const dispatch = useDispatch()
 
   const handleSubmit = async (formValue:USER_DATA) =>{
-    //userService.updateUser(formValue,user._id)
-    // .then( res=>{
-    //   console.log('res from setting', res.data)
-    //   setState({message:'saved', successful:true})
 
-    // },
-    // (error) =>{
-    //   console.log('res error from setting', error)
-
-    //   setState({message:'Not saved', successful:false})
-    // }
-    // )
     try {
+      setState({...state, loading:true})
       await dispatch(updateUser(formValue,user._id))
       setState({ ...state,
         message: 'user updated',
         successful:true,
+        loading:false
       });
+      setTimeout(()=>{
+        window.location.pathname = '/user'
+      },1000)
       // props.history.push("/");
       // window.location.reload();
  
@@ -147,11 +142,17 @@ const  Setting:React.FC =  () => {
                 />
               </div>
       
-              <div className="form-group">
-                <button type="submit" className="btn btn-primary btn-block">
-                          Submit
-                </button>
-              </div>
+              {!state.successful && (
+                <div className="form-group">
+                  <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
+                    {state.loading && (
+                      <span className="spinner-border spinner-border-sm"></span>
+                    )}
+                    <span>Add Book</span>
+                  </button>
+                </div>
+              )
+              }
       
             </div>
           )}
