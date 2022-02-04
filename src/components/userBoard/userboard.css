@@ -4,7 +4,7 @@
 }
 .user__borrowList ol li {  
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr ;
     margin-bottom: 10px;
 }
 
@@ -24,4 +24,14 @@ display: inline-block;
 .userboard-container .active {
     background-color: azure;
     color: green;
+}
+.overdue {
+    width:120px;
+    padding:0px;
+    background: red;
+}
+.nonoverdue {
+    width:120px;
+    background: green;
+    padding:0px;
 }

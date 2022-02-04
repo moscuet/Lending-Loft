@@ -151,8 +151,9 @@ export type Book = {
 
 export type Borrow = {
   bookId: [Book]
-  customerId: string
+  customerId: string[]
   borrowDate: Date
   returnDate: Date
   isReturned: Boolean
+  _id:string
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 //import { useSelector } from 'react-redux'
 //import { useDispatch } from 'react-redux'
 
-import { useLocation } from 'react-router-dom';
 //const { path } = useRouteMatch();
 //let {url} = useRouteMatch()
 
@@ -13,8 +12,6 @@ import { Product} from '../types'
 
 import BookCard from '../components/BookCard'
 
-
-
 const  BooksComp = () => {
   //const dispatch = useDispatch()
   //const products = useSelector((state: AppState) => state.order.inCart)
@@ -23,8 +20,6 @@ const  BooksComp = () => {
   const [content, setContent] = useState<Product[]>([]);
   const [message, setMessage] = useState('');
 
-  const {pathname} = useLocation();
-  console.log(pathname)
   useEffect(() => {
     userService.getPublicContent().then(
       (response) => {
