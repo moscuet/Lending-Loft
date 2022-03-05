@@ -86,7 +86,7 @@ export default function NavBar():ReactElement {
                <Nav.Link href="/signup">Sign Up</Nav.Link>
              </>)
           }
-          <Nav.Link href="/cart"></Nav.Link>
+          <Nav.Link href="/cart">Cart</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -35,7 +35,7 @@ const App: React.FC = () => {
   //const order = useSelector((state: { order: {cart:[]} }) => state.order)
   return <div >
     <NavBar />
-    <div style={{padding: '5px 10% 0 10% ' , border:'2px solid red'}} >
+    <div style={{padding: '5px 10% 0 10% ' }} >
       <Switch>
         <AdminRoute
           path='/admin'
@@ -47,7 +47,7 @@ const App: React.FC = () => {
         />
         <Route  path="/signup"> <Signup history ={history}/> </Route>
         <Route  path="/signin">  <Signin history = {history}/> </Route>
-        <Route  path="/user">  <UserBoard/>  </Route> 
+        {/* <Route  path="/user">  <UserBoard/>  </Route>  */}
         <Route  path="/books/:id">  <SingleBook/> </Route> 
         <Route  path="/profile">  <Profile/> </Route> 
         <Route  path="/cart/:id" > <SingleBook/>  </Route>

@@ -5,7 +5,7 @@ import authorService from '../services/authorService'
 import { Author }from '../types'
 
 import EditAuthor from './EditAuthor'
-import '../components/user.css'
+import '../components/adminboard.css'
 
 export default function Authors() {
   

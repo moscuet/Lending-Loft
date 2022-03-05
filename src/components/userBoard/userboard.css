@@ -7,10 +7,16 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr ;
     margin-bottom: 10px;
 }
+.user__borrowList ol li:first-child {
+  font-weight: bold;
+}
 
-.user__borrowList img {
+.user__borrowList li img {
     max-width:100%;
     max-height:30px;
+}
+.user__borrowList__book{
+    max-width:50%;
 }
 
 .userboard-container a {
@@ -25,13 +31,19 @@ display: inline-block;
     background-color: azure;
     color: green;
 }
-.overdue {
+.nonreturn {
     width:120px;
     padding:0px;
     background: red;
 }
-.nonoverdue {
+.return {
     width:120px;
     background: green;
     padding:0px;
+}
+.green-text{
+    color:green;
+}
+.red-text{
+    color:red;
 }

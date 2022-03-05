@@ -1,3 +1,14 @@
+.adminboard-container_nav{
+    margin-bottom:2rem;
+}
+.adminboard-container_nav a {
+ padding:5px;
+ text-decoration: none;
+margin:0px 5px;
+}
+.adminboard-container_nav a:active{
+  color:green;
+}
 .admin__usersList ol li {
     margin-bottom: 10px;
     text-align: center;

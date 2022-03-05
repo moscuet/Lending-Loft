@@ -5,7 +5,7 @@ import productService from '../services/productService'
 
 import { Book }from '../types'
 
-import '../components/user.css'
+import '../components/adminboard.css'
 
 import EditBook from './EditBook'
 export default function Books() {

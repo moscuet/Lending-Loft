@@ -3,8 +3,8 @@
 import { useState } from "react"
 
 
-const Dropdown = (props:{opts:{label:string, value:string}[]}) => {
-  const {opts }= props
+const Dropdown = (props:{opts:{label:string, value:string}[], id:string, handleReturnDate:(id:string,day:string)=>void }) => {
+  const {opts, handleReturnDate ,id}= props
   
   const [selectedoptsion, setSelectedoptsion] = useState(opts[0].value)
   return (
@@ -19,7 +19,7 @@ const Dropdown = (props:{opts:{label:string, value:string}[]}) => {
           </option>
         ))}
       </select>
-      <button>confirm</button>
+      <button onClick={()=>handleReturnDate(id,selectedoptsion)}>confirm</button>
     </div>
   )
 }

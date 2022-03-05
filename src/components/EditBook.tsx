@@ -47,6 +47,7 @@ export default function EditBook(props: {
         console.log('error', error)
       }
     )
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.eId])
 
   function validationSchema() {
