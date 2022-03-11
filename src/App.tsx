@@ -47,7 +47,7 @@ const App: React.FC = () => {
         />
         <Route  path="/signup"> <Signup history ={history}/> </Route>
         <Route  path="/signin">  <Signin history = {history}/> </Route>
-        {/* <Route  path="/user">  <UserBoard/>  </Route>  */}
+        <Route  path="/user">  <UserBoard/>  </Route> 
         <Route  path="/books/:id">  <SingleBook/> </Route> 
         <Route  path="/profile">  <Profile/> </Route> 
         <Route  path="/cart/:id" > <SingleBook/>  </Route>

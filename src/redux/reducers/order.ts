@@ -3,6 +3,7 @@ import {
   ProductActions,
   ADD_PRODUCT,
   REMOVE_PRODUCT,
+  EMPTY_CART
 } from '../../types'
 
 export default function order(
@@ -33,6 +34,12 @@ export default function order(
       return { ...state, inCart: [...state.inCart] }
     }
     return state
+  }
+
+  case EMPTY_CART:{
+    state.inCart=[]
+    localStorage.setItem('inCart',JSON.stringify([]))
+    return {...state, inCart:[]}
   }
 
   default:

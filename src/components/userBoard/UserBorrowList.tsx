@@ -20,6 +20,7 @@ export default function UserBorrowList() {
     userService.getBorrowList(userId).then(
       (response) => {
         setBorrowList(response.data)
+        console.log('# userId and borrow list', userId,response.data)
       },
       (error) => {
         const _content =
@@ -41,7 +42,7 @@ export default function UserBorrowList() {
 
   const handleClick = (id: string) => {
     //window.location.pathname = `/admin/${id}`
-    history.push(`/user/${id}`)
+    history.push(`/user/borrows/${id}`)
   }
 
   return (
@@ -89,7 +90,7 @@ export default function UserBorrowList() {
       </ol>
       <div className="admin__borrowList__book">
         <Switch>
-          <Route exact path={'/user/:id'} component={SingleBook} />
+          <Route exact path={'/user/borrows/:id'} component={SingleBook} />
         </Switch>
       </div>
     </div>

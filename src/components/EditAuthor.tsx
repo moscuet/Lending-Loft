@@ -110,7 +110,7 @@ export default function EditAuthor(props:{eId:string, editStatus:()=>void} ){
                   {state.loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
-                  <span>Add Book</span>
+                  <span>Update Author</span>
                 </button>
               </div>
             )

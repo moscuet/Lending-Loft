@@ -120,6 +120,7 @@ const Signup = (props: RouterProps): ReactElement => {
           validationSchema={validationSchema}
           onSubmit={handleRegister}
         >
+          
           <Form>
             {!state.successful && (
               <div>

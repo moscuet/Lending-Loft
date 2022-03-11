@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import './userboard.css'
 
 import userService from '../../services/userService'
 import borrowService from '../../services/borrowservice'
-import { AppState, Borrow } from '../../types'
+import {  Borrow } from '../../types'
 import Select from './Select'
 import { Route, Switch } from 'react-router-dom'
 
@@ -12,15 +11,16 @@ import { useHistory } from 'react-router-dom'
 import SingleBook from '../SingleBook'
 
 export default function AdminBorrowList() {
-  const userId: string = useSelector((state: AppState) => state.auth.user._id)
-
+  //const userId: string = useSelector((state: AppState) => state.auth.user._id)
   const [borrowList, setBorrowList] = useState<Borrow[]>([])
 
   const history = useHistory()
 
   useEffect(() => {
-    userService.getBorrowList(userId).then(
+    userService.getAllBorrowList().then(
+
       (response) => {
+        console.log('borrow list from admin',response.data)
         setBorrowList(response.data)
       },
       (error) => {
@@ -33,7 +33,7 @@ export default function AdminBorrowList() {
         console.log(_content)
       }
     )
-  })
+  },[])
 
   const returnOtion = [
     { label: '---', value: '0' },
@@ -48,13 +48,14 @@ export default function AdminBorrowList() {
     )
     if (consent) {
       const books = borrow.bookId.map((b) => b._id)
+      console.log('book id from admin$$$$$$$',books)
       const newBorrow = {
         ...borrow,
         bookId: books,
         isReturned: !borrow.isReturned,
       }
       borrowService.updateBorrow(newBorrow).then((res) => {
-        userService.getBorrowList(userId).then((res) => {
+        userService.getAllBorrowList().then((res) => {
           setBorrowList(res.data)
         })
       })
@@ -75,7 +76,7 @@ export default function AdminBorrowList() {
       returnDate: newReturndate,
     }
     borrowService.updateBorrow(newBorrow).then((res) => {
-      userService.getBorrowList(userId).then((res) => {
+      userService.getAllBorrowList().then((res) => {
         setBorrowList(res.data)
       })
     })
@@ -106,7 +107,7 @@ export default function AdminBorrowList() {
           }
           const isOverDue =
             new Date().getTime() > new Date(returnDate).getTime()
-          console.log('now, overdue', new Date(), isOverDue)
+          //console.log('now, overdue', new Date(), isOverDue)
           return (
             <li>
               <div
@@ -115,7 +116,7 @@ export default function AdminBorrowList() {
                 role="button"
                 tabIndex={0}
               >
-                {bookId[0].title}{' '}
+                {bookId[0].title}
               </div>
               <div>
                 <img src={`${bookId[0].img}`} alt="book pic" />{' '}

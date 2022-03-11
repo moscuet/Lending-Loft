@@ -34,6 +34,7 @@ const SingleBook = () => {
     userService.getSingleBook(id).then(
       (response) => {
         if (response) setBook(response.data)
+        console.log('response data from server in singlebook', response.data)
       },
       (error) => {
         const _content =

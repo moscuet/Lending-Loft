@@ -1,12 +1,11 @@
 import axios from "axios";
 //import { USER_DATA } from "../types";
-
-const API_URL = "http://localhost:3002/api/auths/";
+const API_URL = process.env.REACT_APP_API_URL;
 class  AuthService {
   login  (useremail: string, password: string) {
     console.log('from authservice/login: ', useremail, password)
     return axios
-      .post(API_URL + "signin", {
+      .post(API_URL + "/auths/signin", {
         useremail,
         password
       })
@@ -24,7 +23,7 @@ class  AuthService {
   
   register (firstName: string, lastName: string, useremail: string, phoneNumber:string, address: string, password: string ){
     return axios
-      .post('http://localhost:3002/api/auths/signup', {
+      .post(API_URL + '/auths/signup', {
         firstName,
         lastName, 
         useremail, 

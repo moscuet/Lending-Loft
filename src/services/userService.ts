@@ -3,7 +3,11 @@ import axios from 'axios';
 import { USER_DATA } from '../types';
 import authHeader from './authHeader';
 
-const API_URL = 'http://localhost:3002/api';
+//const dotenv = require('dotenv');
+
+// const API_URL = 'https://library-server300.herokuapp.com/api/';
+//const API_URL = "http://localhost:3002/api/";
+const API_URL = process.env.REACT_APP_API_URL
 
 const getSingleBook = (id:string|undefined) => {
   return axios.get(API_URL + `/books/${id}`);
@@ -19,7 +23,7 @@ const getCustomerBoard = () => {
 };
 
 const getAdminBoard = () => {
-  return axios.get(API_URL + "admin", { headers: authHeader() });
+  return axios.get(API_URL + "/admin", { headers: authHeader() });
 };
 
 const deleteUser = (id:string) => {
@@ -42,7 +46,11 @@ const updateUser =  (user:USER_DATA, id:string) =>{
 
 const getBorrowList = (id:string) =>{
   console.log(id)
-  return axios.get(`${API_URL }/borrows?customerId=283f04bf-0780-4017-981f-683d45f0daf2`, { headers: authHeader() });
+  return axios.get(`${API_URL}/borrows?customerId=${id}`, { headers: authHeader() });
+}
+
+const getAllBorrowList = () =>{
+  return axios.get(`${API_URL}/borrows`, { headers: authHeader() });
 }
 
 export default {
@@ -50,6 +58,7 @@ export default {
   updateUser,
   getSingleBook ,
   getBorrowList,
+  getAllBorrowList,
   getPublicContent,
   getCustomerBoard,
   getAdminBoard,

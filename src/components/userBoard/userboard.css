@@ -8,6 +8,7 @@
     margin-bottom: 10px;
 }
 .user__borrowList ol li:first-child {
+
   font-weight: bold;
 }
 
@@ -31,6 +32,48 @@ display: inline-block;
     background-color: azure;
     color: green;
 }
+
+
+
+
+
+.admin__borrowList ol {
+    margin: 0;
+    padding:0;
+}
+.admin__borrowList ol li {  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr ;
+    margin-bottom: 10px;
+}
+.admin__borrowList ol li:first-child {
+
+  font-weight: bold;
+}
+
+.admin__borrowList li img {
+    max-width:100%;
+    max-height:30px;
+}
+.admin__borrowList__book{
+    max-width:50%;
+}
+
+.adminboard-container a {
+display: inline-block;
+ padding:5px 10px;
+ margin:5px 10px 20px 0px ;
+ text-decoration: none;
+
+}
+
+.adminboard-container .active {
+    background-color: azure;
+    color: green;
+}
+
+
+
 .nonreturn {
     width:120px;
     padding:0px;

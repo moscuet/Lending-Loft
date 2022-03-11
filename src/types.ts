@@ -1,6 +1,7 @@
 // Action types
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
+export const EMPTY_CART = 'EMPTY_CART'
 export const payload = 'payload'
 // A product
 
@@ -56,8 +57,13 @@ export type RemoveProductAction = {
     product: Product
   }
 }
+
+export type  EmptyCartAction = {
+  type: typeof EMPTY_CART
+}
+
 // Use this union in reducer
-export type ProductActions = AddProductAction | RemoveProductAction
+export type ProductActions = AddProductAction | RemoveProductAction | EmptyCartAction
 
 export type OrderState = {
   inCart: Product[]

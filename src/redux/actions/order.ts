@@ -5,6 +5,7 @@ import {
   REMOVE_PRODUCT,
   ProductActions,
   Product,
+  EMPTY_CART
 } from '../../types'
 // localStorage.setItem('testObject', JSON.stringify(testObject));
 //var retrievedObject = localStorage.getItem('testObject');
@@ -24,6 +25,13 @@ export function removeProduct(product: Product): ProductActions {
     payload: {
       product,
     },
+  }
+}
+
+export function EmptyCart(): ProductActions {
+  return {
+    type: EMPTY_CART,
+
   }
 }
 

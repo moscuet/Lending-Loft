@@ -160,3 +160,22 @@ const  Addid= (): ReactElement => {
 }
 
 export default Addid
+
+
+/*
+
+
+(property) initialValues: {
+    firstName: string;
+    lastName: string;
+    biography: string;
+}
+
+const initialValues: {
+    firstName: string;
+    lastName: string;
+    biography: string;
+}
+
+
+*/
