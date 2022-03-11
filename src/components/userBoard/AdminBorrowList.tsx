@@ -100,7 +100,7 @@ export default function AdminBorrowList() {
           <div>Extend deadline</div>
         </li>
         {borrowList.map((borrow: Borrow) => {
-          const { borrowDate, returnDate, isReturned, bookId } = borrow
+          const { borrowDate, returnDate, isReturned, bookId,_id } = borrow
           const getFormattedDate = (date: Date) => {
             let d = new Date(date)
             return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
@@ -109,7 +109,7 @@ export default function AdminBorrowList() {
             new Date().getTime() > new Date(returnDate).getTime()
           //console.log('now, overdue', new Date(), isOverDue)
           return (
-            <li>
+            <li key = {`key-${_id}`}>
               <div
                 onClick={() => handleClick(borrow._id ? bookId[0]._id : '')}
                 onKeyPress={() => handleClick(borrow._id ? borrow._id : '')}
