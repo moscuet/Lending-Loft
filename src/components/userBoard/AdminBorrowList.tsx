@@ -3,24 +3,23 @@ import './userboard.css'
 
 import userService from '../../services/userService'
 import borrowService from '../../services/borrowservice'
-import {  Borrow } from '../../types'
+import { Borrow } from '../../types'
 import Select from './Select'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Routes as Switch } from 'react-router-dom'
 
-import { useHistory } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import SingleBook from '../SingleBook'
 
 export default function AdminBorrowList() {
   //const userId: string = useSelector((state: AppState) => state.auth.user._id)
   const [borrowList, setBorrowList] = useState<Borrow[]>([])
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   useEffect(() => {
     userService.getAllBorrowList().then(
-
       (response) => {
-        console.log('borrow list from admin',response.data)
+        console.log('borrow list from admin', response.data)
         setBorrowList(response.data)
       },
       (error) => {
@@ -33,7 +32,7 @@ export default function AdminBorrowList() {
         console.log(_content)
       }
     )
-  },[])
+  }, [])
 
   const returnOtion = [
     { label: '---', value: '0' },
@@ -48,7 +47,7 @@ export default function AdminBorrowList() {
     )
     if (consent) {
       const books = borrow.bookId.map((b) => b._id)
-      console.log('book id from admin$$$$$$$',books)
+      console.log('book id from admin$$$$$$$', books)
       const newBorrow = {
         ...borrow,
         bookId: books,
@@ -84,7 +83,7 @@ export default function AdminBorrowList() {
 
   const handleClick = (id: string) => {
     //window.location.pathname = `/admin/${id}`
-    history.push(`/admin/${id}`)
+    navigate(`/admin/${id}`)
   }
 
   return (
@@ -100,7 +99,7 @@ export default function AdminBorrowList() {
           <div>Extend deadline</div>
         </li>
         {borrowList.map((borrow: Borrow) => {
-          const { borrowDate, returnDate, isReturned, bookId,_id } = borrow
+          const { borrowDate, returnDate, isReturned, bookId, _id } = borrow
           const getFormattedDate = (date: Date) => {
             let d = new Date(date)
             return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
@@ -109,7 +108,7 @@ export default function AdminBorrowList() {
             new Date().getTime() > new Date(returnDate).getTime()
           //console.log('now, overdue', new Date(), isOverDue)
           return (
-            <li key = {`key-${_id}`}>
+            <li key={`key-${_id}`}>
               <div
                 onClick={() => handleClick(borrow._id ? bookId[0]._id : '')}
                 onKeyPress={() => handleClick(borrow._id ? borrow._id : '')}
@@ -145,7 +144,7 @@ export default function AdminBorrowList() {
       </ol>
       <div className="admin__borrowList__book">
         <Switch>
-          <Route exact path={'/admin/:id'} component={SingleBook} />
+          <Route path={'/admin/:id'}> <SingleBook />  </Route>
         </Switch>
       </div>
     </div>

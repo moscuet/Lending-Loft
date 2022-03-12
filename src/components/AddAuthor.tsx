@@ -1,8 +1,6 @@
 import React, { useState, ReactElement } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-
-import {useHistory} from 'react-router-dom'
 import authorService from '../services/authorService'
 
 const  Addid= (): ReactElement => {
@@ -10,8 +8,7 @@ const  Addid= (): ReactElement => {
   const authorlist:string[] = ['dfdfa','1133','13133']
   console.log(authorlist)
 
-  const history = useHistory()
-  console.log(history)
+ 
   
   const initialValues = {
     firstName: '',

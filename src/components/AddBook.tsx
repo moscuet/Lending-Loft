@@ -2,15 +2,11 @@ import React, { useState, ReactElement } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import {useHistory} from 'react-router-dom'
 import productService from '../services/productService'
 
 const  AddBook= (): ReactElement => {
 
 
-  const history = useHistory()
-  console.log(history)
-  
   
   const initialValues = {
     ISBN: '',
@@ -68,7 +64,7 @@ const  AddBook= (): ReactElement => {
       (response) => {
         setState({ ...state, successful: true , loading:false, message:'Book added'})
         // setState({ ...state, successful: true , loading:true})
-        // history.push('/admin')
+        // Navigate.push('/admin')
         // window.location.reload()
 
       },

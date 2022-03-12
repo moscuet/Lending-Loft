@@ -4,9 +4,9 @@ import './userboard.css'
 
 import userService from '../../services/userService'
 import { AppState, Borrow } from '../../types'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Routes as Switch } from 'react-router-dom'
 
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import SingleBook from '../SingleBook'
 
 export default function UserBorrowList() {
@@ -14,13 +14,13 @@ export default function UserBorrowList() {
 
   const [borrowList, setBorrowList] = useState<Borrow[]>([])
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   useEffect(() => {
     userService.getBorrowList(userId).then(
       (response) => {
         setBorrowList(response.data)
-        console.log('# userId and borrow list', userId,response.data)
+        console.log('# userId and borrow list', userId, response.data)
       },
       (error) => {
         const _content =
@@ -32,17 +32,12 @@ export default function UserBorrowList() {
         console.log(_content)
       }
     )
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
-
-
-
-
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleClick = (id: string) => {
     //window.location.pathname = `/admin/${id}`
-    history.push(`/user/borrows/${id}`)
+    navigate(`/user/borrows/${id}`)
   }
 
   return (
@@ -55,7 +50,7 @@ export default function UserBorrowList() {
           <div>Due Date</div>
           <div>Status</div>
         </li>
-        {borrowList.map((borrow: Borrow,i) => {
+        {borrowList.map((borrow: Borrow, i) => {
           const { borrowDate, returnDate, isReturned, bookId } = borrow
           const getFormattedDate = (date: Date) => {
             let d = new Date(date)
@@ -64,7 +59,7 @@ export default function UserBorrowList() {
           const isOverDue =
             new Date().getTime() > new Date(returnDate).getTime()
           return (
-            <li key = {bookId[0]._id+i}>
+            <li key={bookId[0]._id + i}>
               <div
                 onClick={() => handleClick(borrow._id ? bookId[0]._id : '')}
                 onKeyPress={() => handleClick(borrow._id ? borrow._id : '')}
@@ -83,14 +78,13 @@ export default function UserBorrowList() {
                 {getFormattedDate(returnDate)}
               </div>
               <div>{isReturned ? 'Returned' : 'Not Returned'}</div>
-              
             </li>
           )
         })}
       </ol>
       <div className="admin__borrowList__book">
         <Switch>
-          <Route exact path={'/user/borrows/:id'} component={SingleBook} />
+          <Route path={'/user/borrows/:id'} > <  SingleBook   /></Route>
         </Switch>
       </div>
     </div>

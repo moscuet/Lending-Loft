@@ -1,7 +1,7 @@
 import React, { useState,  ReactElement } from "react";
 import {  useSelector, useDispatch } from "react-redux";
 import {AppState}  from '../types'
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {login} from '../redux/actions/auth'
@@ -65,7 +65,7 @@ const  Signin = (props:RouterProps) : ReactElement => {
   };
 
   if (isLoggedIn) {
-    <Redirect to="/login" />
+    <Navigate to="/login" />
 
   }
   return (
