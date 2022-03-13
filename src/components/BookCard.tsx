@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Product } from '../types'
@@ -8,6 +8,11 @@ import { addProduct } from '../redux/actions'
 export default function BookCard(book: (Product & {isIncart?:boolean})): ReactElement {
   const { title, img, authors } = book
   const dispatch = useDispatch()
+  const [cartState, setCartstate ] = useState(book.isIncart)
+  const onclick = () =>{
+    dispatch(addProduct(book))
+    setCartstate(!cartState)
+  }
   console.log('frooooooom bookcard',book)
   return (
     <div style={{ width: '100%' }}>
@@ -23,7 +28,7 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
               .map((a) => a.firstName + ' ' + a.lastName)
               .join(',')}`}
           </Card.Text>
-          <Button variant="primary"  onClick={() => dispatch(addProduct(book))} disabled={book.isIncart}>
+          <Button variant="primary"  onClick={onclick} disabled={cartState}>
             Add to cart
           </Button>
         </Card.Body>

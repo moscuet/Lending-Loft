@@ -1,16 +1,19 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-import AddBook from './AddBook'
+//import AddBook from './AddBook'
 import AddAuthor from './AddAuthor'
 import Users from './Users'
 import Books from './Books'
 import Authors from './Authors'
-import userService from '../services/userService'
-import EventBus from '../common/EventBus'
-import { NavLink, Route, Routes as Switch } from 'react-router-dom'
-import BorrowList from './userBoard/AdminBorrowList'
+import BorrowList from './AdminBorrowList'
+import { Route, Routes as Switch } from 'react-router-dom'
+
+import userService from '../../services/userService'
+import EventBus from '../../common/EventBus'
+import { NavLink } from 'react-router-dom'
 import './adminboard.css'
+import AdminBorrowList from './AdminBorrowList'
 const AdminBoard: React.FC = () => {
   const [content, setContent] = useState('')
 
@@ -41,6 +44,7 @@ const AdminBoard: React.FC = () => {
 
   return (
     <div className="adminboard-container">
+      <div ><h2 style={{textAlign:'center'}}>Admin Board</h2></div>
       <div className="adminboard-container_nav">
         <NavLink to={`${path}`}>Borrows</NavLink>
         <NavLink to={`${path}/users`}>Users</NavLink>
@@ -51,13 +55,12 @@ const AdminBoard: React.FC = () => {
       </div>
       <div>
         <Switch>
-          <Route path={`${path}`} > < BorrowList/> </Route>  
-          <Route path={`${path}/users`} > < Users /> </Route> 
-          <Route path={`${path}/books`} > < Books/> </Route> 
-          <Route path={`${path}/authors`} > < Authors /> </Route> 
-          <Route path={`${path}/addbook`} > < AddBook/> </Route> 
-          <Route path={`${path}/addauthor`} > < AddAuthor/> </Route> 
-          <Route path={`${path}/:id`} >BorrowList</Route> 
+          <Route path={'/'} element = {< BorrowList/>} />
+          <Route path={'/books'} element = {< Books/>}/> 
+          <Route path={'/users'} element = {< Users />}/>
+          <Route path={`/authors`} element = {< Authors />}/> 
+          <Route path={`/addauthor`} element ={< AddAuthor/>} />  
+          <Route path={`/addbook`} element ={< AdminBorrowList/>} /> 
         </Switch>
       </div>
     </div>

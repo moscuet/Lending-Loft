@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-import userService from '../services/userService'
-import {USER_DATA }from '../types'
+import userService from '../../services/userService'
+import {USER_DATA }from '../../types'
 
-import '../components/adminboard.css'
+import './adminboard.css'
 export default function Users() {
   
   const [ users, setUsers] = useState<USER_DATA[]>([])

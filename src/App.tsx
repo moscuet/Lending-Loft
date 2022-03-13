@@ -9,11 +9,10 @@ import './App.css'
 
 import { clearMessage } from './redux/actions'
 
-import AdminRoute from './components/Routing/AdminRoute'
-import AdminBoard from './components/AdminBoard'
-
-import UserRoute from './components/Routing/UserRoute'
+import AdminBoard from './components/adminBoard/AdminBoard'
 import UserBoard from './components/userBoard/UserBoard'
+
+
 
 import NavBar from './components/nabBar/NavBar'
 import Signin from './components/SigninForm'
@@ -21,6 +20,8 @@ import Signup from './components/SignupForm'
 import Home from './pages/Home'
 import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
+import AdminRoute from './components/Routing/AdminRoute'
+import UserRoute from './components/Routing/UserRoute'
 
 const App: React.FC = () => {
   const history = createBrowserHistory()
@@ -31,34 +32,32 @@ const App: React.FC = () => {
     })
   }, [dispatch, history])
 
-  //const order = useSelector((state: { order: {cart:[]} }) => state.order)
   return (
     <Fragment>
       <NavBar />
       <Switch>
-        <Route path='/admin' element={<AdminRoute/>}/>
-        <Route path='/user' element={<UserRoute/>}/>
-        <
-          Route  path='/admin' element={<AdminRoute/>}>
-          <Route path='/admin' element={<AdminBoard/>}/>
-        </Route>
-        {/* <AdminRoute path="/admin" component={AdminBoard} /> */}
-         
-        {/* <UserRoute path="/user" component={UserBoard} /> */}
-          
-          
-        {/* <Route path="/signup">
-          <Signupp history={history} />
-        </Route> */}
+      
+        <Route path='/admin/*'
+          element={
+            <AdminRoute >
+              <AdminBoard/>
+            </AdminRoute >
+          }
+        />
+
+        <Route path='/user/*'
+          element={
+            <UserRoute >
+              <UserBoard/>
+            </UserRoute>
+          }
+        />
 
         <Route path='/signup' element = {<Signup history={history}/>} />
         <Route path='/signin' element = {<Signin history={history}/>} />
-        <Route path='/user' element =   {<UserBoard />} />
         <Route path='/books/:id' element =   { <SingleBook />} />
-
         <Route path='/cart/:id' element =   {  <SingleBook />} />
         <Route path='/cart' element =   { <Cart />} />
-
         <Route path='/' element =   { <Home />} />
       </Switch>
     </Fragment>

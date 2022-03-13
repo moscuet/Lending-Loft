@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-import authorService from '../services/authorService'
+import authorService from '../../services/authorService'
 
-import { Author }from '../types'
+import { Author }from '../../types'
 
-import EditAuthor from './EditAuthor'
-import '../components/adminboard.css'
+import EditAuthor from '../EditAuthor'
+import './adminboard.css'
 
 export default function Authors() {
   

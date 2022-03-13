@@ -84,7 +84,7 @@ export default function UserBorrowList() {
       </ol>
       <div className="admin__borrowList__book">
         <Switch>
-          <Route path={'/user/borrows/:id'} > <  SingleBook   /></Route>
+          <Route path={'/:id'} element = {<  SingleBook   />} /> 
         </Switch>
       </div>
     </div>

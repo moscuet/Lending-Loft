@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import './userboard.css'
+import './adminboard.css'
 
 import userService from '../../services/userService'
 import borrowService from '../../services/borrowservice'
 import { Borrow } from '../../types'
 import Select from './Select'
-import { Route, Routes as Switch } from 'react-router-dom'
+//import { Route, Routes as Switch } from 'react-router-dom'
 
 import {useNavigate } from 'react-router-dom'
-import SingleBook from '../SingleBook'
+//import SingleBook from '../SingleBook'
 
 export default function AdminBorrowList() {
   //const userId: string = useSelector((state: AppState) => state.auth.user._id)
@@ -143,9 +143,9 @@ export default function AdminBorrowList() {
         })}
       </ol>
       <div className="admin__borrowList__book">
-        <Switch>
+        {/* <Switch>
           <Route path={'/admin/:id'}> <SingleBook />  </Route>
-        </Switch>
+        </Switch> */}
       </div>
     </div>
   )

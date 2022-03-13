@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-import userService from '../services/userService'
-import productService from '../services/productService'
+import userService from '../../services/userService'
+import productService from '../../services/productService'
 
-import { Book }from '../types'
+import { Book }from '../../types'
 
-import '../components/adminboard.css'
+import './adminboard.css'
 
-import EditBook from './EditBook'
+import EditBook from '../EditBook'
 export default function Books() {
   
   const [ books, setBooks] = useState<Book[]>([])

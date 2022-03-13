@@ -1,7 +1,7 @@
 import React, { useState, ReactElement } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import authorService from '../services/authorService'
+import authorService from '../../services/authorService'
 
 const  Addid= (): ReactElement => {
 
