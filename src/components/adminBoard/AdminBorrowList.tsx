@@ -5,13 +5,12 @@ import userService from '../../services/userService'
 import borrowService from '../../services/borrowservice'
 import { Borrow } from '../../types'
 import Select from './Select'
-//import { Route, Routes as Switch } from 'react-router-dom'
+import { Route, Routes as Switch } from 'react-router-dom'
 
 import {useNavigate } from 'react-router-dom'
-//import SingleBook from '../SingleBook'
+import SingleBook from '../SingleBook'
 
 export default function AdminBorrowList() {
-  //const userId: string = useSelector((state: AppState) => state.auth.user._id)
   const [borrowList, setBorrowList] = useState<Borrow[]>([])
 
   const navigate = useNavigate()
@@ -83,7 +82,7 @@ export default function AdminBorrowList() {
 
   const handleClick = (id: string) => {
     //window.location.pathname = `/admin/${id}`
-    navigate(`/admin/${id}`)
+    navigate(`/admin/borrows/${id}`)
   }
 
   return (
@@ -143,9 +142,9 @@ export default function AdminBorrowList() {
         })}
       </ol>
       <div className="admin__borrowList__book">
-        {/* <Switch>
-          <Route path={'/admin/:id'}> <SingleBook />  </Route>
-        </Switch> */}
+        <Switch>
+          <Route path={'/:id'} element ={<SingleBook />} />
+        </Switch>
       </div>
     </div>
   )

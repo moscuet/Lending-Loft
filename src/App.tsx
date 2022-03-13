@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-//import { useState, useEffect } from "react";
 import { Routes as Switch, Route } from 'react-router-dom'
-//import {useHistory} from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { useDispatch } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'

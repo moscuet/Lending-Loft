@@ -46,8 +46,8 @@ const AdminBoard: React.FC = () => {
     <div className="adminboard-container">
       <div ><h2 style={{textAlign:'center'}}>Admin Board</h2></div>
       <div className="adminboard-container_nav">
-        <NavLink to={`${path}`}>Borrows</NavLink>
-        <NavLink to={`${path}/users`}>Users</NavLink>
+        <NavLink to={`${path}/borrows`}>Borrows</NavLink>
+        <NavLink to={`${path}/`}>Users</NavLink>
         <NavLink to={`${path}/books`}>Books</NavLink>
         <NavLink to={`${path}/authors`}>authors</NavLink>
         <NavLink to={`${path}/addbook`}>Add Book</NavLink>
@@ -55,9 +55,9 @@ const AdminBoard: React.FC = () => {
       </div>
       <div>
         <Switch>
-          <Route path={'/'} element = {< BorrowList/>} />
+          <Route path={'/'} element = {< Users/>} />
           <Route path={'/books'} element = {< Books/>}/> 
-          <Route path={'/users'} element = {< Users />}/>
+          <Route path={'/borrows/*'} element = {< BorrowList/>}/>
           <Route path={`/authors`} element = {< Authors />}/> 
           <Route path={`/addauthor`} element ={< AddAuthor/>} />  
           <Route path={`/addbook`} element ={< AdminBorrowList/>} /> 
