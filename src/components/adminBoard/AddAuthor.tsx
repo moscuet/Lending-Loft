@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import authorService from '../../services/authorService'
 
-const  Addid= (): ReactElement => {
+const  AddAuthor= (): ReactElement => {
 
   const authorlist:string[] = ['dfdfa','1133','13133']
   console.log(authorlist)
@@ -121,7 +121,7 @@ const  Addid= (): ReactElement => {
                   {state.loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
-                  <span>Add Book</span>
+                  <span>Add Author</span>
                 </button>
               </div>
             )
@@ -156,7 +156,7 @@ const  Addid= (): ReactElement => {
   )
 }
 
-export default Addid
+export default AddAuthor
 
 
 /*
