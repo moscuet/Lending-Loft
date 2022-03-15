@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Formik,  Form} from 'formik'
-//import { useSelector } from 'react-redux'
-//import { AppState } from '../../types'
 
 import './checkout.css'
 import UserDetails from "./UserDetails";
 import UserAddress from "./UserAddress";
 import Confirmation from "./Confirmation";
-
 import SuccedCheckout from './SuccedCheckout'
+
 import { Product } from '../../types';
 
 const MultiStepForm =(props:{inCart:Product[]})=> {

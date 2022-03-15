@@ -1,10 +1,7 @@
 import React from 'react'
-// import { ErrorMessage, Field, Form, Formik } from 'formik'
-// import * as Yup from 'yup'
-//import { useState,  useEffect } from 'react'
+
 import { useSelector } from 'react-redux'
 import { AppState } from '../types'
-//import { AppState } from "../types";
 import { useDispatch } from 'react-redux'
 import { Link} from 'react-router-dom'
 

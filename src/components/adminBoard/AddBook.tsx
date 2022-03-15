@@ -61,10 +61,7 @@ const  AddBook= (): ReactElement => {
     productService.addBook( formValue).then(
       (response) => {
         setState({ ...state, successful: true , loading:false, message:'Book added'})
-        // setState({ ...state, successful: true , loading:true})
-        // Navigate.push('/admin')
-        // window.location.reload()
-
+     
       },
       (error) => {
         setState({

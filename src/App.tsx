@@ -9,9 +9,6 @@ import { clearMessage } from './redux/actions'
 
 import AdminBoard from './components/adminBoard/AdminBoard'
 import UserBoard from './components/userBoard/UserBoard'
-
-
-
 import NavBar from './components/nabBar/NavBar'
 import Signin from './components/SigninForm'
 import Signup from './components/SignupForm'

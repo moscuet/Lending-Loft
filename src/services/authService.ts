@@ -1,5 +1,4 @@
 import axios from "axios";
-//import { USER_DATA } from "../types";
 const API_URL = process.env.REACT_APP_API_URL;
 class  AuthService {
   login  (useremail: string, password: string) {

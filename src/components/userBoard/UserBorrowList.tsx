@@ -36,7 +36,6 @@ export default function UserBorrowList() {
   }, [])
 
   const handleClick = (id: string) => {
-    //window.location.pathname = `/admin/${id}`
     navigate(`/user/borrows/${id}`)
   }
 

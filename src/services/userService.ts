@@ -3,10 +3,6 @@ import axios from 'axios';
 import { USER_DATA } from '../types';
 import authHeader from './authHeader';
 
-//const dotenv = require('dotenv');
-
-// const API_URL = 'https://library-server300.herokuapp.com/api/';
-//const API_URL = "http://localhost:3002/api/";
 const API_URL = process.env.REACT_APP_API_URL
 
 const getSingleBook = (id:string|undefined) => {
@@ -27,7 +23,6 @@ const getAdminBoard = () => {
 };
 
 const deleteUser = (id:string) => {
-  //http://localhost:3000/customers/id
   return axios.delete(API_URL + `/customers/${id}`, { headers: authHeader() });
 
 }

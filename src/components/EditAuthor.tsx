@@ -16,7 +16,6 @@ export default function EditAuthor(props:{eId:string, editStatus:()=>void} ){
     _id: ''
   })
 
-  // delete later
   useEffect(() => {
     setState({...state,loading:true})
     authorService.getAuthorById(props.eId).then( res =>{

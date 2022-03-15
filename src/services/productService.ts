@@ -14,8 +14,6 @@ type Book ={
 }
 
 const API_URL = process.env.REACT_APP_API_URL
-//const API_URL = "http://localhost:3002/api/";
-//const API_URL = "https://library-server300.herokuapp.com/api/";
 class  productService {
 
   addBook (formValue:{ISBN:string,title:string,publisherName:string,author:string,publishedYear:number,genres:string,description:string,edition:string,pageCount:number, img:string}){

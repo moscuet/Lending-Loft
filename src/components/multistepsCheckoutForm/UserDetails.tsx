@@ -4,7 +4,6 @@ import { Button, Container } from 'react-bootstrap'
 
 interface ToggleProps {
     nextStep: () => void
-    // handleChange: () => void
     inputValues:{firstName:string, lastName:string, email:string, address:string, city:string, state:string, zip:string }
 }
 

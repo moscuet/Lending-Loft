@@ -44,9 +44,6 @@ const  AddAuthor= (): ReactElement => {
       (response) => {
         console.log('from add book',response.data)
         setState({ ...state, successful: true , loading:false, message:'Author added'})
-        //history.push('/admin')
-        //window.location.reload()
-
       },
       (error) => {
         setState({
@@ -157,22 +154,3 @@ const  AddAuthor= (): ReactElement => {
 }
 
 export default AddAuthor
-
-
-/*
-
-
-(property) initialValues: {
-    firstName: string;
-    lastName: string;
-    biography: string;
-}
-
-const initialValues: {
-    firstName: string;
-    lastName: string;
-    biography: string;
-}
-
-
-*/

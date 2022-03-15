@@ -81,7 +81,6 @@ export default function AdminBorrowList() {
   }
 
   const handleClick = (id: string) => {
-    //window.location.pathname = `/admin/${id}`
     navigate(`/admin/borrows/${id}`)
   }
 

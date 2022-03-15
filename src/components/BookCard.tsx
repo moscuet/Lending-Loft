@@ -37,4 +37,3 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
   )
 }
 
-//<button onClick={() => dispatch(removeProduct(p))}>Remove</button>
