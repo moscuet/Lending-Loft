@@ -1,6 +1,22 @@
+# Library-App-Full-Stack
+Full stack library app to manage book borrowing service for a public library. App was developed independently from scratch including designing data structure. Main focus was developing React-redux and express app using typescript. Code template / boilerplate was created by my teacher in Integrify.
+All features were not developed yet, work is on progress.
+## Tech stacks:
+
+### Frontend: Typescript, React, Redux, React-bootsrap, Formik-form, Yup validation, JWT
+
+### Backend: Typescript, Express, mongoose
+
+### Database: Mongodb
+
+### Deploy: Heroku
+
+[Backend Repo](https://github.com/moscuet/library-server100)
+
+## Live App [link](https://lbrary400.herokuapp.com/)
+Heroku slowly loading app  first time might cause displaying error message but refresing page will disappear the error and reload the app with better speed. 
+
 # Library-App : Front-end
-
-
 
 ### Fast Track React app template with TypeScript & Redux 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
