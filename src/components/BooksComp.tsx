@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react'
-//import { useSelector } from 'react-redux'
-//import { useDispatch } from 'react-redux'
-
-//const { path } = useRouteMatch();
-//let {url} = useRouteMatch()
+import BookSearch from './searchBar/BookSearch'
 import userService from '../services/userService'
 import { Product } from '../types'
 //import {  AppState } from '../types'
@@ -51,7 +47,7 @@ const BooksComp = () => {
 
   return (
     <div style={{ width: '100%' }}>
-      <h2 style={{ textAlign: 'center' }}> All books </h2>
+      <div> <BookSearch /> </div>
       <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
         {content.map((book) => (
           <li key={book._id}>

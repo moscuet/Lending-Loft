@@ -30,31 +30,34 @@ const App: React.FC = () => {
   return (
     <Fragment>
       <NavBar />
-      <Switch>
-      
-        <Route path='/admin/*'
-          element={
-            <AdminRoute >
-              <AdminBoard/>
-            </AdminRoute >
-          }
-        />
+      <div className='main-layout'>
+        <Switch>
+          <Route path='/admin/*'
+            element={
+              <AdminRoute >
+                <AdminBoard/>
+              </AdminRoute >
+            }
+          />
 
-        <Route path='/user/*'
-          element={
-            <UserRoute >
-              <UserBoard/>
-            </UserRoute>
-          }
-        />
+          <Route path='/user/*'
+            element={
+              <UserRoute >
+                <UserBoard/>
+              </UserRoute>
+            }
+          />
 
-        <Route path='/signup' element = {<Signup history={history}/>} />
-        <Route path='/signin' element = {<Signin history={history}/>} />
-        <Route path='/books/:id' element =   { <SingleBook />} />
-        <Route path='/cart/:id' element =   {  <SingleBook />} />
-        <Route path='/cart' element =   { <Cart />} />
-        <Route path='/' element =   { <Home />} />
-      </Switch>
+          <Route path='/signup' element = {<Signup history={history}/>} />
+          <Route path='/signin' element = {<Signin history={history}/>} />
+          <Route path='/books/:id' element =   { <SingleBook />} />
+          <Route path='/cart/:id' element =   {  <SingleBook />} />
+          <Route path='/cart' element =   { <Cart />} />
+          <Route path='/' element =   { <Home />} />
+        </Switch>
+
+      </div>
+
     </Fragment>
   )
 }

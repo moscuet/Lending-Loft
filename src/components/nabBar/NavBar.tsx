@@ -6,7 +6,6 @@ import { createBrowserHistory } from 'history';
 import authService from "../../services/authService";
 import EventBus from "../../common/EventBus";
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './navBar.css'
@@ -85,9 +84,9 @@ export default function NavBar():ReactElement {
                <Nav.Link href="/signup">Sign Up</Nav.Link>
              </>)
           }
-          <Nav.Link href="/cart">Cart</Nav.Link>
         </Nav>
       </Navbar.Collapse>
+      <Nav.Link href="/cart">Cart</Nav.Link>
     </Navbar>
   )
 }

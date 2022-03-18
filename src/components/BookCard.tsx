@@ -13,9 +13,8 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
     dispatch(addProduct(book))
     setCartstate(!cartState)
   }
-  console.log('frooooooom bookcard',book)
   return (
-    <div style={{ width: '100%' }}>
+    <div className='bookcomp-wrapper' style={{ width: '100%' }}>
       <Card style={{ width: '18rem' }}>
         <Card.Link href={`books/${book._id}`}>
           <Card.Img variant="top" src={`${img}`} />
