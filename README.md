@@ -1,6 +1,6 @@
 # Library-App-Full-Stack
-Full stack library app to manage book borrowing service for a public. App was developed independently from scratch including designing data structure by me. Main focus was developing React-redux and express app using typescript. Code template / boilerplate was created by my teacher in Integrify.
-
+Full stack library app to manage book borrowing service for a public library. App was developed independently from scratch including designing data structure. Main focus was developing React-redux and express app using typescript. Code template / boilerplate was created by my teacher in Integrify.
+All features were not developed yet, work is on progress.
 ## Tech stacks:
 
 ### Frontend: Typescript, React, Redux, React-bootsrap, Formik-form, Yup validation, JWT
