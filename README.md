@@ -1,10 +1,16 @@
 # Library-App-Full-Stack
-Full stack library app to manage book borrowing service for a public. App was developed independedly from scatch including desiging data structure by me. Main focus was devoloping React-redux and express app using typescript.
+Full stack library app to manage book borrowing service for a public. App was developed independently from scratch including designing data structure by me. Main focus was developing React-redux and express app using typescript.
+
 ## Tech stacks:
+
 ### Frontend: Typescript, React, Redux, React-bootsrap, Formik-form, Yup validation, JWT
+
 ### Backend: Typescript, Express, mongoose
+
 ### Database: Mongodb
+
 ### Deploy: Heroku
+
 [Backend Repo](https://github.com/moscuet/library-server100)
 
 ## Live App [link](https://lbrary400.herokuapp.com/)
