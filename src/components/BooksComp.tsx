@@ -82,7 +82,7 @@ const BooksComp = () => {
             message?( <p>{message}</p>):
               (<>
                 <div> <BookSearch handleSearch ={handleSearch} /> </div>
-                { updateContent.length===0? (<h1>No book found, change search word</h1>):
+                { updateContent.length===0? (<p style = {{ width:'500px', margin: '0 auto'}}>No book found, change search word</p>):
                   <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {updateContent.map((book) => (
                       <li key={book._id}>
