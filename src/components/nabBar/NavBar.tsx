@@ -68,13 +68,13 @@ export default function NavBar():ReactElement {
           </NavDropdown>
           {showAdminBoard && (
             <>
-              <Nav.Link href="/admin">Admin</Nav.Link>
+              <Nav.Link href="/admin">Admin Board</Nav.Link>
               <Nav.Link onClick={logOut}>logout</Nav.Link>
             </>
           )}
           {showUserBoard && (
             <>
-              <Nav.Link href="/user">User</Nav.Link>
+              <Nav.Link href="/user">User Board</Nav.Link>
               <Nav.Link onClick = {logOut}>logout</Nav.Link>
             </>
           )

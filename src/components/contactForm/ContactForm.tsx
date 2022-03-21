@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Form, Button } from 'react-bootstrap';
 import { Formik} from 'formik';
 import * as Yup from 'yup';
 
+import contactService from '../../services/contactService'
 const CONTAINER = styled.div`
   background: #FEFEFE;
   height: auto;
   width: 90%;
-  margin: 5em auto;
+  margin: 2rem auto;
   padding: 20px;
   -webkit-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.4);
@@ -32,9 +33,9 @@ const CONTAINER = styled.div`
     position: absolute;
     font-size: .8em;
   }
-  h1 {
+  h2 {
     text-align:center;
-    color: #323232;
+    color: green;
     padding-top: .5em;
   }
   .form-group {
@@ -63,6 +64,7 @@ const BUTTON = styled(Button)`
   }
 `;
 
+
 // RegEx for phone number validation
 const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
@@ -80,27 +82,30 @@ const validationSchema = Yup.object().shape({
     .matches(phoneRegExp, "*Phone number is not valid")
     .required("*Phone number required"),
   message: Yup.string()
-    .min(50, "*Message must have at least 50 characters")
+    .min(20, "*Message must have at least 20 characters")
     .max(1000, "*Message can't be longer than 1000 characters")
     .required("*Message is required"),
 });
 const ContactForm = () => {
+  const [formsubmitted, setFormSubmitted] = useState(false)
   return(
     <CONTAINER>
-      <h1>Send your inquiry</h1>
+      <h2 >SAY HELLO!</h2>
       <Formik
         initialValues={{ name:"", email:"", phone:"", message:""}}
         validationSchema={validationSchema}
         onSubmit={(values, {setSubmitting, resetForm}) => {
           // When button submits form and form is in the process of submitting, submit button is disabled
           setSubmitting(true);
-
+          setFormSubmitted(true)
+          contactService.sendMessage(values)
           // Simulate submitting to database, shows us values submitted, resets form
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            //alert(JSON.stringify(values, null, 2));
             resetForm();
             setSubmitting(false);
-          }, 500);
+            setFormSubmitted(false)
+          }, 3000);
         }}
       >
         {( {values,
@@ -179,6 +184,9 @@ const ContactForm = () => {
             <BUTTON variant="primary" type="submit" disabled={isSubmitting}>
             Submit
             </BUTTON>
+            {
+              formsubmitted && ( <div style = {{color:'green'}}> MESSAGE SENT</div>)
+            }
           </MYFORM>
         )}
       </Formik>
