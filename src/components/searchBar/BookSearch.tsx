@@ -18,7 +18,7 @@ export default function BookSearc(props:{handleSearch:Handleseacrh}) {
             {/* <Form.Label>Email address</Form.Label> */}
             <Form.Control
               type="text"
-              placeholder="search by book, author, catagory"
+              placeholder="search by book name, author, catagory"
               onChange={handleChange}
             />
           </Form.Group>

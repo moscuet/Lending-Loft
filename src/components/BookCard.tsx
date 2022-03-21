@@ -6,7 +6,7 @@ import { Card, Button } from 'react-bootstrap'
 import { addProduct } from '../redux/actions'
 
 export default function BookCard(book: (Product & {isIncart?:boolean})): ReactElement {
-  const { title, img, authors } = book
+  const { title, img, authors,genres } = book
   const dispatch = useDispatch()
   const [cartState, setCartstate ] = useState(book.isIncart)
   const onclick = () =>{
@@ -20,13 +20,14 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
           <Card.Img variant="top" src={`${img}`} />
         </Card.Link>
         <Card.Body>
-          <Card.Title>{`${title}`}</Card.Title>
+          <Card.Title>{`${title}`}<p>{`${genres.toString()}`}</p></Card.Title>
           <Card.Text>
-            {' '}
-            {`Author: ${authors
+            {`Authors: ${authors
               .map((a) => a.firstName + ' ' + a.lastName)
-              .join(',')}`}
+              .join(',')}`
+            }
           </Card.Text>
+       
           <Button variant="primary"  onClick={onclick} disabled={cartState}>
             Add to cart
           </Button>

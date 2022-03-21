@@ -17,6 +17,7 @@ import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
 import AdminRoute from './components/Routing/AdminRoute'
 import UserRoute from './components/Routing/UserRoute'
+import ContactForm from './components/contactForm/ContactForm'
 
 const App: React.FC = () => {
   const history = createBrowserHistory()
@@ -47,7 +48,8 @@ const App: React.FC = () => {
               </UserRoute>
             }
           />
-
+          <Route path='/contact-us' element = {<ContactForm />} />
+          <Route path='/books/catagory/*' element = {<Home />} />
           <Route path='/signup' element = {<Signup history={history}/>} />
           <Route path='/signin' element = {<Signin history={history}/>} />
           <Route path='/books/:id' element =   { <SingleBook />} />

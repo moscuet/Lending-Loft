@@ -10,18 +10,17 @@ import BookSearch from './searchBar/BookSearch'
 import Loader from 'react-ts-loaders'
 const BooksComp = () => {
   const cartProducts = useSelector((state: AppState) => state.order.inCart).map( p=>p._id)
-
+  
   type ProductWithIncart = Product & { isIncart?: boolean }
+  type Handleseacrh = (word:string) =>void
 
   const [loading, setLoading] = useState(false)
   const [loadingSuccess, setLoadingSuccess] = useState(false)
-
-
   const [content, setContent] = useState<ProductWithIncart[]>([])
   const [updateContent, setUpdatedContent] = useState<ProductWithIncart[]>([])
   const [message, setMessage] = useState('')
   
-  type Handleseacrh = (word:string) =>void
+  const arrayOfPath = window.location.pathname.split("/")
 
   const handleSearch:Handleseacrh =(searchword) =>{
     console.log('search word $$$$$$',searchword, typeof(searchword))
@@ -34,22 +33,24 @@ const BooksComp = () => {
     setUpdatedContent(books)
   }
 
-
   useEffect(() => {
     setLoading(true)
     userService.getPublicContent().then(
       (response) => {
         setLoading(false)
         setLoadingSuccess(true)
-        const updatedProduct: ProductWithIncart[] = response.data.map(
+        let updatedProduct: ProductWithIncart[] = response.data.map(
           (prod: ProductWithIncart) => {
             prod.isIncart = cartProducts.includes(prod._id)
             return prod
           }
         )
+        if (arrayOfPath.length===4){
+          const catagorisedProd = updatedProduct.filter( prod =>prod.genres.toString().includes(arrayOfPath[3]))
+          updatedProduct = catagorisedProd 
+        }
         setContent(updatedProduct)
         setUpdatedContent(updatedProduct)
-
       },
       (error) => {
         setLoading(false)
@@ -68,7 +69,6 @@ const BooksComp = () => {
 
   console.log('content', content)
   console.log('message', message)
-  console.log(loading)
   return (
     <>
       { 

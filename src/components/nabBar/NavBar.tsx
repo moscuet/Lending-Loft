@@ -55,15 +55,16 @@ export default function NavBar():ReactElement {
       <Navbar.Collapse>
         <Nav>
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="#contact">Contact Us</Nav.Link>
+          <Nav.Link href="/contact-us">Contact Us</Nav.Link>
           <NavDropdown title="Book catagories">
-            <NavDropdown.Item href="#catagory/action">Action and adventure</NavDropdown.Item>
-            <NavDropdown.Item href="#catagory/comedy">Comedy</NavDropdown.Item>
-            <NavDropdown.Item href="#catagory/crime">Crime and mystery </NavDropdown.Item>
-            <NavDropdown.Item href="#catagory/fiction">Fiction</NavDropdown.Item>
-            <NavDropdown.Item href="#catagory/romance">Romance</NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/action">Action and adventure</NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/comedy">Comedy</NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/drama">Drama</NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/crime">Crime and mystery </NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/fiction">Fiction</NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/romance">Romance</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#products/promo">Others</NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/promo">Others</NavDropdown.Item>
           </NavDropdown>
           {showAdminBoard && (
             <>
