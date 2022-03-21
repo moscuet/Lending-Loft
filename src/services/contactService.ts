@@ -4,7 +4,8 @@ import axios from "axios";
 class  contactService {
   sendMessage (formValue:{name:string,email:string,phone:string,message:string}){
     console.log('from cotact service', formValue)
-    return axios.post('http://localhost:3002/api' +'/email',formValue)
+
+    return axios.post('http://localhost:3002/api/email',formValue)
   }
 }
   
