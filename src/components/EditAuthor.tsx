@@ -47,7 +47,6 @@ export default function EditAuthor(props:{eId:string, editStatus:()=>void} ){
     }
     )
   }
-  console.log('hello5', author)
   return (
     <div className="col-md-12">
       <div className="card card-container">

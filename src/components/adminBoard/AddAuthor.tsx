@@ -4,11 +4,6 @@ import * as Yup from 'yup'
 import authorService from '../../services/authorService'
 
 const  AddAuthor= (): ReactElement => {
-
-  const authorlist:string[] = ['dfdfa','1133','13133']
-  console.log(authorlist)
-
- 
   
   const initialValues = {
     firstName: '',
@@ -35,14 +30,12 @@ const  AddAuthor= (): ReactElement => {
     lastName: string,
     biography: string,
   }) {
-    console.log('hello from frontend form adBook', formValue)
 
     setState({ ...state, loading:true})
 
  
     authorService.addAuthor( formValue).then(
       (response) => {
-        console.log('from add book',response.data)
         setState({ ...state, successful: true , loading:false, message:'Author added'})
       },
       (error) => {

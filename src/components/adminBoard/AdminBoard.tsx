@@ -1,5 +1,5 @@
+
 import React from 'react'
-import { useState, useEffect } from 'react'
 import { Route, Routes as Switch } from 'react-router-dom'
 
 import AddAuthor from './AddAuthor'
@@ -9,36 +9,9 @@ import Authors from './Authors'
 import AddBook from './AddBook'
 import AdminBorrowList from './AdminBorrowList'
 
-
-import userService from '../../services/userService'
-import EventBus from '../../common/EventBus'
 import { NavLink } from 'react-router-dom'
 import './adminboard.css'
 const AdminBoard: React.FC = () => {
-  const [content, setContent] = useState('')
-
-  useEffect(() => {
-    userService.getCustomerBoard().then(
-      (response) => {
-        setContent(response.data)
-      },
-      (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString()
-        setContent(_content)
-
-        if (error.response && error.response.status === 401) {
-          EventBus.dispatch('logout')
-        }
-      }
-    )
-  }, [])
-
-  console.log(content)
 
   const path = '/admin'
 
@@ -68,3 +41,4 @@ const AdminBoard: React.FC = () => {
 }
 
 export default AdminBoard
+

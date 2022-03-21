@@ -64,8 +64,6 @@ const Signup = (props: RouterProps): ReactElement => {
   }) {
     const { firstName, lastName, useremail, phoneNumber, address, password } =
       formValue
-    
-    console.log('hello from frontend form register')
     setState({ ...state, successful: false })
 
     AuthService.register(

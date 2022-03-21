@@ -11,6 +11,9 @@
 # production
 /build
 
+# admin board withevent bus
+/src/components/adminBoard/adminBoardwithEventBus.tsx
+
 # misc
 .notes.md
 .env

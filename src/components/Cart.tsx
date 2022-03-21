@@ -10,7 +10,6 @@ import { removeProduct } from '../redux/actions'
 import './cart.css'
 function Cart() {
   const cartItems = useSelector((state: AppState) => state.order.inCart)
-  console.log(cartItems)
   const dispatch = useDispatch()
 
   return (

@@ -55,7 +55,6 @@ const  AddBook= (): ReactElement => {
     pageCount: number
     img: string
   }) {
-    console.log('hello from frontend form register', formValue)
     setState({ ...state, loading:true})
 
     productService.addBook( formValue).then(
