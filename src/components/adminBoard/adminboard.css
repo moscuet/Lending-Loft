@@ -1,9 +1,12 @@
 .adminboard-container {
 margin-top:1rem;
 max-width: 1080px;
+
 }
 .adminboard-container_nav{
     margin-bottom:2rem;
+    justify-content: center;
+    display: flex;
 
 }
 .adminboard-container_nav a {
@@ -16,13 +19,14 @@ margin:0px 5px;
 }
 
 
+
 .admin__usersList ol li {
     margin-bottom: 10px;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
-.admin__borrowList ol li:first-child {
+.admin__borrowList ol li div:first-child {
     font-weight: bold;
   }
 
@@ -48,10 +52,17 @@ margin:0px 5px;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.admin__usersList ol li:first-child,
+.admin__booksList ol li:first-child,
+.admin__authorsList ol li:first-child,
+.admin__borrowList ol li:first-child
+ {
+    font-weight: bold;
+}
 .admin__usersList ol li div:first-child,
 .admin__booksList ol li div:first-child,
 .admin__authorsList ol li div:first-child,
-admin__borrowList ol li div:first-child
+.admin__borrowList ol li div:first-child
  {
     text-align: left;
 }

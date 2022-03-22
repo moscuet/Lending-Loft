@@ -1,15 +1,31 @@
-.user__borrowList ol {
-    margin: 0;
-    padding:0;
-}
+.userboard-container {
+    margin-top:1rem;
+    max-width: 1080px;
+    }
+    .userboard-container_nav{
+        margin-bottom:2rem;
+        justify-content: center;
+        display: flex;
+    
+    }
+    .userboard-container_nav a {
+     padding:5px;
+     text-decoration: none;
+    margin:0px 5px;
+    }
+    .userboard-container_nav a:active{
+      color:green;
+    }
+
 .user__borrowList ol li {  
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr ;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin-bottom: 10px;
 }
 .user__borrowList ol li:first-child {
-
-  font-weight: bold;
+    text-align: center;
+    font-weight: bold;
 }
 
 .user__borrowList li img {

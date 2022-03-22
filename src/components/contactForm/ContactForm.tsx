@@ -5,6 +5,7 @@ import { Formik} from 'formik';
 import * as Yup from 'yup';
 
 import contactService from '../../services/contactService'
+
 const CONTAINER = styled.div`
   background: #FEFEFE;
   height: auto;
@@ -48,9 +49,6 @@ const MYFORM = styled(Form)`
   text-align: left;
   padding-top: 2em;
   padding-bottom: 2em;
-  @media(min-width: 786px) {
-    width: 50%;
-  }
 `;
 
 const BUTTON = styled(Button)`

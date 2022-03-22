@@ -13,7 +13,6 @@ const  AddAuthor= (): ReactElement => {
 
   const [state, setState] = useState({...initialValues,successful: false, loading:false,message:''})
 
-  
   function validationSchema() {
     return Yup.object().shape({
       firstName: Yup.string().required('First Name is required'),
