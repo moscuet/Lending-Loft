@@ -33,9 +33,40 @@ display: inline-block;
     color: green;
 }
 
+.user__setting {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .user__setting .card-container
+  {
+      width:80%;
+      max-width: 620px;
+      padding:20px;
+  }
+  .user__setting .card-container label
+   {
+      margin:5px 0px;
+      text-align: center;
+      display: inline-block;
+      width:100%;
+  }
+  .user__setting button {
+      margin-top: 10px;;
+  }
 
 
 
+
+
+
+
+
+
+
+
+
+/*  movethis to adminboard.css */
 
 .admin__borrowList ol {
     margin: 0;

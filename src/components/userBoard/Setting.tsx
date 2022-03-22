@@ -58,118 +58,120 @@ const  Setting:React.FC =  () => {
   }
 
   return (
-    <div>
-      <Formik
-        initialValues={user}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          {!state.message && (
-            <div>
+    <div className="user__setting">
+      <div className="card card-container">
+        <Formik
+          initialValues={user}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            {!state.message && (
+              <div>
           
-              <div className="form-group">
-                <label htmlFor="firstName">First Name</label>
-                <Field
-                  name="firstName"
-                  type="text"
-               
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="firstName"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-      
-              <div className="form-group">
-                <label htmlFor="lastName">Last Name</label>
-                <Field
-                  name="lastName"
-                  type="text"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="lastName"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-      
-              <div className="form-group">
-                <label htmlFor="useremail">User Email</label>
-                <Field
-                  name="useremail"
-                  type="text"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="useremail"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-      
-              <div className="form-group">
-                <label htmlFor="address">Address</label>
-                <Field
-                  name="address"
-                  type="text"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="address"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-                
-              <div className="form-group">
-                <label htmlFor="phonenumber">Phone Number</label>
-                <Field
-                  name="phonenumber"
-                  type="text"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="phonenumber"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-      
-              {!state.successful && (
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
-                    {state.loading && (
-                      <span className="spinner-border spinner-border-sm"></span>
-                    )}
-                    <span>Add Book</span>
-                  </button>
+                  <label htmlFor="firstName">First Name</label>
+                  <Field
+                    name="firstName"
+                    type="text"
+               
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="firstName"
+                    component="div"
+                    className="alert alert-danger"
+                  />
                 </div>
-              )
-              }
       
-            </div>
-          )}
-    
-          {state.message && (
-            <div className="form-group">
-              <div
-                className={
-                  state.successful
-                    ? 'alert alert-success'
-                    : 'alert alert-danger'
+                <div className="form-group">
+                  <label htmlFor="lastName">Last Name</label>
+                  <Field
+                    name="lastName"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="lastName"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+      
+                <div className="form-group">
+                  <label htmlFor="useremail">User Email</label>
+                  <Field
+                    name="useremail"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="useremail"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+      
+                <div className="form-group">
+                  <label htmlFor="address">Address</label>
+                  <Field
+                    name="address"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="address"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="phonenumber">Phone Number</label>
+                  <Field
+                    name="phonenumber"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="phonenumber"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+      
+                {!state.successful && (
+                  <div className="form-group">
+                    <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
+                      {state.loading && (
+                        <span className="spinner-border spinner-border-sm"></span>
+                      )}
+                      <span>Add Book</span>
+                    </button>
+                  </div>
+                )
                 }
-                role="alert"
-              >
-                {state.message}
+      
               </div>
-            </div>
-          )}
-        </Form>
-      </Formik>
+            )}
+    
+            {state.message && (
+              <div className="form-group">
+                <div
+                  className={
+                    state.successful
+                      ? 'alert alert-success'
+                      : 'alert alert-danger'
+                  }
+                  role="alert"
+                >
+                  {state.message}
+                </div>
+              </div>
+            )}
+          </Form>
+        </Formik>
+      </div>
     </div>
   )
 }

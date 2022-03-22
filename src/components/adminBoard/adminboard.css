@@ -1,5 +1,10 @@
+.adminboard-container {
+margin-top:1rem;
+max-width: 1080px;
+}
 .adminboard-container_nav{
     margin-bottom:2rem;
+
 }
 .adminboard-container_nav a {
  padding:5px;
@@ -9,11 +14,23 @@ margin:0px 5px;
 .adminboard-container_nav a:active{
   color:green;
 }
+
+
 .admin__usersList ol li {
     margin-bottom: 10px;
     text-align: center;
     display: grid;
-    grid-template-columns: 3fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.admin__borrowList ol li:first-child {
+    font-weight: bold;
+  }
+
+.admin__borrowList ol li {
+    margin-bottom: 10px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .admin__booksList ol li {
@@ -31,6 +48,15 @@ margin:0px 5px;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.admin__usersList ol li div:first-child,
+.admin__booksList ol li div:first-child,
+.admin__authorsList ol li div:first-child,
+admin__borrowList ol li div:first-child
+ {
+    text-align: left;
+}
+
+
 .book__img {
     display: flex;
     justify-content: center;
@@ -47,5 +73,29 @@ margin:0px 5px;
   padding: 0px 15px;
   margin-left: 2px;
 
+}
+
+.admin__addbook, .admin__addauthor {
+  display: flex;
+  justify-content: center;
+}
+
+.admin__addbook .card-container,
+.admin__addauthor .card-container 
+{
+    width:80%;
+    max-width: 620px;
+    padding:20px;
+}
+.admin__addbook .card-container label,
+.admin__addauthor .card-container label
+ {
+    margin:5px 0px;
+    text-align: center;
+    display: inline-block;
+    width:100%;
+}
+.admin__addbook button, .admin__addauthor button {
+    margin-top: 10px;;
 }
 

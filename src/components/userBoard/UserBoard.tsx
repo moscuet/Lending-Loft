@@ -16,8 +16,12 @@ const UserBoard: React.FC = () => {
 
   return (
     <div className="userboard-container">
-      <NavLink to={`${path}`}>setting</NavLink>
-      <NavLink to={`${path}/borrows`}>Borrowed</NavLink>
+      <div ><h2 style={{textAlign:'center'}}>User Board</h2></div>
+      <div className="userboard-container_nav">
+        <NavLink to={`${path}`}>setting</NavLink>
+        <NavLink to={`${path}/borrows`}>Borrowed</NavLink>
+      </div>
+
       <div>
         <Switch>
           <Route path={`/`} element = {   <Setting />}/>

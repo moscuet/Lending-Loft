@@ -46,8 +46,18 @@
   padding-right: 50px;
 }
 .main-layout {
-  padding: 0px 20px 20px 50px;
+  padding: 0px 20px 20px 60px;
+  width:100%;
+  display: flex;
+  justify-content: center;
 }
+
+.main-layout .main-layout_wrapper{
+  width:100%;
+  max-width: 1080px;
+}
+
+
 
 .main-layout ul{
  padding: 0;

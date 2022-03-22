@@ -11,6 +11,7 @@ import AdminBorrowList from './AdminBorrowList'
 
 import { NavLink } from 'react-router-dom'
 import './adminboard.css'
+
 const AdminBoard: React.FC = () => {
 
   const path = '/admin'
@@ -19,7 +20,7 @@ const AdminBoard: React.FC = () => {
     <div className="adminboard-container">
       <div ><h2 style={{textAlign:'center'}}>Admin Board</h2></div>
       <div className="adminboard-container_nav">
-        <NavLink to={`${path}/`}>Users</NavLink>
+        <NavLink to={`${path}/`} className='adminboard-link-1'>Users</NavLink>
         <NavLink to={`${path}/borrows`}>Borrows</NavLink>
         <NavLink to={`${path}/books`}>Books</NavLink>
         <NavLink to={`${path}/authors`}>authors</NavLink>
@@ -39,6 +40,5 @@ const AdminBoard: React.FC = () => {
     </div>
   )
 }
-
 export default AdminBoard
 

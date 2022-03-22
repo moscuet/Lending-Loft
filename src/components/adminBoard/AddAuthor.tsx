@@ -52,7 +52,7 @@ const  AddAuthor= (): ReactElement => {
   }
 
   return (
-    <div className="col-md-12">
+    <div className="admin__addauthor">
       <div className="card card-container">
         <Formik
           initialValues={initialValues}

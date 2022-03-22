@@ -32,31 +32,36 @@ const App: React.FC = () => {
     <Fragment>
       <NavBar />
       <div className='main-layout'>
-        <Switch>
-          <Route path='/admin/*'
-            element={
-              <AdminRoute >
-                <AdminBoard/>
-              </AdminRoute >
-            }
-          />
+        <div className="main-layout_wrapper">
+          <Switch>
+            <Route path='/admin/*'
+              element={
+                <AdminRoute >
+                  <AdminBoard/>
+                </AdminRoute >
+              }
+            />
 
-          <Route path='/user/*'
-            element={
-              <UserRoute >
-                <UserBoard/>
-              </UserRoute>
-            }
-          />
-          <Route path='/contact-us' element = {<ContactForm />} />
-          <Route path='/books/catagory/*' element = {<Home />} />
-          <Route path='/signup' element = {<Signup history={history}/>} />
-          <Route path='/signin' element = {<Signin history={history}/>} />
-          <Route path='/books/:id' element =   { <SingleBook />} />
-          <Route path='/cart/:id' element =   {  <SingleBook />} />
-          <Route path='/cart' element =   { <Cart />} />
-          <Route path='/' element =   { <Home />} />
-        </Switch>
+            <Route path='/user/*'
+              element={
+                <UserRoute >
+                  <UserBoard/>
+                </UserRoute>
+              }
+            />
+            <Route path='/contact-us' element = {<ContactForm />} />
+            <Route path='/books/catagory/*' element = {<Home />} />
+            <Route path='/signup' element = {<Signup history={history}/>} />
+            <Route path='/signin' element = {<Signin history={history}/>} />
+            <Route path='/books/:id' element =   { <SingleBook />} />
+            <Route path='/cart/:id' element =   {  <SingleBook />} />
+            <Route path='/cart' element =   { <Cart />} />
+            <Route path='/' element =   { <Home />} />
+          </Switch>
+
+
+        </div>
+
 
       </div>
 

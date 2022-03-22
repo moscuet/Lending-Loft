@@ -74,7 +74,7 @@ const  AddBook= (): ReactElement => {
   }
 
   return (
-    <div className="col-md-12">
+    <div className="admin__addbook">
       <div className="card card-container">
         <Formik
           initialValues={initialValues}
