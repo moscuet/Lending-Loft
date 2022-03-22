@@ -9,12 +9,13 @@ All features were not developed yet, work is on progress.
 
 ### Database: Mongodb
 
-### Deploy: Heroku
+### Deploy: Backend to Heroku & Front End to Netlify
 
 [Backend Repo](https://github.com/moscuet/library-server100)
 
-## Live App [link](https://lbrary400.herokuapp.com/)
-Heroku slowly loading app  first time might cause displaying error message but refresing page will disappear the error and reload the app with better speed. 
+## Live App [link](https://festive-albattani-cd3868.netlify.app/)
+
+Heroku may respond slowly at the beginning because free dyno sleep if app is not active for 30 mints. But after first reponse, speed become normal
 
 # Library-App : Front-end
 
