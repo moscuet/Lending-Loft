@@ -85,6 +85,8 @@ Follow the file/folder structure as explained below to make necessary changes. F
   src/redux/sagas/ui.ts
   ```
 
+
+
 * `src/pages`: Pages (or views) when using [React router](https://reacttraining.com/react-router/web/guides/quick-start). For example:
   ```
   src/pages/Home.tsx
