@@ -98,6 +98,7 @@ Follow the file/folder structure as explained below to make necessary changes. F
   src/pages/Home/Home.scss
   ```
 
+
 * `src/types.ts`: TypeScript's type definitions. For small apps, you can put definitions of all types, interfaces etc and even Redux's actions, action creators, states here.
 
 * `src/Routes.tsx`: Defines all the React router routes to different pages.
