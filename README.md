@@ -14,8 +14,7 @@ All features were not developed yet, work is on progress.
 [Backend Repo](https://github.com/moscuet/library-server100)
 
 ## Live App [link](https://festive-albattani-cd3868.netlify.app/)
-
-Heroku may respond slowly at the beginning because free dyno sleep if app is not active for 30 mints. But after first reponse, speed become normal
+**Please be aware that the frontend app is currently not connected to the backend. This is due to recent changes in Heroku's free hosting policy, which led to the suspension of our server deployment.
 
 # Library-App : Front-end
 
