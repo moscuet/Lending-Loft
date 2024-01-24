@@ -1,9 +1,46 @@
+/* #E1F0DA #D4E7C5 #BFD8AF #99BC85 */
+
+:root {
+  --body-bg-color: #E1F0DA;
+  --background-color: #E1F0DA;
+  --text-color: #4D6049;
+  --accent-color: #99BC85;
+  --navbar-bg-color: #BFD8AF;
+  --navbar-text-color: #333333;
+  --footer-bg-color: #99BC85;
+  --footer-text-color: #FFFFFF;
+  --form-bg-color: #D4E7C5;
+  --form-title-text-color: #5A7F62;
+  --form-text-color: #333333;
+  --form-field-bg-color: #FFFFFF;
+  --button-primary-bg-color: #4E7C5E;
+  --button-primary-text-color: #FFFFFF;
+  --button-secondary-bg-color: #BFD8AF;
+  --button-secondary-text-color: #333333;
+  --link-hover-color: #769f74;
+  --link-color: #5E9C76;
+  --accent-color: #99BC85;
+  --alert-color: #E57373;
+  --highlight-bg-color: #BFD8AF;
+  --hover-bg-color: #99BC85;
+  --card-bg-color: rgba(225, 240, 218, 0.95);
+  --card-text-color: #4D6049;
+  --loader-color: #769f74;
+}
+
+body {
+  background-color: var(--body-bg-color);
+}
+
+
 .App {
   text-align: center;
 }
-*{
+
+* {
   box-sizing: border-box;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -16,58 +53,73 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--navbar-bg-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--navbar-text-color);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--accent-color);
+}
+
+.App-link:hover {
+  color: var(--link-hover-color);
+
 }
 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-
-
-.navbar {
+.custom-navbar {
+  background-color: var(--navbar-bg-color);
+  color: var(--navbar-text-color);
   padding-left: 50px;
   padding-right: 50px;
+  height: 80px;
 }
+
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-toggler {
+  color: var(--navbar-text-color);
+}
+
 .main-layout {
   padding: 0px 20px 20px 60px;
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
+  background-color: var(--background-color);
 }
 
-.main-layout .main-layout_wrapper{
-  width:100%;
+.main-layout .main-layout_wrapper {
+  width: 100%;
   max-width: 1080px;
+  color: var(--text-color);
 }
 
-
-
-.main-layout ul{
- padding: 0;
- margin: 0;
-  
+.main-layout ul {
+  padding: 0;
+  margin: 0;
 }
-.main-layout ul li{
+
+.main-layout ul li {
   list-style: none;
+  color: var(--text-color);
 }
 
-.main-layout ul li:last-child{
+.main-layout ul li:last-child {
   list-style: none;
 }

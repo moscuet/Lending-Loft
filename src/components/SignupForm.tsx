@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useSelector } from 'react-redux'
 import { AppState } from '../types'
-import { Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 
@@ -14,54 +14,94 @@ interface RouterProps {
     push(url: string): void
   }
 }
-
-
-const CONTAINER = styled.div`
-  background: #FEFEFE;
+export const CONTAINER = styled.div`
+  background: var(--form-bg-color);
+  color: var(--text-color);
   border-radius: 3px;
   height: auto;
   width: 90%;
   margin: 2rem auto;
   padding: 20px;
-  -webkit-box-shadow: 2px  2px  2px  2px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px  2px  2px  2px rgba(0, 0, 0, 0.3);
-  box-shadow: 2px  2px  2px  2px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adjusted box-shadow */
   @media(min-width: 786px) {
     width: 60%;
   }
   h2 {
-    text-align:center;
-    color: green;
+    text-align: center;
+    color: var(--form-title-text-color);
     padding-top: .5em;
   }
-  .form-group {
-    margin-bottom: 2.5em;
+  .form-group label {
+    color: var(--text-color);
+    margin-bottom: 0.5em;
+  }
+  .alert.alert-danger {
+    color: var(--alert-color);
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0; 
   }
 `;
 
-const MYFORM = styled(Form)`
+
+export const MYFORM = styled(Form)`
   width: 90%;
   text-align: left;
-  padding-top: 2em;
-  padding-bottom: 2em;
-`;
+  padding-top: 1em;
+  padding-bottom: 1em;
 
-const BUTTON = styled(Button)`
-  background: #1863AB;
-  margin:10px;
-  border: none;
-  font-size: 1.2em;
-  font-weight: 400;
-  &:hover {
-    background: #1D3461;
+  .form-control {
+    background-color: var(--form-field-bg-color);
+    color: var(--text-color);
+  }
+
+  .form-group {
+    margin-bottom: 1em; 
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .alert.alert-danger {
+    color: var(--alert-color);
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    margin-top: 0.5em;
+    padding: 0.0em;
+    font-size: 0.85em;
   }
 `;
 
+export const BUTTON = styled(Button)`
+  background: var(--button-primary-bg-color);
+  color: var(--button-primary-text-color);
+  border: none;
+  &:hover {
+    background: var(--link-hover-color);
+  }
+  margin-right: 1em;
+`;
 
+const FormRow = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media(min-width: 768px) {
+    flex-direction: row;
+
+    .form-group {
+      flex: 1;
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
+    }
+  }
+`;
 
 const Signup = (props: RouterProps): ReactElement => {
   const { isLoggedIn } = useSelector((state: AppState) => state.auth)
-  //const message = useSelector((state: AppState) => state.message)
 
   const [state, setState] = useState({
     firstName: '',
@@ -84,14 +124,14 @@ const Signup = (props: RouterProps): ReactElement => {
         .required('Email is required')
         .email('Email is invalid'),
       phoneNumber: Yup.string()
-        .matches(new RegExp('[0-9]{10}'))
-        .required('phone number is required'),
+        .matches(/^[0-9]{8,15}$/, 'Phone number must be between 8 and 15 digits long')
+        .required('Phone number is required'),
       address: Yup.string()
-        .required('address is required')
+        .required('Address is required')
         .max(255, 'Password must not exceed 255 characters'),
       password: Yup.string()
         .required('Password is required')
-        .min(4, 'Password must be at least 6 characters')
+        .min(4, 'Password must be at least  characters')
         .max(40, 'Password must not exceed 40 characters'),
       confirmPassword: Yup.string()
         .required('Confirm Password is required')
@@ -136,7 +176,7 @@ const Signup = (props: RouterProps): ReactElement => {
   }
 
 
-  
+
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -147,7 +187,7 @@ const Signup = (props: RouterProps): ReactElement => {
     confirmPassword: '',
   }
   if (isLoggedIn) {
-    ;<Navigate  to="/profile" />
+    ; <Navigate to="/profile" />
   }
 
   return (
@@ -159,59 +199,65 @@ const Signup = (props: RouterProps): ReactElement => {
         validationSchema={validationSchema}
         onSubmit={handleRegister}
       >
-          
+
         <MYFORM>
           {!state.successful && (
             <div>
-              <div className="form-group">
-                <label htmlFor="firstName">FirstName</label>
-                <Field
-                  name="firstName"
-                  type="text"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="firstName"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="lastName">LastName</label>
-                <Field name="lastName" type="text" className="form-control" />
-                <ErrorMessage
-                  name="lastName"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
+              <FormRow>
+                <div className="form-group">
+                  <label htmlFor="firstName">First Name</label>
+                  <Field
+                    name="firstName"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="firstName"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="lastName">Last Name</label>
+                  <Field name="lastName" type="text" className="form-control" />
+                  <ErrorMessage
+                    name="lastName"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+              </FormRow>
 
-              <div className="form-group">
-                <label htmlFor="useremail">useremail</label>
-                <Field
-                  name="useremail"
-                  type="text"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="useremail"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="phoneNumber"> PhoneNumber</label>
-                <Field
-                  name="phoneNumber"
-                  type="text"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="phoneNumber"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
+
+              <FormRow>
+                <div className="form-group">
+                  <label htmlFor="useremail">User Email</label>
+                  <Field
+                    name="useremail"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="useremail"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phoneNumber"> Mobile Number</label>
+                  <Field
+                    name="phoneNumber"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="phoneNumber"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+              </FormRow>
+
 
               <div className="form-group">
                 <label htmlFor="address"> Address </label>
@@ -257,7 +303,7 @@ const Signup = (props: RouterProps): ReactElement => {
 
               <div className="form-group">
                 <BUTTON type="submit" className="btn btn-primary btn-block">
-                    Sign Up
+                  Sign Up
                 </BUTTON>
               </div>
             </div>

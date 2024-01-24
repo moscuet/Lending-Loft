@@ -1,3 +1,28 @@
+Page Body:
+# Color Scheme
+
+## Background Colors
+- Background Color: Light Beige (`#FFFBF5`)
+- Navbar Background Color: Dark Purple (`#7743DB`)
+- Footer Background Color: Soft Lavender (`#C3ACD0`)
+- Signup Form Background Color: Off-White (`#F7EFE5`)
+- Buttons (Primary) Background Color: Dark Purple (`#7743DB`)
+- Buttons (Secondary) Background Color: Soft Lavender (`#C3ACD0`)
+- Hover State Background Color: Off-White (`#F7EFE5`)
+
+## Text Colors
+- General Text Color: Dark Gray (Suggested: `#333333` or `#4a4a4a`)
+- Navbar Text Color: Light Beige (`#FFFBF5`)
+- Footer Text Color: Light Beige (`#FFFBF5`)
+- Form Field Text Color: Dark Gray (Suggested: `#333333` or `#4a4a4a`)
+- Buttons (Primary) Text Color: Light Beige (`#FFFBF5`)
+- Buttons (Secondary) Text Color: Light Beige (`#FFFBF5`)
+- Headings/Links Color: Dark Purple (`#7743DB`)
+- Hover State Text Color: Dark Purple (`#7743DB`)
+
+## Additional Colors
+- Alert Messages Color: Deep Red (`#D32F2F`)
+
 # Lending Loft
 Full stack library app to manage book borrowing service for a public library. App was developed independently from scratch including designing data structure. Main focus was developing React-redux and express app using typescript.
 All features were not developed yet, work is on progress.

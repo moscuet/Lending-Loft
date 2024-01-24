@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react'
+import React, { ReactElement } from 'react'
 import { useState, useEffect } from "react";
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { createBrowserHistory } from 'history';
@@ -8,9 +8,7 @@ import EventBus from "../../common/EventBus";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './navBar.css'
-
-export default function NavBar():ReactElement {
+export default function NavBar(): ReactElement {
   const history = createBrowserHistory()
 
   const [showAdminBoard, setShowAdminBoard] = useState<boolean>(false);
@@ -38,17 +36,16 @@ export default function NavBar():ReactElement {
     return () => {
       EventBus.remove("logout", logOut);
     };
-  }, );
+  },);
 
 
 
 
   return (
-    <Navbar bg="dark" variant="dark"
+    <Navbar className='custom-navbar'
       sticky="top" expand="sm" collapseOnSelect>
       <Navbar.Brand>
-        {/* <img src={logo} width="40px" height="40px" />{' '} */}
-          Logo
+        <Nav.Link href="/"> LOGO</Nav.Link>
       </Navbar.Brand>
 
       <Navbar.Toggle className="coloring" />
@@ -75,15 +72,15 @@ export default function NavBar():ReactElement {
           {showUserBoard && (
             <>
               <Nav.Link href="/user">User Board</Nav.Link>
-              <Nav.Link onClick = {logOut}>logout</Nav.Link>
+              <Nav.Link onClick={logOut}>logout</Nav.Link>
             </>
           )
           }
-          { !(showUserBoard || showAdminBoard ) &&
-             (<>
-               <Nav.Link href="/signin">signin</Nav.Link>
-               <Nav.Link href="/signup">Sign Up</Nav.Link>
-             </>)
+          {!(showUserBoard || showAdminBoard) &&
+            (<>
+              <Nav.Link href="/signin">signin</Nav.Link>
+              <Nav.Link href="/signup">Sign Up</Nav.Link>
+            </>)
           }
         </Nav>
       </Navbar.Collapse>

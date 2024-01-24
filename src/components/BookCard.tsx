@@ -4,6 +4,36 @@ import { useDispatch } from 'react-redux'
 import { Product } from '../types'
 import { Card, Button } from 'react-bootstrap'
 import { addProduct } from '../redux/actions'
+import styled from 'styled-components';
+
+
+const StyledCard = styled(Card)`
+  width: 18rem;
+  background: var(--card-bg-color);
+  color: var(--card-text-color);
+
+  .card-title {
+    font-size: 1.2em; 
+  }
+
+  .card-text {
+    font-size: 1em; 
+  }
+
+  .btn-primary {
+    background: var(--button-primary-bg-color);
+    border:none;
+    color: var(--button-primary-text-color);
+    &:hover {
+      background: var(--link-hover-color);
+    }
+  }
+`;
+
+const BookCardWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 20px; 
+`;
 
 export default function BookCard(book: (Product & {isIncart?:boolean})): ReactElement {
   const { title, img, authors,genres } = book
@@ -13,27 +43,23 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
     dispatch(addProduct(book))
     setCartstate(!cartState)
   }
+
   return (
-    <div className='bookcomp-wrapper' style={{ width: '100%' }}>
-      <Card style={{ width: '18rem' }}>
+    <BookCardWrapper>
+      <StyledCard>
         <Card.Link href={`books/${book._id}`}>
           <Card.Img variant="top" src={`${img}`} />
         </Card.Link>
         <Card.Body>
           <Card.Title>{`${title}`}<p>{`${genres.toString()}`}</p></Card.Title>
           <Card.Text>
-            {`Authors: ${authors
-              .map((a) => a.firstName + ' ' + a.lastName)
-              .join(',')}`
-            }
+            {`Authors: ${authors.map((a) => a.firstName + ' ' + a.lastName).join(',')}`}
           </Card.Text>
-       
-          <Button variant="primary"  onClick={onclick} disabled={cartState}>
+          <Button variant="primary" onClick={onclick} disabled={cartState}>
             Add to cart
           </Button>
         </Card.Body>
-      </Card>
-    </div>
+      </StyledCard>
+    </BookCardWrapper>
   )
 }
-

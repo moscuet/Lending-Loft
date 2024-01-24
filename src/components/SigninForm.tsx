@@ -1,73 +1,31 @@
-import React, { useState,  ReactElement } from "react";
-import {  useSelector, useDispatch } from "react-redux";
-import {AppState}  from '../types'
+import { useState, ReactElement } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { AppState } from '../types'
 import { NavLink, Navigate } from "react-router-dom";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {login} from '../redux/actions/auth'
-import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { login } from '../redux/actions/auth'
+import { BUTTON, CONTAINER, MYFORM } from "./SignupForm";
 
 
 interface RouterProps {
-    history: {
-        push(url: string): void;
-    };
+  history: {
+    push(url: string): void;
+  };
 }
 
 
-const CONTAINER = styled.div`
-  background: #FEFEFE;
-  border-radius: 3px;
-  height: auto;
-  width: 90%;
-  margin: 2rem auto;
-  padding: 20px;
-  -webkit-box-shadow: 2px  2px  2px  2px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px  2px  2px  2px rgba(0, 0, 0, 0.3);
-  box-shadow: 2px  2px  2px  2px rgba(0, 0, 0, 0.3);
-  @media(min-width: 786px) {
-    width: 60%;
-  }
-  h2 {
-    text-align:center;
-    color: green;
-    padding-top: .5em;
-  }
-  .form-group {
-    margin-bottom: 2.5em;
-  }
-`;
+const Signin = (props: RouterProps): ReactElement => {
 
-const MYFORM = styled(Form)`
-  width: 90%;
-  text-align: left;
-  padding-top: 2em;
-  padding-bottom: 2em;
-`;
-
-const BUTTON = styled(Button)`
-  background: #1863AB;
-  margin:10px;
-  border: none;
-  font-size: 1.2em;
-  font-weight: 400;
-  &:hover {
-    background: #1D3461;
-  }
-`;
-
-const  Signin = (props:RouterProps) : ReactElement => {
-
-  const { isLoggedIn } = useSelector((state:AppState) => state.auth);
+  const { isLoggedIn } = useSelector((state: AppState) => state.auth);
   //const message = useSelector((state:AppState) => state.message);
 
   const [userState, setUserState] = useState({
     useremail: "",
     password: "",
     loading: false,
-    isLoggedIn:false,
-    message:''
+    isLoggedIn: false,
+    message: ''
   })
 
 
@@ -82,24 +40,27 @@ const  Signin = (props:RouterProps) : ReactElement => {
 
   const dispatch = useDispatch()
 
-  const  handleSignin = async(formValue: { useremail: string; password: string }) => {
+  const handleSignin = async (formValue: { useremail: string; password: string }) => {
     const { useremail, password } = formValue;
-    setUserState({ ...userState,
+    setUserState({
+      ...userState,
       loading: true
     });
-    
+
     try {
-      await dispatch(login(useremail, password ))
-      setUserState({ ...userState,
+      await dispatch(login(useremail, password))
+      setUserState({
+        ...userState,
         loading: false,
-        isLoggedIn:true,
+        isLoggedIn: true,
       });
       props.history.push("/");
       window.location.reload();
- 
-    } catch(error){
-      console.log('error',error)
-      setUserState({...userState,
+
+    } catch (error) {
+      console.log('error', error)
+      setUserState({
+        ...userState,
         loading: false,
         message: 'invalid email and password'
       });
@@ -151,7 +112,8 @@ const  Signin = (props:RouterProps) : ReactElement => {
               )}
               <span>Login</span>
             </BUTTON>
-              Not registered yet? <NavLink to={`/signup`}>Register</NavLink>
+            <span style={{ marginRight: '1em' }}>Not registered yet?</span>
+            <NavLink to={`/signup`} style={{ color: 'var(--link-color)' }}>Register</NavLink>
 
           </div>
 

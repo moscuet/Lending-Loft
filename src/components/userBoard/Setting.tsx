@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import { useSelector , useDispatch} from 'react-redux'
 import { AppState, USER_DATA } from '../../types'
 import { updateUser } from '../../redux/actions'
-import { setTimeout } from 'timers'
 
 const  Setting:React.FC =  () => {
   const user:USER_DATA  = useSelector( (state:AppState) =>state.auth.user)

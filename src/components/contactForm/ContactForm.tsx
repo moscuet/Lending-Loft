@@ -1,72 +1,13 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Form, Button } from 'react-bootstrap';
-import { Formik} from 'formik';
 import * as Yup from 'yup';
+import { Formik, Field, ErrorMessage } from "formik";
+import { FormikHelpers } from 'formik';
 
 import contactService from '../../services/contactService'
+import { BUTTON, CONTAINER, MYFORM } from '../SignupForm';
 
-const CONTAINER = styled.div`
-  background: #FEFEFE;
-  height: auto;
-  width: 90%;
-  margin: 2rem auto;
-  padding: 20px;
-  -webkit-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.4);
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.4);
-  @media(min-width: 786px) {
-    width: 60%;
-  }
-  label {
-    color: #black;
-    font-size: 1.2em;
-    font-weight: 400;
-  }
-  .error {
-    border: 2px solid #FF6565;
-  }
-  .error-message {
-    color: #FF6565;
-    padding: .5em .2em;
-    height: 1em;
-    margin-left:85px;
-    position: absolute;
-    font-size: .8em;
-  }
-  h2 {
-    text-align:center;
-    color: green;
-    padding-top: .5em;
-  }
-  .form-group {
-    margin-bottom: 2.5em;
-  }
-`;
-
-const MYFORM = styled(Form)`
-  width: 90%;
-  text-align: left;
-  padding-top: 2em;
-  padding-bottom: 2em;
-`;
-
-const BUTTON = styled(Button)`
-  background: #1863AB;
-  margin-top:10px;
-  border: none;
-  font-size: 1.2em;
-  font-weight: 400;
-  &:hover {
-    background: #1D3461;
-  }
-`;
-
-
-// RegEx for phone number validation
 const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
-// Schema for yup
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "*Names must have at least 2 characters")
@@ -85,106 +26,92 @@ const validationSchema = Yup.object().shape({
     .required("*Message is required"),
 });
 const ContactForm = () => {
-  const [formsubmitted, setFormSubmitted] = useState(false)
-  return(
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  interface FormValues {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+  }
+
+  const handleSubmit = (
+    values: FormValues,
+    { setSubmitting, resetForm }: FormikHelpers<FormValues>
+  ) => {
+    setSubmitting(true);
+    setFormSubmitted(false);
+    setSubmitError('');
+
+    contactService.sendMessage(values)
+      .then(response => {
+        // Handle successful response
+        setFormSubmitted(true);
+        resetForm();
+      })
+      .catch(error => {
+        // Handle error response
+        setSubmitError('Failed to send message. Please try again.');
+        console.error('Error during form submission', error);
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
+
+
+
+  return (
     <CONTAINER>
       <h2 >SAY HELLO!</h2>
       <Formik
-        initialValues={{ name:"", email:"", phone:"", message:""}}
+        initialValues={{ name: "", email: "", phone: "", message: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values, {setSubmitting, resetForm}) => {
-          // When button submits form and form is in the process of submitting, submit button is disabled
-          setSubmitting(true);
-          setFormSubmitted(true)
-          contactService.sendMessage(values)
-          // Simulate submitting to database, shows us values submitted, resets form
-          setTimeout(() => {
-            //alert(JSON.stringify(values, null, 2));
-            resetForm();
-            setSubmitting(false);
-            setFormSubmitted(false)
-          }, 3000);
-        }}
+        onSubmit={handleSubmit}
       >
-        {( {values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting }) => (
-          <MYFORM onSubmit={handleSubmit} className="mx-auto">
+        {({ handleSubmit, isSubmitting }) => (
+          <MYFORM onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <Field name="name" type="text" className="form-control" />
+              <ErrorMessage name="name" component="div" className="alert alert-danger" />
+            </div>
 
-            <Form.Group controlId="formName">
-              <Form.Label>Name :</Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.name}
-                className={touched.name && errors.name ? "has-error" : ''}
-              />
-              {touched.name && errors.name ? (
-                <div className="error-message">{errors.name}</div>
-              ): null}
-            </Form.Group>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <Field name="email" type="text" className="form-control" />
+              <ErrorMessage name="email" component="div" className="alert alert-danger" />
+            </div>
 
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email :</Form.Label>
-              <Form.Control
-                type="text"
-                name="email"
-                placeholder="Email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                className={touched.email && errors.email ? "has-error" : ''}
-              />
-              {touched.email && errors.email ? (
-                <div className="error-message">{errors.email}</div>
-              ): null}
-            </Form.Group>
+            <div className="form-group">
+              <label htmlFor="phone">Mobile</label>
+              <Field name="phone" type="text" className="form-control" />
+              <ErrorMessage name="phone" component="div" className="alert alert-danger" />
+            </div>
 
-            <Form.Group controlId="formPhone">
-              <Form.Label>Phone :</Form.Label>
-              <Form.Control
-                type="text"
-                name="phone"
-                placeholder="Phone"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.phone}
-                className={touched.phone && errors.phone ? "has-error" : ''}
-              />
-              {touched.phone && errors.phone ? (
-                <div className="error-message">{errors.phone}</div>
-              ): null}
-            </Form.Group>
-            <Form.Group controlId="formMessage">
-              <Form.Label>message :</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={5}
-                name="message"
-                placeholder="Type your message here"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.message}
-                className={touched.message && errors.message ? "has-error" :''}
-              />
-              {touched.message && errors.message ? (
-                <div className="error-message">{errors.message}</div>
-              ): null}
-            </Form.Group>
-            {/*Submit button that is disabled after button is clicked/form is in the process of submitting*/}
-            <BUTTON variant="primary" type="submit" disabled={isSubmitting}>
-            Submit
-            </BUTTON>
-            {
-              formsubmitted && ( <div style = {{color:'green'}}> MESSAGE SENT</div>)
-            }
+            <div className="form-group">
+              <label htmlFor="message">Message</label>
+              <Field name="message" as="textarea" rows={5} className="form-control" />
+              <ErrorMessage name="message" component="div" className="alert alert-danger" />
+            </div>
+
+            <div className="form-group">
+              <BUTTON type="submit" disabled={isSubmitting}>
+                {isSubmitting && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                <span>Submit</span>
+              </BUTTON>
+              {submitError && (
+                <div className="alert alert-danger" role="alert">
+                  {submitError}
+                </div>
+              )}
+              {formSubmitted && (
+                <div style={{ color: 'green' }}>MESSAGE SENT</div>
+              )}
+            </div>
           </MYFORM>
         )}
       </Formik>
