@@ -93,7 +93,7 @@ const BooksComp = () => {
   return (
     <>
       {
-        !loading && <LoaderContainer>
+        loading && <LoaderContainer>
           <Loader type="spinner" color="var(--loader-color)" />
         </LoaderContainer>
       }

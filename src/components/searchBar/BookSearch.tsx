@@ -4,30 +4,19 @@ import './booksearch.css'
 import styled from 'styled-components';
 
 const ResponsiveForm = styled(Form)`
-  width: 350px;
-
-  @media (max-width: 480px) {
-    width: 100%;
-  }
-
   .form-control {
-    ::placeholder {
-      color: #b3b3b3;
-      opacity: 1;
-    }
+    background-color: var(--placeholder-bg-color);
 
-    &:focus {
-      border: none;
-      outline: none;
-      box-shadow: none;
+    ::placeholder {
+      color: var(--placeholder-text-color);
     }
 
     :-ms-input-placeholder { 
-      color: #b3b3b3;
+      color: var(--placeholder-text-color);
     }
 
     ::-ms-input-placeholder {
-      color: #b3b3b3;
+      color: var(--placeholder-text-color);
     }
   }
 `;
@@ -47,7 +36,7 @@ export default function BookSearch(props: { handleSearch: Handleseacrh }) {
           <Form.Group className="mb-3" controlId="searchInput">
             <Form.Control
               type="text"
-              placeholder="book name, author, category"
+              placeholder="Book, Author, Category"
               onChange={handleChange}
             />
           </Form.Group>

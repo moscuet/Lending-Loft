@@ -14,6 +14,8 @@ interface RouterProps {
     push(url: string): void
   }
 }
+
+
 export const CONTAINER = styled.div`
   background: var(--form-bg-color);
   color: var(--text-color);
@@ -22,7 +24,7 @@ export const CONTAINER = styled.div`
   width: 90%;
   margin: 2rem auto;
   padding: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adjusted box-shadow */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   @media(min-width: 786px) {
     width: 60%;
   }
@@ -52,8 +54,27 @@ export const MYFORM = styled(Form)`
   padding-bottom: 1em;
 
   .form-control {
-    background-color: var(--form-field-bg-color);
+    background-color: var(--placeholder-bg-color);
     color: var(--text-color);
+    border: 1px solid #ced4da;
+
+    ::placeholder {
+      color: var(--placeholder-color);
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: none;  
+      box-shadow: none
+    }
+
+    :-ms-input-placeholder { 
+      color: var(--placeholder-color);
+    }
+
+    ::-ms-input-placeholder {
+      color: var(--placeholder-color);
+    }
   }
 
   .form-group {
@@ -63,6 +84,7 @@ export const MYFORM = styled(Form)`
       margin-bottom: 0;
     }
   }
+
   .alert.alert-danger {
     color: var(--alert-color);
     background-color: transparent;
@@ -73,6 +95,7 @@ export const MYFORM = styled(Form)`
     font-size: 0.85em;
   }
 `;
+
 
 export const BUTTON = styled(Button)`
   background: var(--button-primary-bg-color);

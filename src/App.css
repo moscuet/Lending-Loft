@@ -26,6 +26,8 @@
   --card-bg-color: rgba(225, 240, 218, 0.95);
   --card-text-color: #4D6049;
   --loader-color: #769f74;
+  --placeholder-text-color: #9CA3AF;
+  --placeholder-bg-color: #F3F4F6;
 }
 
 body {
