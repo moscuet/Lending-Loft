@@ -22,4 +22,6 @@ class  authorService {
   }
 }
 
-export default new authorService();
+const newAuthorService = new authorService()
+
+export default newAuthorService

@@ -77,12 +77,10 @@ const BooksComp = () => {
         setLoading(false)
         setLoadingSuccess(false)
         const _content =
-          (error.response && error.response.data) ||
-          error.message ||
+          error.message || (error.response && error.response.data) ||
           error.toString()
-
+        console.log('####', _content)
         setMessage(_content)
-        console.log(error)
       }
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,6 +95,13 @@ const BooksComp = () => {
           <Loader type="spinner" color="var(--loader-color)" />
         </LoaderContainer>
       }
+
+      {!loadingSuccess && (
+        <div style={{ textAlign: 'center', margin: '20px' }}>
+          Server Error: {message}
+        </div>
+      )}
+
       {loadingSuccess && (
         <div style={{ width: '100%' }}>
           {

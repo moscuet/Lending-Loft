@@ -32,4 +32,5 @@ class  productService {
 
 }
 
-export default new productService();
+const newProductService = new productService();
+export default newProductService 

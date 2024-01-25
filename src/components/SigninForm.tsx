@@ -18,7 +18,6 @@ interface RouterProps {
 const Signin = (props: RouterProps): ReactElement => {
 
   const { isLoggedIn } = useSelector((state: AppState) => state.auth);
-  //const message = useSelector((state:AppState) => state.message);
 
   const [userState, setUserState] = useState({
     useremail: "",

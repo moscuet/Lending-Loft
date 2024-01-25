@@ -46,12 +46,10 @@ const ContactForm = () => {
 
     contactService.sendMessage(values)
       .then(response => {
-        // Handle successful response
         setFormSubmitted(true);
         resetForm();
       })
       .catch(error => {
-        // Handle error response
         setSubmitError('Failed to send message. Please try again.');
         console.error('Error during form submission', error);
       })

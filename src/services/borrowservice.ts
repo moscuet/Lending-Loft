@@ -29,4 +29,7 @@ class  borrowService {
 
 }
 
-export default new borrowService();
+const newborrowService = new borrowService()
+
+export default newborrowService
+
