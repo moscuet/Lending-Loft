@@ -94,7 +94,7 @@ const ContactForm = () => {
                 {isSubmitting && (
                   <span className="spinner-border spinner-border-sm"></span>
                 )}
-                <span>Submit</span>
+                <span style={{ marginLeft: '8px' }}>Submit</span>
               </BUTTON>
             </div>
           </MYFORM>

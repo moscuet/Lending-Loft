@@ -99,12 +99,31 @@ body {
 }
 
 .main-layout {
-  padding: 0px 20px 20px 60px;
   width: 100%;
   display: flex;
   justify-content: center;
   background-color: var(--background-color);
 }
+
+@media (min-width: 768px) {
+  .main-layout {
+    padding: 0px 40px 20px 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-layout {
+    padding: 0px 20px 20px 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .main-layout {
+    padding: 0px 10px 20px 10px;
+  }
+}
+
+
 
 .main-layout .main-layout_wrapper {
   width: 100%;

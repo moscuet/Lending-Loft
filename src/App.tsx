@@ -33,8 +33,8 @@ const App: React.FC = () => {
     <Fragment>
       <NavBar />
       <ToastNotification />
-      <div className='main-layout'>
-        <div className="main-layout_wrapper">
+      <div  className='main-layout'>
+        <div  className="main-layout_wrapper">
           <Switch>
             <Route path='/admin/*'
               element={

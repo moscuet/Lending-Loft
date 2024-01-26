@@ -10,7 +10,7 @@ import BookSearch from './searchBar/BookSearch'
 import Loader from 'react-ts-loaders'
 import styled from 'styled-components';
 
-const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,10 +21,9 @@ const LoaderContainer = styled.div`
 const BookListItem = styled.li`
   margin: 4px;
   list-style-type: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
-
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
   &:hover {
-    transform: scale(1.03); /* Slightly increase size on hover */
+    transform: scale(1.03); 
   }
 `;
 
@@ -109,7 +108,7 @@ const BooksComp = () => {
               (<>
                 <div> <BookSearch handleSearch={handleSearch} /> </div>
                 {updateContent.length === 0 ? (<p style={{ width: '500px', margin: '0 auto' }}>Oops! No books found. Please try a different keyword</p>) :
-                  <ul style={{ display: 'flex', flexWrap: 'wrap', padding: 0 }}>
+                  <ul style={{ display: 'flex', flexWrap: 'wrap', padding: 0, justifyContent: 'center' }}>
                     {updateContent.map((book) => (
                       <BookListItem key={book._id}>
                         <BookCard {...book} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,14 +6,8 @@ import { AppState, USER_DATA } from '../../types';
 import { updateUser } from '../../redux/actions';
 import { BUTTON, FormRow, CONTAINER, MYFORM } from '../SignupForm'; // Import common styled components
 
-const Setting: React.FC = () => {
+const Setting: React.FC<{ onSaved: () => void }> = ({ onSaved }) => {
   const user: USER_DATA = useSelector((state: AppState) => state.auth.user);
-
-  const [state, setState] = useState({
-    message: '',
-    successful: false,
-    loading: false,
-  });
 
   function validationSchema() {
     return Yup.object().shape({
@@ -34,28 +28,12 @@ const Setting: React.FC = () => {
 
   const handleSubmit = async (formValue: USER_DATA, { setSubmitting }: any) => {
     try {
-      setState({ ...state, loading: true });
       await dispatch(updateUser(formValue, user._id));
-      setState({
-        ...state,
-        message: 'User updated',
-        successful: true,
-        loading: false,
-      });
-      setTimeout(() => {
-        window.location.pathname = '/user';
-      }, 1000);
+      onSaved();
     } catch (error) {
-      console.log('error', error);
-      setState({
-        ...state,
-        message: 'User not updated',
-        successful: false,
-      });
     } finally {
-      setTimeout(() => {
-        setSubmitting(false);
-      }, 5000);     }
+      setSubmitting(false);
+    }
   };
 
   const initialValues = {
@@ -76,87 +54,83 @@ const Setting: React.FC = () => {
       >
         {({ isSubmitting }) => (
           <MYFORM>
-            {!state.successful && (
-              <div>
-                <FormRow>
-                  <div className="form-group">
-                    <label htmlFor="firstName">First Name</label>
-                    <Field
-                      name="firstName"
-                      type="text"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="firstName"
-                      component="div"
-                      className="alert alert-danger"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="lastName">Last Name</label>
-                    <Field
-                      name="lastName"
-                      type="text"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="lastName"
-                      component="div"
-                      className="alert alert-danger"
-                    />
-                  </div>
-                </FormRow>
+            <div>
+              <FormRow>
                 <div className="form-group">
-                  <label htmlFor="useremail">User Email</label>
+                  <label htmlFor="firstName">First Name</label>
                   <Field
-                    name="useremail"
+                    name="firstName"
                     type="text"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="useremail"
+                    name="firstName"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="address">Address</label>
+                  <label htmlFor="lastName">Last Name</label>
                   <Field
-                    name="address"
+                    name="lastName"
                     type="text"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="address"
+                    name="lastName"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="phoneNumber">Phone Number</label>
-                  <Field
-                    name="phoneNumber"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="phoneNumber"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                {!state.successful && (
-                  <div className="form-group">
-                    <BUTTON type="submit" disabled={isSubmitting}>
-                      {isSubmitting && (
-                        <span className="spinner-border spinner-border-sm"></span>
-                      )}
-                      <span>Save Changes</span>
-                    </BUTTON>
-                  </div>
-                )}
+              </FormRow>
+              <div className="form-group">
+                <label htmlFor="useremail">User Email</label>
+                <Field
+                  name="useremail"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="useremail"
+                  component="div"
+                  className="alert alert-danger"
+                />
               </div>
-            )}
+              <div className="form-group">
+                <label htmlFor="address">Address</label>
+                <Field
+                  name="address"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phoneNumber">Phone Number</label>
+                <Field
+                  name="phoneNumber"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="phoneNumber"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+              <div className="form-group">
+                <BUTTON type="submit" disabled={isSubmitting}>
+                  {isSubmitting && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span style={{ marginLeft: '4px' }}>Save Changes</span>
+                </BUTTON>
+              </div>
+            </div>
           </MYFORM>
         )}
       </Formik>

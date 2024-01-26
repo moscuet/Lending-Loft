@@ -1,5 +1,5 @@
 import React, { useState, ReactElement } from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { Formik, Field, Form, ErrorMessage, FormikState } from 'formik'
 import * as Yup from 'yup'
 import { useSelector } from 'react-redux'
 import { AppState } from '../types'
@@ -8,6 +8,8 @@ import styled from 'styled-components';
 
 import AuthService from '../services/authService'
 import { toast } from 'react-toastify'
+import Loader from 'react-ts-loaders'
+import { LoaderContainer } from './BooksComp'
 
 interface RouterProps {
   history: {
@@ -20,9 +22,11 @@ interface FormValues {
   lastName: string;
   useremail: string;
   phoneNumber: string;
-  password: string;
   address: string;
+  password: string;
+  confirmPassword: string;
 }
+
 
 
 export const CONTAINER = styled.div`
@@ -184,16 +188,25 @@ const Signup = (props: RouterProps): ReactElement => {
     })
   }
 
-  function handleRegister(formValue: FormValues, setSubmitting: (isSubmitting: boolean) => void) {
+  function handleRegister(
+    formValue: FormValues,
+    setSubmitting: (isSubmitting: boolean) => void,
+    resetForm: (nextState?: Partial<FormikState<FormValues>>) => void
+  ) {
     const { firstName, lastName, useremail, phoneNumber, address, password } = formValue;
     setState({ ...state, successful: false });
 
     AuthService.register(firstName, lastName, useremail, phoneNumber, address, password)
       .then(response => {
+        setState({ ...state, successful: true });
         toast.success("Your registration is successful! We're excited to have you on board.");
-        props.history.push('/signin');
-        window.location.reload();
+        resetForm();
+        setTimeout(() => {
+          props.history.push('/signin');
+          window.location.reload();
+        }, 2000);
       })
+
       .catch(error => {
         toast.error("Failed to register: " + error.message);
         setState({ ...state, successful: false, message: error.message });
@@ -216,132 +229,139 @@ const Signup = (props: RouterProps): ReactElement => {
     ; <Navigate to="/profile" />
   }
 
+
   return (
-    <CONTAINER >
-      {<h2>Sign Up</h2>}
+    <>
+      {
+        state.successful && <LoaderContainer>
+          <Loader type="spinner" color="var(--loader-color)" />
+        </LoaderContainer>
+      }
+      {!state.successful && <CONTAINER >
+        {<h2>Sign Up</h2>}
 
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(formValue, { setSubmitting }) => {
-          handleRegister(formValue, setSubmitting);
-        }}      >
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={(formValue, { setSubmitting, resetForm }) => {
+            handleRegister(formValue, setSubmitting, resetForm);
+          }}      >
 
-        {({ isSubmitting }) => (
-          <MYFORM>
-            <div>
-              <FormRow>
+          {({ isSubmitting }) => (
+            <MYFORM>
+              <div>
+                <FormRow>
+                  <div className="form-group">
+                    <label htmlFor="firstName">First Name</label>
+                    <Field
+                      name="firstName"
+                      type="text"
+                      className="form-control"
+                    />
+                    <ErrorMessage
+                      name="firstName"
+                      component="div"
+                      className="alert alert-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="lastName">Last Name</label>
+                    <Field name="lastName" type="text" className="form-control" />
+                    <ErrorMessage
+                      name="lastName"
+                      component="div"
+                      className="alert alert-danger"
+                    />
+                  </div>
+                </FormRow>
+
+                <FormRow>
+                  <div className="form-group">
+                    <label htmlFor="useremail">User Email</label>
+                    <Field
+                      name="useremail"
+                      type="text"
+                      className="form-control"
+                    />
+                    <ErrorMessage
+                      name="useremail"
+                      component="div"
+                      className="alert alert-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phoneNumber"> Mobile Number</label>
+                    <Field
+                      name="phoneNumber"
+                      type="text"
+                      className="form-control"
+                    />
+                    <ErrorMessage
+                      name="phoneNumber"
+                      component="div"
+                      className="alert alert-danger"
+                    />
+                  </div>
+                </FormRow>
+
+
                 <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
+                  <label htmlFor="address"> Address </label>
                   <Field
-                    name="firstName"
-                    type="text"
+                    name="address"
+                    type="address"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="firstName"
+                    name="address"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <Field name="lastName" type="text" className="form-control" />
-                  <ErrorMessage
-                    name="lastName"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-              </FormRow>
 
-
-              <FormRow>
                 <div className="form-group">
-                  <label htmlFor="useremail">User Email</label>
+                  <label htmlFor="password"> Password </label>
                   <Field
-                    name="useremail"
-                    type="text"
+                    name="password"
+                    type="password"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="useremail"
+                    name="password"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="phoneNumber"> Mobile Number</label>
+                  <label htmlFor="confirmPassword"> Confirm Password </label>
                   <Field
-                    name="phoneNumber"
-                    type="text"
+                    name="confirmPassword"
+                    type="password"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="phoneNumber"
+                    name="confirmPassword"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-              </FormRow>
 
-
-              <div className="form-group">
-                <label htmlFor="address"> Address </label>
-                <Field
-                  name="address"
-                  type="address"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="address"
-                  component="div"
-                  className="alert alert-danger"
-                />
+                <div className="form-group">
+                  <BUTTON type="submit" disabled={isSubmitting}>
+                    {isSubmitting && (
+                      <span className="spinner-border spinner-border-sm"></span>
+                    )}
+                    <span style={{ marginLeft: '4px' }}>Sign Up</span>
+                  </BUTTON>
+                </div>
               </div>
+            </MYFORM>
+          )}
 
-              <div className="form-group">
-                <label htmlFor="password"> Password </label>
-                <Field
-                  name="password"
-                  type="password"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="confirmPassword"> Confirm Password </label>
-                <Field
-                  name="confirmPassword"
-                  type="password"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="confirmPassword"
-                  component="div"
-                  className="alert alert-danger"
-                />
-              </div>
-
-              <div className="form-group">
-                <BUTTON type="submit" disabled={isSubmitting}>
-                  {isSubmitting && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
-                  <span style={{marginLeft:'4px'}}>Sign Up</span>
-                </BUTTON>
-              </div>
-            </div>
-          </MYFORM>
-        )}
-
-      </Formik>
-    </CONTAINER >
+        </Formik>
+      </CONTAINER >}
+    </>
   )
 }
 

@@ -6,27 +6,39 @@ import { Card, Button } from 'react-bootstrap'
 import { addProduct } from '../redux/actions'
 import styled from 'styled-components';
 
-
 const StyledCard = styled(Card)`
-  width: 18rem;
   background: var(--card-bg-color);
   color: var(--card-text-color);
+  width: 18rem;
 
   .card-title {
-    font-size: 1.2em; 
+    font-size: 1.2em;
   }
 
   .card-text {
-    font-size: 1em; 
+    font-size: 1em;
   }
 
   .btn-primary {
     background: var(--button-primary-bg-color);
-    border:none;
+    border: none;
     color: var(--button-primary-text-color);
+
     &:hover {
       background: var(--link-hover-color);
     }
+  }
+
+  @media (max-width: 980px) {
+    width: 15rem;
+  }
+
+  @media (max-width: 836px) {
+    width: 18rem;
+  }
+
+  @media (max-width: 650px) {
+    width: 15rem;
   }
 `;
 

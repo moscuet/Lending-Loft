@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import { login } from '../redux/actions/auth'
 import { BUTTON, CONTAINER, MYFORM } from "./SignupForm";
 
-
 interface RouterProps {
   history: {
     push(url: string): void;
@@ -105,7 +104,7 @@ const Signin = (props: RouterProps): ReactElement => {
           </div>
 
           <div className="form-group">
-            <BUTTON type="submit" className="btn btn-primary btn-block" disabled={userState.loading}>
+            <BUTTON type="submit"  disabled={userState.loading}>
               {userState.loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
