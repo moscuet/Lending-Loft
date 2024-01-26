@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { AppState } from '../types'
 import { Navigate } from "react-router-dom";
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
 
 import AuthService from '../services/authService'
 import { toast } from 'react-toastify'
@@ -106,25 +105,29 @@ export const MYFORM = styled(Form)`
   }
 `;
 
-
-export const BUTTON = styled(Button)`
+export const BUTTON = styled.button`
   background: var(--button-primary-bg-color);
   color: var(--button-primary-text-color);
   border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+
   &:hover {
     background: var(--link-hover-color);
   }
-  &.btn-primary:active {
-    background: var(--accent-color); 
+
+  &:active {
+    background: var(--button-primary-bg-color);
   }
+
   margin-right: 1em;
 `;
 
 
 
-
-
-const FormRow = styled.div`
+export const FormRow = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -200,8 +203,6 @@ const Signup = (props: RouterProps): ReactElement => {
       });
   }
 
-
-
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -217,7 +218,7 @@ const Signup = (props: RouterProps): ReactElement => {
 
   return (
     <CONTAINER >
-      {!state.successful && <h2>Sign Up</h2>}
+      {<h2>Sign Up</h2>}
 
       <Formik
         initialValues={initialValues}
@@ -228,117 +229,114 @@ const Signup = (props: RouterProps): ReactElement => {
 
         {({ isSubmitting }) => (
           <MYFORM>
-            {!state.successful && (
-              <div>
-                <FormRow>
-                  <div className="form-group">
-                    <label htmlFor="firstName">First Name</label>
-                    <Field
-                      name="firstName"
-                      type="text"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="firstName"
-                      component="div"
-                      className="alert alert-danger"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="lastName">Last Name</label>
-                    <Field name="lastName" type="text" className="form-control" />
-                    <ErrorMessage
-                      name="lastName"
-                      component="div"
-                      className="alert alert-danger"
-                    />
-                  </div>
-                </FormRow>
-
-
-                <FormRow>
-                  <div className="form-group">
-                    <label htmlFor="useremail">User Email</label>
-                    <Field
-                      name="useremail"
-                      type="text"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="useremail"
-                      component="div"
-                      className="alert alert-danger"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phoneNumber"> Mobile Number</label>
-                    <Field
-                      name="phoneNumber"
-                      type="text"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="phoneNumber"
-                      component="div"
-                      className="alert alert-danger"
-                    />
-                  </div>
-                </FormRow>
-
-
+            <div>
+              <FormRow>
                 <div className="form-group">
-                  <label htmlFor="address"> Address </label>
+                  <label htmlFor="firstName">First Name</label>
                   <Field
-                    name="address"
-                    type="address"
+                    name="firstName"
+                    type="text"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="address"
+                    name="firstName"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-
                 <div className="form-group">
-                  <label htmlFor="password"> Password </label>
-                  <Field
-                    name="password"
-                    type="password"
-                    className="form-control"
-                  />
+                  <label htmlFor="lastName">Last Name</label>
+                  <Field name="lastName" type="text" className="form-control" />
                   <ErrorMessage
-                    name="password"
+                    name="lastName"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
+              </FormRow>
 
+
+              <FormRow>
                 <div className="form-group">
-                  <label htmlFor="confirmPassword"> Confirm Password </label>
+                  <label htmlFor="useremail">User Email</label>
                   <Field
-                    name="confirmPassword"
-                    type="password"
+                    name="useremail"
+                    type="text"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="confirmPassword"
+                    name="useremail"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-
                 <div className="form-group">
-
-                  <BUTTON type="submit" disabled={isSubmitting}>
-                    {isSubmitting && (
-                      <span className="spinner-border spinner-border-sm"></span>
-                    )}
-                    <span>Sign Up</span>
-                  </BUTTON>
+                  <label htmlFor="phoneNumber"> Mobile Number</label>
+                  <Field
+                    name="phoneNumber"
+                    type="text"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="phoneNumber"
+                    component="div"
+                    className="alert alert-danger"
+                  />
                 </div>
+              </FormRow>
+
+
+              <div className="form-group">
+                <label htmlFor="address"> Address </label>
+                <Field
+                  name="address"
+                  type="address"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className="alert alert-danger"
+                />
               </div>
-            )}
+
+              <div className="form-group">
+                <label htmlFor="password"> Password </label>
+                <Field
+                  name="password"
+                  type="password"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="confirmPassword"> Confirm Password </label>
+                <Field
+                  name="confirmPassword"
+                  type="password"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+
+              <div className="form-group">
+                <BUTTON type="submit" disabled={isSubmitting}>
+                  {isSubmitting && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span style={{marginLeft:'4px'}}>Sign Up</span>
+                </BUTTON>
+              </div>
+            </div>
           </MYFORM>
         )}
 

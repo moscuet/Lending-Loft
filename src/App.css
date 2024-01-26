@@ -6,7 +6,7 @@
   --text-color: #4D6049;
   --accent-color: #99BC85;
   --navbar-bg-color: #BFD8AF;
-  --navbar-text-color: #333333;
+  --navbar-text-color: #4D6049;
   --footer-bg-color: #99BC85;
   --footer-text-color: #FFFFFF;
   --form-bg-color: #D4E7C5;
@@ -130,4 +130,3 @@ body {
   background-color: red;
   color: blue;
 }
-

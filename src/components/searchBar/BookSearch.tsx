@@ -6,8 +6,8 @@ import styled from 'styled-components';
 const ResponsiveForm = styled(Form)`
   .form-control {
     background-color: var(--placeholder-bg-color);
-    border: 1px solid transparent;  // Ensures a transparent border by default
-    transition: border-color 0.15s ease-in-out;  // Smooth transition for border property
+    border: 1px solid transparent;  
+    transition: border-color 0.15s ease-in-out; 
     border: none;
 
     ::placeholder {

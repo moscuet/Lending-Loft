@@ -78,7 +78,7 @@ export default function NavBar(): ReactElement {
           }
           {!(showUserBoard || showAdminBoard) &&
             (<>
-              <Nav.Link href="/signin">signin</Nav.Link>
+              <Nav.Link href="/signin">sign In</Nav.Link>
               <Nav.Link href="/signup">Sign Up</Nav.Link>
             </>)
           }

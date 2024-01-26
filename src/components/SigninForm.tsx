@@ -77,7 +77,7 @@ const Signin = (props: RouterProps): ReactElement => {
   }
   return (
     <CONTAINER >
-      <h2>Signin</h2>
+      <h2>Sign In</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -85,7 +85,7 @@ const Signin = (props: RouterProps): ReactElement => {
       >
         <MYFORM>
           <div className="form-group">
-            <label htmlFor="useremail">useremail</label>
+            <label htmlFor="useremail">User Email</label>
             <Field name="useremail" type="text" className="form-control" />
             <ErrorMessage
               name="useremail"
@@ -113,7 +113,6 @@ const Signin = (props: RouterProps): ReactElement => {
             </BUTTON>
             <span style={{ marginRight: '1em' }}>Not registered yet?</span>
             <NavLink to={`/signup`} style={{ color: 'var(--link-color)' }}>Register</NavLink>
-
           </div>
 
           {userState.message && (
@@ -124,6 +123,7 @@ const Signin = (props: RouterProps): ReactElement => {
             </div>
           )}
         </MYFORM>
+
       </Formik>
     </CONTAINER >
   )

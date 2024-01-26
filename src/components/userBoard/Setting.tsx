@@ -1,19 +1,19 @@
-import { Formik, Field,  ErrorMessage, Form } from 'formik'
-import * as Yup from 'yup'
+import React, { useState } from 'react';
+import { Formik, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState, USER_DATA } from '../../types';
+import { updateUser } from '../../redux/actions';
+import { BUTTON, FormRow, CONTAINER, MYFORM } from '../SignupForm'; // Import common styled components
 
-import React, { useState } from 'react'
-import { useSelector , useDispatch} from 'react-redux'
-import { AppState, USER_DATA } from '../../types'
-import { updateUser } from '../../redux/actions'
+const Setting: React.FC = () => {
+  const user: USER_DATA = useSelector((state: AppState) => state.auth.user);
 
-const  Setting:React.FC =  () => {
-  const user:USER_DATA  = useSelector( (state:AppState) =>state.auth.user)
-  
-  const [ state, setState] = useState({
-    message:'',
-    successful:false,
-    loading:false
-  })
+  const [state, setState] = useState({
+    message: '',
+    successful: false,
+    loading: false,
+  });
 
   function validationSchema() {
     return Yup.object().shape({
@@ -24,79 +24,88 @@ const  Setting:React.FC =  () => {
         .email('Email is invalid'),
       phoneNumber: Yup.string()
         .matches(new RegExp('[0-9]{10}'))
-        .required('phone number is required'),
+        .required('Phone number is required'),
       address: Yup.string()
-        .required('address is required')
+        .required('Address is required')
         .max(255, 'Password must not exceed 255 characters'),
-    })
+    });
   }
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const handleSubmit = async (formValue:USER_DATA) =>{
-
+  const handleSubmit = async (formValue: USER_DATA, { setSubmitting }: any) => {
     try {
-      setState({...state, loading:true})
-      await dispatch(updateUser(formValue,user._id))
-      setState({ ...state,
-        message: 'user updated',
-        successful:true,
-        loading:false
+      setState({ ...state, loading: true });
+      await dispatch(updateUser(formValue, user._id));
+      setState({
+        ...state,
+        message: 'User updated',
+        successful: true,
+        loading: false,
       });
-      setTimeout(()=>{
-        window.location.pathname = '/user'
-      },1000)
-    } catch(error){
-      console.log('error',error)
-      setState({ ...state,
-        message: 'user not updated',
-        successful:false,
+      setTimeout(() => {
+        window.location.pathname = '/user';
+      }, 1000);
+    } catch (error) {
+      console.log('error', error);
+      setState({
+        ...state,
+        message: 'User not updated',
+        successful: false,
       });
-    }
+    } finally {
+      setTimeout(() => {
+        setSubmitting(false);
+      }, 5000);     }
+  };
 
-
-  }
+  const initialValues = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    useremail: user.useremail,
+    phoneNumber: user.phoneNumber,
+    address: user.address,
+  };
 
   return (
-    <div className="user__setting">
-      <div className="card card-container">
-        <Formik
-          initialValues={user}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          <Form>
-            {!state.message && (
+    <CONTAINER>
+      <h2>Edit Profile</h2>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <MYFORM>
+            {!state.successful && (
               <div>
-          
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <Field
-                    name="firstName"
-                    type="text"
-               
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="firstName"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-      
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <Field
-                    name="lastName"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="lastName"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-      
+                <FormRow>
+                  <div className="form-group">
+                    <label htmlFor="firstName">First Name</label>
+                    <Field
+                      name="firstName"
+                      type="text"
+                      className="form-control"
+                    />
+                    <ErrorMessage
+                      name="firstName"
+                      component="div"
+                      className="alert alert-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="lastName">Last Name</label>
+                    <Field
+                      name="lastName"
+                      type="text"
+                      className="form-control"
+                    />
+                    <ErrorMessage
+                      name="lastName"
+                      component="div"
+                      className="alert alert-danger"
+                    />
+                  </div>
+                </FormRow>
                 <div className="form-group">
                   <label htmlFor="useremail">User Email</label>
                   <Field
@@ -110,7 +119,6 @@ const  Setting:React.FC =  () => {
                     className="alert alert-danger"
                   />
                 </div>
-      
                 <div className="form-group">
                   <label htmlFor="address">Address</label>
                   <Field
@@ -124,58 +132,36 @@ const  Setting:React.FC =  () => {
                     className="alert alert-danger"
                   />
                 </div>
-                
                 <div className="form-group">
-                  <label htmlFor="phonenumber">Phone Number</label>
+                  <label htmlFor="phoneNumber">Phone Number</label>
                   <Field
-                    name="phonenumber"
+                    name="phoneNumber"
                     type="text"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="phonenumber"
+                    name="phoneNumber"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
-      
                 {!state.successful && (
                   <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
-                      {state.loading && (
+                    <BUTTON type="submit" disabled={isSubmitting}>
+                      {isSubmitting && (
                         <span className="spinner-border spinner-border-sm"></span>
                       )}
-                      <span>Add Book</span>
-                    </button>
+                      <span>Save Changes</span>
+                    </BUTTON>
                   </div>
-                )
-                }
-      
+                )}
               </div>
             )}
-    
-            {state.message && (
-              <div className="form-group">
-                <div
-                  className={
-                    state.successful
-                      ? 'alert alert-success'
-                      : 'alert alert-danger'
-                  }
-                  role="alert"
-                >
-                  {state.message}
-                </div>
-              </div>
-            )}
-          </Form>
-        </Formik>
-      </div>
-    </div>
-  )
-}
+          </MYFORM>
+        )}
+      </Formik>
+    </CONTAINER>
+  );
+};
 
-export default Setting
-
-
-
+export default Setting;
