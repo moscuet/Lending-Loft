@@ -48,6 +48,7 @@ const BookCardWrapper = styled.div`
 `;
 
 export default function BookCard(book: (Product & {isIncart?:boolean})): ReactElement {
+ 
   const { title, img, authors,genres } = book
   const dispatch = useDispatch()
   const [cartState, setCartstate ] = useState(book.isIncart)

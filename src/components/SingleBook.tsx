@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import userService from '../services/userService'
 import { Product } from '../types'
@@ -7,7 +7,22 @@ import { useDispatch } from 'react-redux'
 import { addProduct } from '../redux/actions'
 
 import { AppState } from '../types'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { BUTTON } from './SignupForm'
+
+import styled from 'styled-components';
+
+const CONTAINER = styled.div`
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row; 
+
+  @media (max-width: 780px) {
+    flex-direction: column;
+  }
+`;
+
 
 type QuizParams = {
   id: string
@@ -15,7 +30,7 @@ type QuizParams = {
 const SingleBook = () => {
   const { id } = useParams<QuizParams>()
   const dispatch = useDispatch()
-  
+
   const [book, setBook] = useState<Product & { isIncart?: boolean }>({
     _id: '',
     title: '',
@@ -29,71 +44,66 @@ const SingleBook = () => {
     pageCount: 0,
     img: '',
   })
-  const isIncart = useSelector((state: AppState) => state.order.inCart).map( p=>p._id).includes(id)
+
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const isIncart = useSelector((state: AppState) => state.order.inCart).map(p => p._id).includes(id)
   useEffect(() => {
     userService.getSingleBook(id).then(
       (response) => {
         if (response) setBook(response.data)
-        console.log('response data from server in singlebook', response.data)
       },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString()
-
-        // setMessage(_content);
-        console.log(_content)
+      (error: Error) => {
+        setErrorMessage(`No book Found: ${error.message}`)
       }
     )
   }, [id])
 
-  const {
-    img,
-    title,
-    authors,
-    publisherName,
-    publishedYear,
-    edition,
-    pageCount,
-    description,
-    genres,
-  } = book
   return (
-    <div>
-      <Card style={{ width: '85%' }}>
-        <Card.Img variant="top" src={`${img}`} />
-        <Card.Body>
-          <Card.Title>
-            <h1>{`${title}`} Single Book</h1>
-          </Card.Title>
-          <Card.Text>
-            {' '}
-            {`Author: ${authors
-              .map((a) => a.firstName + ' ' + a.lastName)
-              .join(',')}`}
+    <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center' }}>
+      {book._id ? (
+        <Card style={{ width: '85%', maxWidth: '1280px', backgroundColor: 'transparent', border: 'none' }}>
+          <CONTAINER>
+            <div>
+              <Card.Img
+                variant="top"
+                src={book.img}
+                style={{ maxWidth: '480px', width: '100%', objectFit: 'cover' }}
+              />
+              <Card.Title style={{ marginTop: '20px', textAlign: 'center' }}>
+                <h6>{book.title}</h6>
+              </Card.Title>
+            </div>
+
+            <div style={{ padding: '20px' }}>
+              <Card.Text>{`Author: ${book.authors.map(a => `${a.firstName} ${a.lastName}`).join(', ')}`}</Card.Text>
+              <Card.Text>{`Publisher: ${book.publisherName}`}</Card.Text>
+              <Card.Text>{`Year: ${book.publishedYear}`}</Card.Text>
+              <Card.Text>{`Edition: ${book.edition}`}</Card.Text>
+              <Card.Text>{`Pages: ${book.pageCount}`}</Card.Text>
+              <Card.Text>{`Genres: ${book.genres.join(', ')}`}</Card.Text>
+            </div>
+          </CONTAINER >
+
+          <Card.Text style={{ padding: '0 20px' }}>
+            {book.description}
           </Card.Text>
-          <Card.Text> {`Publisher: ${publisherName}`}</Card.Text>
-          <Card.Text> {`Year: ${publishedYear}`}</Card.Text>
-          <Card.Text> {`Edition: ${edition}`}</Card.Text>
-          <Card.Text> {`pages: ${pageCount}`}</Card.Text>
-          <Card.Text> {`genres: ${genres}`}</Card.Text>
-          <Card.Text> {`${description}`}</Card.Text>
           {!window.location.pathname.includes('admin') && (
-            <Button
-              variant="primary"
+            <BUTTON
               onClick={() => dispatch(addProduct(book))}
               disabled={isIncart}
+              style={{ maxWidth: '150px' }}
             >
               Add to cart
-            </Button>
+            </BUTTON>
           )}
-        </Card.Body>
-        {!window.location.pathname.includes('admin') && (
-          <Card.Link href="/"> Back to home</Card.Link>
-        )}
-      </Card>
+        </Card>
+      ) : (
+        <div style={{ textAlign: 'center', margin: '20px' }}>
+          {errorMessage}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 export default SingleBook

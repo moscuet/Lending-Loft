@@ -20,7 +20,6 @@ export default function UserBorrowList() {
     userService.getBorrowList(userId).then(
       (response) => {
         setBorrowList(response.data)
-        console.log('# userId and borrow list', userId, response.data)
       },
       (error) => {
         const _content =
