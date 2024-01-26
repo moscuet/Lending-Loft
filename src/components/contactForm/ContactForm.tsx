@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Formik, Field, ErrorMessage } from "formik";
 import { FormikHelpers } from 'formik';
 
 import contactService from '../../services/contactService'
 import { BUTTON, CONTAINER, MYFORM } from '../SignupForm';
+import { toast } from 'react-toastify';
 
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+const mobileRegExp = /^\+?\d{7,13}$/
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -15,24 +15,22 @@ const validationSchema = Yup.object().shape({
     .required("*Name is required"),
   email: Yup.string()
     .email("*Must be a valid email address")
-    .max(100, "*Email must be less than 100 characters")
+    .max(500, "*Email must be less than 500 characters")
     .required("*Email is required"),
-  phone: Yup.string()
-    .matches(phoneRegExp, "*Phone number is not valid")
-    .required("*Phone number required"),
+  mobile: Yup.string()
+    .matches(mobileRegExp, "Valid phone number (7-13 digits, start with optional '+').")
+    .required("*mobile number required"),
   message: Yup.string()
     .min(20, "*Message must have at least 20 characters")
     .max(1000, "*Message can't be longer than 1000 characters")
     .required("*Message is required"),
 });
-const ContactForm = () => {
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState('');
 
+const ContactForm = () => {
   interface FormValues {
     name: string;
     email: string;
-    phone: string;
+    mobile: string;
     message: string;
   }
 
@@ -41,17 +39,14 @@ const ContactForm = () => {
     { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
     setSubmitting(true);
-    setFormSubmitted(false);
-    setSubmitError('');
 
     contactService.sendMessage(values)
       .then(response => {
-        setFormSubmitted(true);
         resetForm();
+        toast.success('Thank you for reaching out! I will get back to you soon.')
       })
       .catch(error => {
-        setSubmitError('Failed to send message. Please try again.');
-        console.error('Error during form submission', error);
+        toast.error('Failed to send message. Please try again later.')
       })
       .finally(() => {
         setSubmitting(false);
@@ -64,7 +59,7 @@ const ContactForm = () => {
     <CONTAINER>
       <h2 >SAY HELLO!</h2>
       <Formik
-        initialValues={{ name: "", email: "", phone: "", message: "" }}
+        initialValues={{ name: "", email: "", mobile: "", message: "" }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
@@ -83,9 +78,9 @@ const ContactForm = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="phone">Mobile</label>
-              <Field name="phone" type="text" className="form-control" />
-              <ErrorMessage name="phone" component="div" className="alert alert-danger" />
+              <label htmlFor="mobile">Mobile</label>
+              <Field name="mobile" type="text" className="form-control" />
+              <ErrorMessage name="mobile" component="div" className="alert alert-danger" />
             </div>
 
             <div className="form-group">
@@ -101,14 +96,6 @@ const ContactForm = () => {
                 )}
                 <span>Submit</span>
               </BUTTON>
-              {submitError && (
-                <div className="alert alert-danger" role="alert">
-                  {submitError}
-                </div>
-              )}
-              {formSubmitted && (
-                <div style={{ color: 'green' }}>MESSAGE SENT</div>
-              )}
             </div>
           </MYFORM>
         )}

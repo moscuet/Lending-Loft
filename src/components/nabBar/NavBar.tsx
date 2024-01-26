@@ -43,7 +43,7 @@ export default function NavBar(): ReactElement {
 
   return (
     <Navbar className='custom-navbar'
-      sticky="top" expand="sm" collapseOnSelect>
+      sticky="top" expand="md" collapseOnSelect>
       <Navbar.Brand>
         <Nav.Link href="/"> LOGO</Nav.Link>
       </Navbar.Brand>

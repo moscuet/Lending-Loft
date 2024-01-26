@@ -6,6 +6,9 @@ import styled from 'styled-components';
 const ResponsiveForm = styled(Form)`
   .form-control {
     background-color: var(--placeholder-bg-color);
+    border: 1px solid transparent;  // Ensures a transparent border by default
+    transition: border-color 0.15s ease-in-out;  // Smooth transition for border property
+    border: none;
 
     ::placeholder {
       color: var(--placeholder-text-color);
@@ -18,8 +21,15 @@ const ResponsiveForm = styled(Form)`
     ::-ms-input-placeholder {
       color: var(--placeholder-text-color);
     }
+
+    &:focus {
+      border: none;
+      box-shadow: none;
+      outline: none;
+    }
   }
 `;
+
 
 
 type Handleseacrh = (word: string) => void

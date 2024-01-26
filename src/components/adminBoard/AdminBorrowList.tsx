@@ -104,7 +104,6 @@ export default function AdminBorrowList() {
           }
           const isOverDue =
             new Date().getTime() > new Date(returnDate).getTime()
-          //console.log('now, overdue', new Date(), isOverDue)
           return (
             <li key={`key-${_id}`}>
               <div

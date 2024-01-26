@@ -125,3 +125,9 @@ body {
 .main-layout ul li:last-child {
   list-style: none;
 }
+
+.Toastify__toast {
+  background-color: red;
+  color: blue;
+}
+

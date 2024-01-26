@@ -18,6 +18,7 @@ import Cart from './components/Cart'
 import AdminRoute from './components/Routing/AdminRoute'
 import UserRoute from './components/Routing/UserRoute'
 import ContactForm from './components/contactForm/ContactForm'
+import ToastNotification from './components/ToastNotification'
 
 const App: React.FC = () => {
   const history = createBrowserHistory()
@@ -31,13 +32,14 @@ const App: React.FC = () => {
   return (
     <Fragment>
       <NavBar />
+      <ToastNotification />
       <div className='main-layout'>
         <div className="main-layout_wrapper">
           <Switch>
             <Route path='/admin/*'
               element={
                 <AdminRoute >
-                  <AdminBoard/>
+                  <AdminBoard />
                 </AdminRoute >
               }
             />
@@ -45,20 +47,19 @@ const App: React.FC = () => {
             <Route path='/user/*'
               element={
                 <UserRoute >
-                  <UserBoard/>
+                  <UserBoard />
                 </UserRoute>
               }
             />
-            <Route path='/contact-us' element = {<ContactForm />} />
-            <Route path='/books/catagory/*' element = {<Home />} />
-            <Route path='/signup' element = {<Signup history={history}/>} />
-            <Route path='/signin' element = {<Signin history={history}/>} />
-            <Route path='/books/:id' element =   { <SingleBook />} />
-            <Route path='/cart/:id' element =   {  <SingleBook />} />
-            <Route path='/cart' element =   { <Cart />} />
-            <Route path='/' element =   { <Home />} />
+            <Route path='/contact-us' element={<ContactForm />} />
+            <Route path='/books/catagory/*' element={<Home />} />
+            <Route path='/signup' element={<Signup history={history} />} />
+            <Route path='/signin' element={<Signin history={history} />} />
+            <Route path='/books/:id' element={<SingleBook />} />
+            <Route path='/cart/:id' element={<SingleBook />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/' element={<Home />} />
           </Switch>
-
 
         </div>
 

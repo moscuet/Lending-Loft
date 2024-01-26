@@ -8,7 +8,6 @@ import {
   AUTH_ACTION,
   USERUPDATE_FAIL,
   USERUPDATE_SUCCESS
-  // USER_DATA
 } from "../../types";
   
 const user = JSON.parse(localStorage.getItem("user") || '{}');

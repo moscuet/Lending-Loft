@@ -62,14 +62,12 @@ export type  EmptyCartAction = {
   type: typeof EMPTY_CART
 }
 
-// Use this union in reducer
 export type ProductActions = AddProductAction | RemoveProductAction | EmptyCartAction
 
 export type OrderState = {
   inCart: Product[]
 }
 
-//message type
 
 // authentication types
 

@@ -6,7 +6,6 @@ export default function authHeader(){
     user = JSON.parse(userStr);
   
   if (user && user.accessToken) {
-    //return { Authorization: 'Bearer ' + user.accessToken }; // for Spring Boot back-end
     return { 'x-access-token': user.accessToken  };
   } else {
     return {'x-access-token':''};

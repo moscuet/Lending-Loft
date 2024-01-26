@@ -18,7 +18,6 @@ export default function order(
     if (state.inCart.find((p) => p._id === product._id)) {
       return state
     }
-    // Always return new state (e.g, new object) if changed
     const updatedCart = [...state.inCart,product]
     localStorage.setItem('inCart', JSON.stringify(updatedCart));
 

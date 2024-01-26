@@ -33,7 +33,6 @@ class  AuthService {
       
   }
 
-  // /api/auth'/signup
   getCurrentCustomer () {
     const userStr = localStorage.getItem("user");
     console.log('user from authservice/auths/getCurrentcustomer', userStr )
