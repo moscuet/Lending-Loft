@@ -22,13 +22,15 @@
 }
 
 .admin__usersList,
-.admin__authorsList {
+.admin__authorsList,
+.admin__booksList {
     display: flex;
     justify-content: center;
 }
 
 .admin__usersList ol,
-.admin__authorsList ol {
+.admin__authorsList ol,
+.admin__booksList ol {
     padding: 0;
     width: 100%;
     max-width: 780px;
@@ -38,7 +40,6 @@
 .admin__authorsList ol li {
     margin-bottom: 10px;
     text-align: center;
-
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
@@ -60,10 +61,16 @@
     margin-bottom: 10px;
     text-align: center;
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 3fr 2fr;
-
+    grid-template-columns: 2fr 2fr 2fr 3fr;
+    align-items: center;
+    justify-content: center; 
 }
 
+@media screen and (max-width: 520px) {
+    .admin__booksList ol li {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
 
 .admin__usersList ol li:first-child,
 .admin__booksList ol li:first-child,
@@ -80,19 +87,29 @@
     margin-left: 2px;
 }
 
-.admin__usersList ol li div:last-child,
-.admin__booksList ol li div:last-child,
-.admin__authorsList ol li div:last-child,
-.admin__borrowList ol li div:last-child {
-    text-align: right;
-}
-
-
 
 .book__img {
     display: flex;
     justify-content: center;
+    width: 100px;
+    height: 80px;
+    cursor: 'pointer';
 }
+
+@media screen and (max-width: 760px) {
+    .book__img {
+        width: 80px;
+        height: 64px;
+    }
+}
+@media screen and (max-width: 520px) {
+    .book__img {
+        width: 50px;
+        height: 40px;
+    }
+}
+
+
 
 .admin__booksList ol li button,
 .admin__usersList ol li button,
@@ -121,7 +138,19 @@
 
 /* author__list specific css */
 
-.admin__authorsList ol li .editButton {
+.admin__authorsList ol li .editButton,
+.admin__authorsList ol li .deleteButton,
+.admin__booksList ol li .editButton,
+.admin__booksList ol li .deleteButton {
+    max-width: 100px;
+    margin-left: 2px;
+    outline: none;
+    border: none;
+}
+
+.admin__authorsList ol li .editButton,
+.admin__booksList ol li .editButton {
+    margin-top: 2px;
     color: var(--button-primary-text-color);
     background: var(--button-primary-bg-color);
     &:hover {
@@ -129,34 +158,37 @@
     }
 }
 
-.admin__authorsList ol li .editButton,
-.admin__authorsList ol li .deleteButton {
-    max-width: 100px;
-    margin-left: 2px;
-    outline: none;
-    border: none;
-}
-
 @media (max-width: 720px) {
     .admin__authorsList ol li .editButton,
-    .admin__authorsList ol li .deleteButton {
+    .admin__authorsList ol li .deleteButton,
+    .admin__booksList ol li .editButton,
+    .admin__booksList ol li .deleteButton {
         max-width: 60px;
     }
 }
 
 @media (max-width: 520px) {
     .admin__authorsList ol li .editButton,
-    .admin__authorsList ol li .deleteButton {
+    .admin__authorsList ol li .deleteButton,
+    .admin__booksList ol li .editButton,
+    .admin__booksList ol li .deleteButton {
         width:100%;
         max-width: 50px;
         font-size: 14px;
         height: 30px;
     }
 
-    .admin__authorsList ol li div:nth-child(1), .admin__authorsList ol li div:nth-child(2) {
+    .admin__authorsList ol li div:nth-child(1),
+    .admin__authorsList ol li div:nth-child(2) {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-size: 14px;
+    }
+
+    .admin__booksList ol li div:nth-child(1),
+    .admin__booksList ol li div:nth-child(3) {
+        overflow: hidden;
         font-size: 14px;
     }
 }

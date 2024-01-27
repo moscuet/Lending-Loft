@@ -42,12 +42,6 @@ const TabButton = styled.button`
 const AdminBoard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('users');
 
-  // const handleTabChange = (tab: string) => {
-  //   setActiveTab(tab);
-  //   toast.success("User Settings Updated Succesfully!");
-  // };
-
-
 
   return (
     <div className="adminboard-container">

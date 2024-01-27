@@ -49,7 +49,7 @@ export default function EditAuthor(props: { eId: string, editStatus: () => void 
     authorService.updateAuthor(values)
       .then(response => {
         resetForm();
-        toast.success("Succesfully Updated Author's Details!")
+        toast.success("Successfully Updated Author's Details!")
       })
       .catch(error => {
         toast.error("Failed to Update: " + error.message)

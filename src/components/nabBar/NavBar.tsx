@@ -54,10 +54,10 @@ export default function NavBar(): ReactElement {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/contact-us">Contact Us</Nav.Link>
           <NavDropdown title="Book catagories">
-            <NavDropdown.Item href="/books/catagory/action">Action and adventure</NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/action">Action & Adventure</NavDropdown.Item>
             <NavDropdown.Item href="/books/catagory/comedy">Comedy</NavDropdown.Item>
             <NavDropdown.Item href="/books/catagory/drama">Drama</NavDropdown.Item>
-            <NavDropdown.Item href="/books/catagory/crime">Crime and mystery </NavDropdown.Item>
+            <NavDropdown.Item href="/books/catagory/crime">Crime & Mystery</NavDropdown.Item>
             <NavDropdown.Item href="/books/catagory/fiction">Fiction</NavDropdown.Item>
             <NavDropdown.Item href="/books/catagory/romance">Romance</NavDropdown.Item>
             <NavDropdown.Divider />
