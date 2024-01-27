@@ -5,7 +5,7 @@ import { NavLink, Navigate } from "react-router-dom";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { login } from '../redux/actions/auth'
-import { BUTTON, CONTAINER, MYFORM } from "./SignupForm";
+import { BUTTON, CONTAINER, MYFORM } from "./ui/StyledComponenet";
 
 interface RouterProps {
   history: {
@@ -104,7 +104,7 @@ const Signin = (props: RouterProps): ReactElement => {
           </div>
 
           <div className="form-group">
-            <BUTTON type="submit"  disabled={userState.loading}>
+            <BUTTON type="submit" disabled={userState.loading}>
               {userState.loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}

@@ -1,15 +1,15 @@
 import React, { useState, ReactElement } from 'react'
-import { Formik, Field, Form, ErrorMessage, FormikState } from 'formik'
+import { Formik, Field, ErrorMessage, FormikState } from 'formik'
 import * as Yup from 'yup'
 import { useSelector } from 'react-redux'
 import { AppState } from '../types'
 import { Navigate } from "react-router-dom";
-import styled from 'styled-components';
 
 import AuthService from '../services/authService'
 import { toast } from 'react-toastify'
 import Loader from 'react-ts-loaders'
 import { LoaderContainer } from './BooksComp'
+import { BUTTON, CONTAINER, FormRow, MYFORM } from './ui/StyledComponenet'
 
 interface RouterProps {
   history: {
@@ -27,125 +27,6 @@ interface FormValues {
   confirmPassword: string;
 }
 
-
-
-export const CONTAINER = styled.div`
-  background: var(--form-bg-color);
-  color: var(--text-color);
-  border-radius: 3px;
-  height: auto;
-  width: 90%;
-  margin: 2rem auto;
-  padding: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  @media(min-width: 786px) {
-    width: 60%;
-  }
-  h2 {
-    text-align: center;
-    color: var(--form-title-text-color);
-    padding-top: .5em;
-  }
-  .form-group label {
-    color: var(--text-color);
-    margin-bottom: 0.5em;
-  }
-  .alert.alert-danger {
-    color: var(--alert-color);
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0; 
-  }
-`;
-
-
-export const MYFORM = styled(Form)`
-  width: 90%;
-  text-align: left;
-  padding-top: 1em;
-  padding-bottom: 1em;
-
-  .form-control {
-    background-color: var(--placeholder-bg-color);
-    color: var(--text-color);
-    border: 1px solid #ced4da;
-
-    ::placeholder {
-      color: var(--placeholder-color);
-      opacity: 1;
-    }
-
-    &:focus {
-      outline: none;  
-      box-shadow: none
-    }
-
-    :-ms-input-placeholder { 
-      color: var(--placeholder-color);
-    }
-
-    ::-ms-input-placeholder {
-      color: var(--placeholder-color);
-    }
-  }
-
-  .form-group {
-    margin-bottom: 1em; 
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .alert.alert-danger {
-    color: var(--alert-color);
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    margin-top: 0.5em;
-    padding: 0.0em;
-    font-size: 0.85em;
-  }
-`;
-
-export const BUTTON = styled.button`
-  background: var(--button-primary-bg-color);
-  color: var(--button-primary-text-color);
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-
-  &:hover {
-    background: var(--link-hover-color);
-  }
-
-  &:active {
-    background: var(--button-primary-bg-color);
-  }
-
-  margin-right: 1em;
-`;
-
-
-
-export const FormRow = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media(min-width: 768px) {
-    flex-direction: row;
-
-    .form-group {
-      flex: 1;
-      &:not(:last-child) {
-        margin-right: 1em;
-      }
-    }
-  }
-`;
 
 const Signup = (props: RouterProps): ReactElement => {
   const { isLoggedIn } = useSelector((state: AppState) => state.auth)

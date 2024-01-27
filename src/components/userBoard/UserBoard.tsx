@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-
-import './userboard.css'
 import UserBorrowList from './UserBorrowList'
 import Setting from './Setting'
 import styled from 'styled-components'

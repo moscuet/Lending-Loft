@@ -1,147 +1,117 @@
-import React, { useState, ReactElement } from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import React, { ReactElement } from 'react'
+import { Formik, Field, ErrorMessage, FormikHelpers } from 'formik'
 import * as Yup from 'yup'
 import authorService from '../../services/authorService'
+import { toast } from 'react-toastify'
+import { BUTTON, CONTAINER, MYFORM } from '../ui/StyledComponenet'
 
-const  AddAuthor= (): ReactElement => {
-  
+type FormValue = {
+  firstName: string,
+  lastName: string,
+  biography: string,
+}
+
+const AddAuthor = (): ReactElement => {
+
   const initialValues = {
     firstName: '',
     lastName: '',
-    biography: 'biography'
+    biography: ''
   }
-
-  const [state, setState] = useState({...initialValues,successful: false, loading:false,message:''})
 
   function validationSchema() {
     return Yup.object().shape({
       firstName: Yup.string().required('First Name is required'),
       lastName: Yup.string().required('LastName is required'),
-      biography: Yup.string().required('Biography is required'),
+      biography: Yup.string().required('Biography is required').max(980, 'Biography cannot be more than 980 characters'),
     })
   }
 
-  function handleAddMore (){
-    setState({ ...state, successful:false, message:''})
-  }
-  function handleAddBook(formValue: {
-    firstName: string,
-    lastName: string,
-    biography: string,
-  }) {
 
-    setState({ ...state, loading:true})
+  const handleSubmit = (
+    values: FormValue,
+    { setSubmitting, resetForm }: FormikHelpers<FormValue>
+  ) => {
+    setSubmitting(true);
 
- 
-    authorService.addAuthor( formValue).then(
-      (response) => {
-        setState({ ...state, successful: true , loading:false, message:'Author added'})
-      },
-      (error) => {
-        setState({
-          ...state,
-          successful: false,
-          loading:false,
-          message:'Author not added'
+    authorService.addAuthor(values)
+      .then(response => {
+        resetForm();
+        toast.success('Thank you for reaching out! I will get back to you soon.')
+      })
+      .catch(error => {
+        toast.error('Failed to send message. Please try again later.')
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
 
-        })
-        console.log(error)
-      }
-    )
-  }
 
   return (
-    <div className="admin__addauthor">
-      <div className="card card-container">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleAddBook}
-        >
-          <Form>
-            {!state.successful && (
-              <div>
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <Field
-                    name="firstName"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="firstName"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <Field
-                    name="lastName"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="lastName"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="biography">Biography</label>
-                  <Field
-                    name="biography"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="biography"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                
-              </div>
-            )}
-
-            {!state.successful && (
+    <CONTAINER>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleSubmit, isSubmitting }) => (
+          <MYFORM onSubmit={handleSubmit}>
+            <div>
               <div className="form-group">
-                <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
-                  {state.loading && (
+                <label htmlFor="firstName">First Name</label>
+                <Field
+                  name="firstName"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="firstName"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <Field
+                  name="lastName"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="lastName"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="biography">Biography</label>
+                <Field
+                  as="textarea"
+                  name="biography"
+                  className="form-control"
+                  rows="5"
+                />
+                <ErrorMessage
+                  name="biography"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+
+              <div className="form-group">
+                <BUTTON type="submit" disabled={isSubmitting}>
+                  {isSubmitting && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
-                  <span>Add Author</span>
-                </button>
+                  <span style={{ marginLeft: '4px' }}>Submit</span>
+                </BUTTON>
               </div>
-            )
-            }
-            {state.successful && (
-              <div className="form-group">
-                <button className="btn btn-primary btn-block" onClick = {handleAddMore} >
-                  <span>Add more</span>
-                </button>
-              </div>
-            )
-            }          
-
-            {state.message && (
-              <div className="form-group">
-                <div
-                  className={
-                    state.successful
-                      ? 'alert alert-success'
-                      : 'alert alert-danger'
-                  }
-                  role="alert"
-                >
-                  {state.message}
-                </div>
-              </div>
-            )}
-          </Form>
-        </Formik>
-      </div>
-    </div>
+            </div>
+          </MYFORM>
+        )}
+      </Formik>
+    </CONTAINER>
   )
 }
 

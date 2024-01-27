@@ -6,6 +6,22 @@ import { Card, Button } from 'react-bootstrap'
 import { addProduct } from '../redux/actions'
 import styled from 'styled-components';
 
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 0;
+  padding-top: 75%; 
+  position: relative;
+`;
+
+const StyledCardImage = styled(Card.Img)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 const StyledCard = styled(Card)`
   background: var(--card-bg-color);
   color: var(--card-text-color);
@@ -61,12 +77,14 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
     <BookCardWrapper>
       <StyledCard>
         <Card.Link href={`books/${book._id}`}>
-          <Card.Img variant="top" src={`${img}`} />
+          <ImageWrapper>
+            <StyledCardImage variant="top" src={`${img}`} />
+          </ImageWrapper>
         </Card.Link>
         <Card.Body>
-          <Card.Title>{`${title}`}<p>{`${genres.toString()}`}</p></Card.Title>
-          <Card.Text>
-            {`Authors: ${authors.map((a) => a.firstName + ' ' + a.lastName).join(',')}`}
+          <Card.Title>{`${title}`}</Card.Title>
+          <Card.Text> <p> Genres: <span style={{ fontSize: '14px' }}> {genres.join(', ')} </span> </p> </Card.Text>          <Card.Text>
+            {`By ${authors.map((a) => a.firstName + ' ' + a.lastName).join(',')}`}
           </Card.Text>
           <Button variant="primary" onClick={onclick} disabled={cartState}>
             Add to cart
@@ -75,4 +93,5 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
       </StyledCard>
     </BookCardWrapper>
   )
+  
 }

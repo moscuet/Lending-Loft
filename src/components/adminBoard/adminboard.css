@@ -1,34 +1,53 @@
 .adminboard-container {
-margin-top:1rem;
-max-width: 1080px;
+    margin-top: 1rem;
+    max-width: 1080px;
 
 }
-.adminboard-container_nav{
-    margin-bottom:2rem;
+
+.adminboard-container_nav {
+    margin-bottom: 2rem;
     justify-content: center;
     display: flex;
 
 }
+
 .adminboard-container_nav a {
- padding:5px;
- text-decoration: none;
-margin:0px 5px;
-}
-.adminboard-container_nav a:active{
-  color:green;
+    padding: 5px;
+    text-decoration: none;
+    margin: 0px 5px;
 }
 
+.adminboard-container_nav a:active {
+    color: green;
+}
 
+.admin__usersList,
+.admin__authorsList {
+    display: flex;
+    justify-content: center;
+}
 
-.admin__usersList ol li {
+.admin__usersList ol,
+.admin__authorsList ol {
+    padding: 0;
+    width: 100%;
+    max-width: 780px;
+}
+
+.admin__usersList ol li,
+.admin__authorsList ol li {
     margin-bottom: 10px;
     text-align: center;
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
 }
+
+
 .admin__borrowList ol li div:first-child {
     font-weight: bold;
-  }
+}
 
 .admin__borrowList ol li {
     margin-bottom: 10px;
@@ -41,31 +60,33 @@ margin:0px 5px;
     margin-bottom: 10px;
     text-align: center;
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 3fr 2fr ;
+    grid-template-columns: 2fr 2fr 2fr 3fr 2fr;
 
 }
 
-.admin__authorsList ol li  {
-    margin-bottom: 10px;
-    text-align: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
 
 .admin__usersList ol li:first-child,
 .admin__booksList ol li:first-child,
 .admin__authorsList ol li:first-child,
-.admin__borrowList ol li:first-child
- {
+.admin__borrowList ol li:first-child {
     font-weight: bold;
 }
+
 .admin__usersList ol li div:first-child,
 .admin__booksList ol li div:first-child,
 .admin__authorsList ol li div:first-child,
-.admin__borrowList ol li div:first-child
- {
+.admin__borrowList ol li div:first-child {
     text-align: left;
+    margin-left: 2px;
 }
+
+.admin__usersList ol li div:last-child,
+.admin__booksList ol li div:last-child,
+.admin__authorsList ol li div:last-child,
+.admin__borrowList ol li div:last-child {
+    text-align: right;
+}
+
 
 
 .book__img {
@@ -73,40 +94,98 @@ margin:0px 5px;
     justify-content: center;
 }
 
-.admin__booksList ol li button, .admin__usersList ol li button, .admin__authorsList ol li button{
-    height:40px;
+.admin__booksList ol li button,
+.admin__usersList ol li button,
+.admin__authorsList ol li button {
+    align-self: center;
+    width: 100%;
+    max-width: 150px;
+    height: 36px;
     border-radius: 2px;
-    background: red;
+    background: #e24040;
+    outline: none;
+    border: none;
+    color: #FFFFFF;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background: red;
+    }
+
+    &:disabled {
+        background: #F6B2B5;
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
 }
 
-.admin__booksList ol li .editButton, .admin__authorsList ol li .editButton  {
-  background: blue;
-  padding: 0px 15px;
-  margin-left: 2px;
+/* author__list specific css */
 
+.admin__authorsList ol li .editButton {
+    color: var(--button-primary-text-color);
+    background: var(--button-primary-bg-color);
+    &:hover {
+        background: var(--link-hover-color);
+    }
 }
 
-.admin__addbook, .admin__addauthor {
-  display: flex;
-  justify-content: center;
+.admin__authorsList ol li .editButton,
+.admin__authorsList ol li .deleteButton {
+    max-width: 100px;
+    margin-left: 2px;
+    outline: none;
+    border: none;
+}
+
+@media (max-width: 720px) {
+    .admin__authorsList ol li .editButton,
+    .admin__authorsList ol li .deleteButton {
+        max-width: 60px;
+    }
+}
+
+@media (max-width: 520px) {
+    .admin__authorsList ol li .editButton,
+    .admin__authorsList ol li .deleteButton {
+        width:100%;
+        max-width: 50px;
+        font-size: 14px;
+        height: 30px;
+    }
+
+    .admin__authorsList ol li div:nth-child(1), .admin__authorsList ol li div:nth-child(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+}
+
+/* ------------------------------- */
+
+.admin__addbook,
+.admin__addauthor {
+    display: flex;
+    justify-content: center;
 }
 
 .admin__addbook .card-container,
-.admin__addauthor .card-container 
-{
-    width:80%;
+.admin__addauthor .card-container {
+    width: 80%;
     max-width: 620px;
-    padding:20px;
-}
-.admin__addbook .card-container label,
-.admin__addauthor .card-container label
- {
-    margin:5px 0px;
-    text-align: center;
-    display: inline-block;
-    width:100%;
-}
-.admin__addbook button, .admin__addauthor button {
-    margin-top: 10px;;
+    padding: 20px;
 }
 
+.admin__addbook .card-container label,
+.admin__addauthor .card-container label {
+    margin: 5px 0px;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.admin__addbook button,
+.admin__addauthor button {
+    margin-top: 10px;
+    ;
+}

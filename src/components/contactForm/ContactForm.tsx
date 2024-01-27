@@ -3,8 +3,8 @@ import { Formik, Field, ErrorMessage } from "formik";
 import { FormikHelpers } from 'formik';
 
 import contactService from '../../services/contactService'
-import { BUTTON, CONTAINER, MYFORM } from '../SignupForm';
 import { toast } from 'react-toastify';
+import { BUTTON, CONTAINER, MYFORM } from '../ui/StyledComponenet';
 
 const mobileRegExp = /^\+?\d{7,13}$/
 
@@ -94,7 +94,7 @@ const ContactForm = () => {
                 {isSubmitting && (
                   <span className="spinner-border spinner-border-sm"></span>
                 )}
-                <span style={{ marginLeft: '8px' }}>Submit</span>
+                <span style={{ marginLeft: '4px' }}>Submit</span>
               </BUTTON>
             </div>
           </MYFORM>

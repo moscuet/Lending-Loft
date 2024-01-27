@@ -1,13 +1,17 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup'
 import React, { useEffect, useState } from 'react';
 import authorService from '../services/authorService';
 import { Author } from '../types';
+import { toast } from 'react-toastify';
+import { BUTTON, CANCELBUTTON, CONTAINER, MYFORM } from './ui/StyledComponenet'
 
-export default function EditAuthor(props:{eId:string, editStatus:()=>void} ){
 
+type FormValue = { firstName: string, lastName: string, biography: string, _id: string }
 
-  const [state, setState] = useState({successful: false, loading:false,message:''})
+export default function EditAuthor(props: { eId: string, editStatus: () => void }) {
+
+  const [state, setState] = useState({ successful: false, loading: false, message: '' })
 
   const [author, setAuthor] = useState<Author>({
     firstName: '',
@@ -17,17 +21,16 @@ export default function EditAuthor(props:{eId:string, editStatus:()=>void} ){
   })
 
   useEffect(() => {
-    setState({...state,loading:true})
-    authorService.getAuthorById(props.eId).then( res =>{
+    setState({ ...state, loading: true })
+    authorService.getAuthorById(props.eId).then(res => {
       setAuthor(res.data)
-      setState({...state,loading:false})
+      setState({ ...state, loading: false })
     },
-    (error)=>{
-      console.log('error',error)
+    error => {
+      toast.success('Failed to load author details!')
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.eId]);
-
 
   function validationSchema() {
     return Yup.object().shape({
@@ -37,100 +40,93 @@ export default function EditAuthor(props:{eId:string, editStatus:()=>void} ){
     })
   }
 
-  function handleSubmit (formValue:{firstName:string, lastName:string, biography:string,_id:string}){
-    authorService.updateAuthor(formValue).then(res=>{
-      setState({...state, successful:true, message: 'Updater Author'})
-      props.editStatus()
-    },
-    (error)=>{
-      console.log(error)
-    }
-    )
-  }
-  return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <Formik
-          enableReinitialize
-          initialValues={author}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          <Form>
-            {!state.successful && (
-              <div>
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <Field
-                    name="firstName"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="firstName"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <Field
-                    name="lastName"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="lastName"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="biography">Biography</label>
-                  <Field
-                    name="biography"
-                    type="text"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="biography"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                
-              </div>
-            )}
+  const handleSubmit = (
+    values: FormValue,
+    { setSubmitting, resetForm }: FormikHelpers<FormValue>
+  ) => {
+    setSubmitting(true);
 
-            {!state.successful && (
+    authorService.updateAuthor(values)
+      .then(response => {
+        resetForm();
+        toast.success("Succesfully Updated Author's Details!")
+      })
+      .catch(error => {
+        toast.error("Failed to Update: " + error.message)
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
+
+  return (
+    <CONTAINER>
+      <Formik
+        enableReinitialize
+        initialValues={author}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleSubmit, isSubmitting }) => (
+          <MYFORM onSubmit={handleSubmit}>
+            <div>
               <div className="form-group">
-                <button type="submit" className="btn btn-primary btn-block" disabled={state.loading}>
-                  {state.loading && (
+                <label htmlFor="firstName">First Name</label>
+                <Field
+                  name="firstName"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="firstName"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <Field
+                  name="lastName"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="lastName"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="biography">Biography</label>
+                <Field
+                  name="biography"
+                  type="text"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="biography"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </div>
+
+              <div className="form-group">
+                <BUTTON style={{ marginRight: '4px' }} type="submit" disabled={isSubmitting}>
+                  {isSubmitting && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
-                  <span>Update Author</span>
-                </button>
-              </div>
-            )
-            }         
+                  <span style={{ marginLeft: '4px' }}>Submit</span>
+                </BUTTON>
 
-            {state.message && (
-              <div className="form-group">
-                <div
-                  className={
-                    state.successful
-                      ? 'alert alert-success'
-                      : 'alert alert-danger'
-                  }
-                  role="alert"
-                >
-                  {state.message}
-                </div>
+                <CANCELBUTTON type="button" style={{ marginRight: '4px' }} onClick={props.editStatus}>
+                  <span >Cancel</span>
+                </CANCELBUTTON>
               </div>
-            )}
-          </Form>
-        </Formik>
-      </div>
-    </div>
+            </div>
+          </MYFORM>
+        )}
+      </Formik>
+    </CONTAINER>
+
   )
 }

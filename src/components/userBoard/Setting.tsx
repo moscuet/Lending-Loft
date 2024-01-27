@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState, USER_DATA } from '../../types';
 import { updateUser } from '../../redux/actions';
-import { BUTTON, FormRow, CONTAINER, MYFORM } from '../SignupForm'; // Import common styled components
+import { CONTAINER, MYFORM, FormRow, BUTTON } from '../ui/StyledComponenet';
 
 const Setting: React.FC<{ onSaved: () => void }> = ({ onSaved }) => {
   const user: USER_DATA = useSelector((state: AppState) => state.auth.user);

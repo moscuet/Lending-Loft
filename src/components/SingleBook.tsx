@@ -8,9 +8,9 @@ import { addProduct } from '../redux/actions'
 
 import { AppState } from '../types'
 import { useSelector } from 'react-redux'
-import { BUTTON } from './SignupForm'
 
 import styled from 'styled-components';
+import { BUTTON } from './ui/StyledComponenet'
 
 const CONTAINER = styled.div`
   margin-top: 40px;
@@ -85,7 +85,7 @@ const SingleBook = () => {
             </div>
           </CONTAINER >
 
-          <Card.Text style={{ padding: '0 20px' }}>
+          <Card.Text >
             {book.description}
           </Card.Text>
           {!window.location.pathname.includes('admin') && (
