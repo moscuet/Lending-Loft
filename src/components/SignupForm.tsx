@@ -8,8 +8,7 @@ import { Navigate } from "react-router-dom";
 import AuthService from '../services/authService'
 import { toast } from 'react-toastify'
 import Loader from 'react-ts-loaders'
-import { LoaderContainer } from './BooksComp'
-import { BUTTON, CONTAINER, FormRow, MYFORM } from './ui/StyledComponenet'
+import { BUTTON, CONTAINER, FormRow, MYFORM ,LoaderContainer} from './ui/StyledComponenet'
 
 interface RouterProps {
   history: {

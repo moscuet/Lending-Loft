@@ -5,6 +5,7 @@ import { Product } from '../types'
 import { Card, Button } from 'react-bootstrap'
 import { addProduct } from '../redux/actions'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'
 
 const ImageWrapper = styled.div`
   width: 100%;
@@ -63,12 +64,12 @@ const BookCardWrapper = styled.div`
   margin-bottom: 20px; 
 `;
 
-export default function BookCard(book: (Product & {isIncart?:boolean})): ReactElement {
- 
-  const { title, img, authors,genres } = book
+export default function BookCard(book: (Product & { isIncart?: boolean })): ReactElement {
+
+  const { title, img, authors, genres } = book
   const dispatch = useDispatch()
-  const [cartState, setCartstate ] = useState(book.isIncart)
-  const onclick = () =>{
+  const [cartState, setCartstate] = useState(book.isIncart)
+  const onclick = () => {
     dispatch(addProduct(book))
     setCartstate(!cartState)
   }
@@ -76,11 +77,11 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
   return (
     <BookCardWrapper>
       <StyledCard>
-        <Card.Link href={`books/${book._id}`}>
+        <Link to={`/books/${book._id}`}>
           <ImageWrapper>
             <StyledCardImage variant="top" src={`${img}`} />
           </ImageWrapper>
-        </Card.Link>
+        </Link>
         <Card.Body>
           <Card.Title>{`${title}`}</Card.Title>
           <Card.Text> <p> Genres: <span style={{ fontSize: '14px' }}> {genres.join(', ')} </span> </p> </Card.Text>          <Card.Text>
@@ -93,5 +94,5 @@ export default function BookCard(book: (Product & {isIncart?:boolean})): ReactEl
       </StyledCard>
     </BookCardWrapper>
   )
-  
+
 }

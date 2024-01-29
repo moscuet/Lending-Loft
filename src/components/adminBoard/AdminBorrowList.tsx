@@ -7,30 +7,31 @@ import { Borrow } from '../../types'
 import Select from './Select'
 import { Route, Routes as Switch } from 'react-router-dom'
 
-import {useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import SingleBook from '../SingleBook'
+import { LoaderContainer } from '../ui/StyledComponenet'
+import Loader from 'react-ts-loaders'
+import NotFound from '../ui/NotFound'
 
 export default function AdminBorrowList() {
   const [borrowList, setBorrowList] = useState<Borrow[]>([])
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
 
   const navigate = useNavigate()
 
   useEffect(() => {
+    setLoading(true)
     userService.getAllBorrowList().then(
       (response) => {
-        console.log('borrow list from admin', response.data)
         setBorrowList(response.data)
       },
       (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString()
-        console.log(_content)
+        setMessage(error.message);
       }
-    )
+    ).finally(() => {
+      setLoading(false)
+    });
   }, [])
 
   const returnOtion = [
@@ -46,7 +47,6 @@ export default function AdminBorrowList() {
     )
     if (consent) {
       const books = borrow.bookId.map((b) => b._id)
-      console.log('book id from admin$$$$$$$', books)
       const newBorrow = {
         ...borrow,
         bookId: books,
@@ -85,65 +85,79 @@ export default function AdminBorrowList() {
   }
 
   return (
-    <div className="admin__borrowList">
-      <ol>
-        <li>
-          <div> Book Name</div>
-          <div> image</div>
-          <div> borrow Date</div>
-          <div>Due date</div>
-          <div>status</div>
-          <div>Action</div>
-          <div>Extend deadline</div>
-        </li>
-        {borrowList.map((borrow: Borrow) => {
-          const { borrowDate, returnDate, isReturned, bookId, _id } = borrow
-          const getFormattedDate = (date: Date) => {
-            let d = new Date(date)
-            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+    <>
+      {
+        loading && <LoaderContainer>
+          <Loader type="spinner" color="var(--loader-color)" />
+        </LoaderContainer>
+      }
+
+      {!loading && <div className="admin__borrowList">
+        <ol>
+          <li>
+            <div> Book Name</div>
+            <div> image</div>
+            <div> borrow Date</div>
+            <div>Due date</div>
+            <div>status</div>
+            <div>Action</div>
+            <div>Extend deadline</div>
+          </li>
+          {borrowList.length > 0 ? borrowList.map((borrow: Borrow) => {
+            const { borrowDate, returnDate, isReturned, bookId, _id } = borrow
+            const getFormattedDate = (date: Date) => {
+              let d = new Date(date)
+              return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+            }
+            const isOverDue =
+              new Date().getTime() > new Date(returnDate).getTime()
+            return (
+              <li key={`key-${_id}`}>
+                <div
+                  onClick={() => handleClick(borrow._id ? bookId[0]._id : '')}
+                  onKeyPress={() => handleClick(borrow._id ? borrow._id : '')}
+                  role="button"
+                  tabIndex={0}
+                >
+                  {bookId[0].title}
+                </div>
+                <div>
+                  <img src={`${bookId[0].img}`} alt="book pic" />{' '}
+                </div>
+                <div>{getFormattedDate(borrowDate)}</div>
+                <div
+                  className={!isReturned && isOverDue ? 'red-text' : 'green-text'}
+                >
+                  {getFormattedDate(returnDate)}
+                </div>
+                <div>{isReturned ? 'Returned' : 'Not Returned'}</div>
+                <button
+                  className={!isReturned ? 'nonreturn' : 'return'}
+                  onClick={() => handleReturn(borrow)}
+                >
+                  {isReturned ? 'Not Returned' : 'Returned'}
+                </button>
+                <Select
+                  handleReturnDate={handleReturnDate}
+                  id={borrow._id}
+                  opts={returnOtion}
+                />
+              </li>
+            )
+          })
+
+            :
+            message ? <NotFound message={'No book borrowed yet!'} />
+              :
+              <NotFound message={message} />
           }
-          const isOverDue =
-            new Date().getTime() > new Date(returnDate).getTime()
-          return (
-            <li key={`key-${_id}`}>
-              <div
-                onClick={() => handleClick(borrow._id ? bookId[0]._id : '')}
-                onKeyPress={() => handleClick(borrow._id ? borrow._id : '')}
-                role="button"
-                tabIndex={0}
-              >
-                {bookId[0].title}
-              </div>
-              <div>
-                <img src={`${bookId[0].img}`} alt="book pic" />{' '}
-              </div>
-              <div>{getFormattedDate(borrowDate)}</div>
-              <div
-                className={!isReturned && isOverDue ? 'red-text' : 'green-text'}
-              >
-                {getFormattedDate(returnDate)}
-              </div>
-              <div>{isReturned ? 'Returned' : 'Not Returned'}</div>
-              <button
-                className={!isReturned ? 'nonreturn' : 'return'}
-                onClick={() => handleReturn(borrow)}
-              >
-                {isReturned ? 'Not Returned' : 'Returned'}
-              </button>
-              <Select
-                handleReturnDate={handleReturnDate}
-                id={borrow._id}
-                opts={returnOtion}
-              />
-            </li>
-          )
-        })}
-      </ol>
-      <div className="admin__borrowList__book">
-        <Switch>
-          <Route path={'/:id'} element ={<SingleBook />} />
-        </Switch>
-      </div>
-    </div>
+        </ol>
+        <div className="admin__borrowList__book">
+          <Switch>
+            <Route path={'/:id'} element={<SingleBook />} />
+          </Switch>
+        </div>
+      </div>}
+    </>
   )
 }

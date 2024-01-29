@@ -58,7 +58,7 @@ export type RemoveProductAction = {
   }
 }
 
-export type  EmptyCartAction = {
+export type EmptyCartAction = {
   type: typeof EMPTY_CART
 }
 
@@ -117,13 +117,13 @@ export type USER_DATA = {
 
 export type AUTH_ACTION = {
   type:
-    | typeof REGISTER_SUCCESS
-    | typeof REGISTER_FAIL
-    | typeof LOGIN_SUCCESS
-    | typeof LOGIN_FAIL
-    | typeof LOGOUT
-    | typeof USERUPDATE_FAIL
-    | typeof USERUPDATE_SUCCESS
+  | typeof REGISTER_SUCCESS
+  | typeof REGISTER_FAIL
+  | typeof LOGIN_SUCCESS
+  | typeof LOGIN_FAIL
+  | typeof LOGOUT
+  | typeof USERUPDATE_FAIL
+  | typeof USERUPDATE_SUCCESS
   payload: LOGIN_DATA | USER_DATA
 }
 
@@ -159,5 +159,35 @@ export type Borrow = {
   borrowDate: Date
   returnDate: Date
   isReturned: Boolean
-  _id:string
+  _id: string
+}
+
+
+
+export type BookFormValues = {
+  ISBN: string
+  title: string
+  publisherName: string
+  author: string
+  publishedYear: number
+  genres: string
+  description: string
+  edition: string
+  pageCount: number
+  img: string
+}
+
+
+export type BookFormEditValues =  {
+  ISBN: string
+  title: string
+  publisherName: string
+  authors: string[]
+  publishedYear: number
+  genres: string[]
+  description: string
+  edition: string
+  pageCount: number
+  img: string
+  _id: string;
 }

@@ -50,6 +50,8 @@ const AddAuthor = (): ReactElement => {
 
   return (
     <CONTAINER>
+      <h3> Add Author</h3>
+
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

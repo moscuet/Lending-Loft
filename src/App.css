@@ -21,6 +21,8 @@
   --link-color: #5E9C76;
   --accent-color: #99BC85;
   --alert-color: #E57373;
+  --error-message-bg-color: rgba(225, 240, 218, 0.95);
+  --error-message-text-color: #4D6049;
   --highlight-bg-color: #BFD8AF;
   --hover-bg-color: #99BC85;
   --card-bg-color: rgba(225, 240, 218, 0.95);

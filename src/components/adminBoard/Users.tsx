@@ -4,29 +4,33 @@ import userService from '../../services/userService'
 import { USER_DATA } from '../../types'
 
 import './adminboard.css'
+import Loader from 'react-ts-loaders'
+import { LoaderContainer } from '../ui/StyledComponenet'
+import NoDataFound from '../ui/NoDataFound'
+import NotFound from '../ui/NotFound'
 
 
 export default function Users() {
 
   const [users, setUsers] = useState<USER_DATA[]>([])
   const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  console.log(message)
+
   useEffect(() => {
+    setLoading(true)
     userService.getCustomerBoard().then(
       (response) => {
         setUsers(response.data);
       },
       (error) => {
-        const _Users =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-
-        setMessage(_Users);
+        setMessage(error.message);
       }
-    );
+    ).finally(() => {
+      setLoading(false)
+    });
   }, []);
+
   const handleDeleteUser = (id: string) => {
     userService.deleteUser(id).then(
       res => {
@@ -34,30 +38,47 @@ export default function Users() {
         setUsers(updatUsers)
       }
     )
-
   }
-  return (
-    <div  className='admin__usersList'>
-      <ol >
-        <li>
-          <div> Name</div>
-          <div> Roles</div>
-          <div>Action</div>
-        </li>
-        {users.map(user => (
-          <li key={user._id}>
-            <div> {`${user.firstName} ${user.lastName}`}</div>
-            <div> {`${user.roles} `}</div>
-            <div>
-              <button onClick={() => handleDeleteUser(user._id)} disabled={user.roles === 'admin' || user.firstName==='Test'}>
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ol>
 
-    </div>
+  return (
+    <>
+      {
+        loading && <LoaderContainer>
+          <Loader type="spinner" color="var(--loader-color)" />
+        </LoaderContainer>
+      }
+
+      {!loading && <div className='admin__usersList'>
+        <ol >
+          <li>
+            <div> Name</div>
+            <div> Roles</div>
+            <div>Action</div>
+          </li>
+          {users.length > 0 ? users.map(user => (
+            <li key={user._id}>
+              <div> {`${user.firstName} ${user.lastName}`}</div>
+              <div> {`${user.roles} `}</div>
+              <div>
+                <button onClick={() => handleDeleteUser(user._id)} disabled={user.roles === 'admin' || user.firstName === 'Test'}>
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))
+            :
+            message ? <NotFound message={message} />
+              :
+              <NoDataFound type={'user'} />
+          }
+
+
+        </ol>
+
+      </div>}
+
+
+    </>
   )
 }
 

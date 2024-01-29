@@ -3,44 +3,15 @@ import { Formik, Field, ErrorMessage, FormikHelpers } from 'formik'
 import * as Yup from 'yup'
 
 import productService from '../../services/productService'
-import { Author } from '../../types'
+import { Author, BookFormValues } from '../../types'
 import authorService from '../../services/authorService'
 import { toast } from 'react-toastify'
 import { BUTTON, CONTAINER, FormRow, MYFORM } from '../ui/StyledComponenet'
-
-const commonGenres = [
-  "Action & Adventure","Comedy", "Drama", "Crime & Mystery","Fiction", "Romance", "Others"
-];
-
-type FormValues = {
-  ISBN: string
-  title: string
-  publisherName: string
-  author: string
-  publishedYear: number
-  genres: string
-  description: string
-  edition: string
-  pageCount: number
-  img: string
-}
+import { bookInitial, commonGenres } from '../../consts'
 
 const AddBook = (): ReactElement => {
 
-  const initialValues = {
-    ISBN: '',
-    title: '',
-    publisherName: '',
-    author: '',
-    publishedYear: 0,
-    genres: '',
-    description: '',
-    edition: '',
-    pageCount: 0,
-    img: ''
-  }
-
-  const [authors, setAuthors] = useState<Author[]>([]); 
+  const [authors, setAuthors] = useState<Author[]>([]);
 
   useEffect(() => {
     authorService.getAllAuthor()
@@ -78,11 +49,9 @@ const AddBook = (): ReactElement => {
     })
   }
 
-
-
   const handleAddBook = (
-    formValue: FormValues,
-    { setSubmitting, resetForm }: FormikHelpers<FormValues>
+    formValue: BookFormValues,
+    { setSubmitting, resetForm }: FormikHelpers<BookFormValues>
   ) => {
     setSubmitting(true);
     const finalFormValue = {
@@ -106,9 +75,9 @@ const AddBook = (): ReactElement => {
 
   return (
     <CONTAINER>
-      <h2>Add Book</h2>
+      <h3>Add Book</h3>
       <Formik
-        initialValues={initialValues}
+        initialValues={bookInitial}
         validationSchema={validationSchema}
         onSubmit={handleAddBook}
       >

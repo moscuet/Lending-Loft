@@ -1,10 +1,10 @@
 import { ErrorMessage, Field, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup'
-import React, { useEffect, useState } from 'react';
-import authorService from '../services/authorService';
-import { Author } from '../types';
+import { useEffect, useState } from 'react';
+import authorService from '../../services/authorService';
+import { Author } from '../../types';
 import { toast } from 'react-toastify';
-import { BUTTON, CANCELBUTTON, CONTAINER, MYFORM } from './ui/StyledComponenet'
+import { BUTTON, CANCELBUTTON, CONTAINER, MYFORM } from '../ui/StyledComponenet'
 
 
 type FormValue = { firstName: string, lastName: string, biography: string, _id: string }
@@ -56,6 +56,7 @@ export default function EditAuthor(props: { eId: string, editStatus: () => void 
       })
       .finally(() => {
         setSubmitting(false);
+        props.editStatus()
       });
   };
 

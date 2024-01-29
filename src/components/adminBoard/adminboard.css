@@ -63,7 +63,7 @@
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 3fr;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 
 @media screen and (max-width: 520px) {
@@ -102,6 +102,7 @@
         height: 64px;
     }
 }
+
 @media screen and (max-width: 520px) {
     .book__img {
         width: 50px;
@@ -153,12 +154,14 @@
     margin-top: 2px;
     color: var(--button-primary-text-color);
     background: var(--button-primary-bg-color);
+
     &:hover {
         background: var(--link-hover-color);
     }
 }
 
 @media (max-width: 720px) {
+
     .admin__authorsList ol li .editButton,
     .admin__authorsList ol li .deleteButton,
     .admin__booksList ol li .editButton,
@@ -168,11 +171,12 @@
 }
 
 @media (max-width: 520px) {
+
     .admin__authorsList ol li .editButton,
     .admin__authorsList ol li .deleteButton,
     .admin__booksList ol li .editButton,
     .admin__booksList ol li .deleteButton {
-        width:100%;
+        width: 100%;
         max-width: 50px;
         font-size: 14px;
         height: 30px;

@@ -3,9 +3,9 @@ type Book ={
   ISBN: string
   title: string
   publisherName: string
-  author: string[]
+  authors: string
   publishedYear: number
-  genres: string[]
+  genres: string
   description: string
   edition: string
   pageCount: number

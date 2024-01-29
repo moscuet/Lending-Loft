@@ -18,7 +18,7 @@ const CONTAINER = styled.div`
   @media(min-width: 786px) {
     width: 60%;
   }
-  h2 {
+  h3 {
     text-align: center;
     color: var(--form-title-text-color);
     padding-top: .5em;
@@ -144,4 +144,12 @@ const FormRow = styled.div`
   }
 `;
 
-export { CONTAINER ,MYFORM, FormRow, BUTTON, CANCELBUTTON }
+const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 200px);
+`;
+
+
+export { CONTAINER, MYFORM, FormRow, BUTTON, CANCELBUTTON, LoaderContainer }

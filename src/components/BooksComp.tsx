@@ -9,13 +9,9 @@ import BookCard from '../components/BookCard'
 import BookSearch from './searchBar/BookSearch'
 import Loader from 'react-ts-loaders'
 import styled from 'styled-components';
+import { LoaderContainer } from './ui/StyledComponenet'
+import NotFound from './ui/NotFound'
 
-export const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 200px);
-`;
 
 
 const BookListItem = styled.li`
@@ -43,9 +39,7 @@ const BooksComp = () => {
   const arrayOfPath = window.location.pathname.split("/")
 
   const handleSearch: Handleseacrh = (searchword) => {
-    console.log('search word $$$$$$', searchword, typeof (searchword))
     const books = content.filter(book => {
-      console.log(book.authors.map(author => author.firstName + ' ' + author.lastName))
       return book.title.toLowerCase().includes(searchword.toLowerCase())
         || book.authors.map(author => (author.firstName + ' ' + author.lastName)).toString().toLowerCase().includes(searchword.toLowerCase())
         || book.genres.toString().toLowerCase().includes(searchword.toLowerCase())
@@ -85,8 +79,7 @@ const BooksComp = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log('content', content)
-  console.log('message', message)
+
   return (
     <>
       {
@@ -95,11 +88,7 @@ const BooksComp = () => {
         </LoaderContainer>
       }
 
-      {!loadingSuccess && (
-        <div style={{ textAlign: 'center', margin: '20px' }}>
-          Server Error: {message}
-        </div>
-      )}
+      {!loadingSuccess && <NotFound message={message} />}
 
       {loadingSuccess && (
         <div style={{ width: '100%' }}>
