@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from "react"
 
 const NotFound = ({ message }: { message: string }): ReactElement => {
   return (
@@ -15,8 +15,3 @@ const NotFound = ({ message }: { message: string }): ReactElement => {
   )
 }
 export default NotFound
-
-
-
-
-

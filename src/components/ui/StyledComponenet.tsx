@@ -105,6 +105,27 @@ const BUTTON = styled.button`
   margin-right: 1em;
 `;
 
+const SECONDARYBUTTON = styled.button`
+  background: var(--accent-color);
+  color: var(--button-primary-text-color);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+
+  &:hover {
+    background: var(--link-hover-color);
+  }
+
+  &:active {
+    background: var(--button-primary-bg-color);
+  }
+
+  margin-right: 1em;
+`;
+
+
 const CANCELBUTTON = styled.button`
   background: var(--button-secondary-bg-color);
   color: var(--button-secondary-text-color);
@@ -152,4 +173,4 @@ const LoaderContainer = styled.div`
 `;
 
 
-export { CONTAINER, MYFORM, FormRow, BUTTON, CANCELBUTTON, LoaderContainer }
+export { CONTAINER, MYFORM, FormRow, BUTTON, CANCELBUTTON, LoaderContainer,SECONDARYBUTTON }

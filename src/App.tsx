@@ -19,6 +19,7 @@ import AdminRoute from './components/Routing/AdminRoute'
 import UserRoute from './components/Routing/UserRoute'
 import ContactForm from './components/contactForm/ContactForm'
 import ToastNotification from './components/ToastNotification'
+import Footer from './components/Footer'
 
 const App: React.FC = () => {
   const history = createBrowserHistory()
@@ -33,8 +34,8 @@ const App: React.FC = () => {
     <Fragment>
       <NavBar />
       <ToastNotification />
-      <div  className='main-layout'>
-        <div  className="main-layout_wrapper">
+      <div className='main-layout'>
+        <div className="main-layout_wrapper">
           <Switch>
             <Route path='/admin/*'
               element={
@@ -63,9 +64,8 @@ const App: React.FC = () => {
 
         </div>
 
-
       </div>
-
+      <Footer />
     </Fragment>
   )
 }

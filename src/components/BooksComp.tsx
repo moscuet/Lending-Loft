@@ -59,10 +59,13 @@ const BooksComp = () => {
             return prod
           }
         )
+        console.log('äupdated product',updatedProduct)
         if (arrayOfPath.length === 4) {
-          const catagorisedProd = updatedProduct.filter(prod => prod.genres.toString().includes(arrayOfPath[3]))
+          const catagorisedProd = updatedProduct.filter(prod => prod.genres.toString().toLowerCase().includes(arrayOfPath[3].toLowerCase()))
           updatedProduct = catagorisedProd
         }
+        console.log('äupdated product2',updatedProduct)
+
         setContent(updatedProduct)
         setUpdatedContent(updatedProduct)
       },
@@ -72,7 +75,6 @@ const BooksComp = () => {
         const _content =
           error.message || (error.response && error.response.data) ||
           error.toString()
-        console.log('####', _content)
         setMessage(_content)
       }
     )
