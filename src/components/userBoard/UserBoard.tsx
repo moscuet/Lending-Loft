@@ -3,6 +3,8 @@ import UserBorrowList from './UserBorrowList'
 import Setting from './Setting'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
+import { Outlet } from 'react-router'
+import { useLocation } from 'react-router-dom';
 
 const TabButton = styled.button`
   color: var(--navbar-text-color);
@@ -37,36 +39,44 @@ const TabButton = styled.button`
 
 const UserBoard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('borrows');
-
+  const location = useLocation()
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
     toast.success("User Settings Updated Succesfully!");
   };
 
   return (
-    <div className="userboard-container">
-      <div><h2 style={{ textAlign: 'center' }}>User Board</h2></div>
-      <div className="userboard-container_nav">
-        <TabButton
-          onClick={() => setActiveTab('setting')}
-          className={activeTab === 'setting' ? 'active-tab' : ''}
-        >
-          Setting
-        </TabButton>
-        <TabButton
-          onClick={() => setActiveTab('borrows')}
-          className={activeTab === 'borrows' ? 'active-tab' : ''}
-        >
-          Borrowed
-        </TabButton>
-      </div>
-      <div>
-        {activeTab === 'setting' && <Setting onSaved={() => handleTabChange('borrows')} />}
-        {activeTab === 'borrows' && <UserBorrowList />}
-      </div>
-    </div>
+    <>
+      {location.pathname !== '/user/checkout' && (
+        <div className="userboard-container">
+          <div>
+            <h2 style={{ textAlign: 'center' }}>User Board</h2>
+          </div>
+          <div className="userboard-container_nav">
+            <TabButton
+              onClick={() => setActiveTab('setting')}
+              className={activeTab === 'setting' ? 'active-tab' : ''}
+            >
+              Setting
+            </TabButton>
+            <TabButton
+              onClick={() => setActiveTab('borrows')}
+              className={activeTab === 'borrows' ? 'active-tab' : ''}
+            >
+              Borrowed
+            </TabButton>
+          </div>
+          <div>
+            {activeTab === 'setting' && (
+              <Setting onSaved={() => handleTabChange('borrows')} />
+            )}
+            {activeTab === 'borrows' && <UserBorrowList />}
+          </div>
+        </div>
+      )}
+      <Outlet />
+    </>
   );
-}
+};
 
-
-export default UserBoard
+export default UserBoard;

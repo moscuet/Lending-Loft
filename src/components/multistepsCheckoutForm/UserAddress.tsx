@@ -10,7 +10,6 @@ interface ToggleProps {
     email: string
     address: string
     city: string
-    state: string
     zip: string
   }
 }
@@ -38,15 +37,7 @@ const AddressDetails = (props: ToggleProps): ReactElement => {
           className="alert alert-danger"
         />
       </div>
-      <div className="form-group">
-        <label htmlFor="state">state</label>
-        <Field name="state" type="text" className="form-control" />
-        <ErrorMessage
-          name="state"
-          component="div"
-          className="alert alert-danger"
-        />
-      </div>
+
       <div className="form-group">
         <label htmlFor="zip">zip</label>
         <Field name="zip" type="text" className="form-control" />

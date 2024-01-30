@@ -7,12 +7,19 @@ import authService from "../../services/authService";
 import EventBus from "../../common/EventBus";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useSelector } from 'react-redux';
+import { AppState } from '../../types';
+import '../../styles/cart.css'
 export default function NavBar(): ReactElement {
   const history = createBrowserHistory()
 
   const [showAdminBoard, setShowAdminBoard] = useState<boolean>(false);
   const [showUserBoard, setShowUserBoard] = useState<boolean>(false);
+
+
+  const cartItems = useSelector((state: AppState) => state.order.inCart)
+  const cartCount = cartItems.length;
+
 
   const logOut = () => {
     authService.logout();
@@ -86,7 +93,16 @@ export default function NavBar(): ReactElement {
           }
         </Nav>
       </Navbar.Collapse>
-      <Nav.Link href="/cart">Cart</Nav.Link>
+
+
+      <Nav.Link href="/cart">
+        <div className="cart-icon-container">
+          <img src={'/resources/cartIcon.svg'} alt="Cart" className="cart-icon" />
+          {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+        </div>
+      </Nav.Link>
+
+
     </Navbar>
   )
 }

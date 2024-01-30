@@ -7,10 +7,12 @@ import UserAddress from "./UserAddress";
 import Confirmation from "./Confirmation";
 import SuccedCheckout from './SuccedCheckout'
 
-import { Product } from '../../types';
+import { AppState } from '../../types';
+import { useSelector } from 'react-redux';
 
-const MultiStepForm =(props:{inCart:Product[]})=> {
-  console.log('incart from multistepform',props.inCart[0])
+const MultiStepsCheckout =()=> {
+  const cartItems = useSelector((state: AppState) => state.order.inCart)
+
   const [data, setData] = useState({
     step: 1,
     firstName: '',
@@ -18,7 +20,6 @@ const MultiStepForm =(props:{inCart:Product[]})=> {
     email: '',
     address: '',
     city: '',
-    state: '',
     zip:'',
   })
 
@@ -39,8 +40,8 @@ const MultiStepForm =(props:{inCart:Product[]})=> {
     })
   }
 
-  const handleSubmit = (formValue:{firstName:string, lastName:string, email:string, address:string, city:string, state:string, zip:string }) =>{
-    const {firstName, lastName, email, address,city, state, zip} = formValue
+  const handleSubmit = (formValue:{firstName:string, lastName:string, email:string, address:string, city:string, zip:string }) =>{
+    const {firstName, lastName, email, address,city, zip} = formValue
     const { step } = data
     setData({
       step : step + 1,
@@ -49,7 +50,6 @@ const MultiStepForm =(props:{inCart:Product[]})=> {
       email, 
       address,
       city, 
-      state, 
       zip     
     })
   }
@@ -61,8 +61,8 @@ const MultiStepForm =(props:{inCart:Product[]})=> {
       step : step + 1
     })
   }
-  const { step, firstName, lastName, email, address, city, state, zip } = data;
-  const inputValues = { firstName, lastName, email, address, city, state, zip };
+  const { step, firstName, lastName, email, address, city, zip } = data;
+  const inputValues = { firstName, lastName, email, address, city, zip };
  
   return <div className="col-md-12 checkout-wrapper">
     <div className="card card-container">
@@ -92,7 +92,7 @@ const MultiStepForm =(props:{inCart:Product[]})=> {
               />
             case 4:
               return <SuccedCheckout
-                inCart = {props.inCart}
+                inCart = {cartItems}
               />
             }
           })()}
@@ -104,4 +104,4 @@ const MultiStepForm =(props:{inCart:Product[]})=> {
     
 }
 
-export default MultiStepForm;
+export default MultiStepsCheckout;

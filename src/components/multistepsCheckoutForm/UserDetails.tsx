@@ -1,14 +1,21 @@
-import React , {ReactElement } from 'react';
-import {  Field, ErrorMessage } from 'formik'
+import React, { ReactElement } from 'react';
+import { Field, ErrorMessage } from 'formik'
 import { Button, Container } from 'react-bootstrap'
+import { useSelector } from 'react-redux';
+import { AppState, USER_DATA } from '../../types';
 
 interface ToggleProps {
-    nextStep: () => void
-    inputValues:{firstName:string, lastName:string, email:string, address:string, city:string, state:string, zip:string }
+  nextStep: () => void
+  inputValues: { firstName: string, lastName: string, email: string, address: string, city: string, zip: string }
 }
 
-const UserDetails =(props: ToggleProps):ReactElement =>{
-  console.log(props)
+
+const UserDetails = (props: ToggleProps): ReactElement => {
+
+
+  const user: USER_DATA = useSelector((state: AppState) => state.auth.user);
+
+  console.log(user)
   return (
 
     <Container>
@@ -19,6 +26,7 @@ const UserDetails =(props: ToggleProps):ReactElement =>{
           name="firstName"
           type="text"
           className="form-control"
+          value={user.firstName}
         />
         <ErrorMessage
           name="firstName"
@@ -33,6 +41,7 @@ const UserDetails =(props: ToggleProps):ReactElement =>{
           name="lastName"
           type="text"
           className="form-control"
+          value={ user.lastName}
         />
         <ErrorMessage
           name="lastName"
@@ -47,6 +56,8 @@ const UserDetails =(props: ToggleProps):ReactElement =>{
           name="email"
           type="text"
           className="form-control"
+          value={ user.useremail}
+
         />
         <ErrorMessage
           name="email"
@@ -56,10 +67,10 @@ const UserDetails =(props: ToggleProps):ReactElement =>{
       </div>
       <div className="form-group">
         <Button variant="primary" onClick={props.nextStep}>
-                Next
+          Next
         </Button>
       </div>
-             
+
     </Container>
 
   )

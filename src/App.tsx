@@ -20,6 +20,7 @@ import UserRoute from './components/Routing/UserRoute'
 import ContactForm from './components/contactForm/ContactForm'
 import ToastNotification from './components/ToastNotification'
 import Footer from './components/Footer'
+import MultiStepsCheckout from './components/multistepsCheckoutForm/MultiStepsCheckout'
 
 const App: React.FC = () => {
   const history = createBrowserHistory()
@@ -48,10 +49,14 @@ const App: React.FC = () => {
             <Route path='/user/*'
               element={
                 <UserRoute >
-                  <UserBoard />
+                  <UserBoard>
+                    <Route path="/user/checkout" element={<MultiStepsCheckout />} />
+                  </UserBoard>
                 </UserRoute>
               }
             />
+            <Route path='/user/checkout' element={<UserRoute><MultiStepsCheckout /></UserRoute>} /> {/* Protected within UserRoute */}
+
             <Route path='/contact-us' element={<ContactForm />} />
             <Route path='/books/catagory/*' element={<Home />} />
             <Route path='/signup' element={<Signup history={history} />} />

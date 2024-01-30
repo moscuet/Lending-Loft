@@ -5,12 +5,12 @@ import { Button, Container } from 'react-bootstrap';
 interface CheckoutProps {
     nextStep: () => void
     prevStep: () => void
-    inputValues:{firstName:string, lastName:string, email:string, address:string, city:string, state:string, zip:string }
+    inputValues:{firstName:string, lastName:string, email:string, address:string, city:string,  zip:string }
 }
 
 const Confirmation = (props: CheckoutProps):ReactElement =>{
 
-  const {inputValues: {  lastName, email, address, city, state, zip }} = props;
+  const {inputValues: {  lastName, email, address, city, zip }} = props;
 
 
   return(
@@ -22,7 +22,6 @@ const Confirmation = (props: CheckoutProps):ReactElement =>{
       <p>Email: {email}</p>
       <p>Adress: {address}</p>
       <p>City: {city}</p>
-      <p>State: {state}</p>
       <p>Zip: {zip}</p>
       <Button variant="secondary" onClick={props.prevStep}>Back</Button>{' '}
       <Button variant="primary" onClick={props.nextStep} >Confirm</Button>
