@@ -1,4 +1,9 @@
-.checkout-wrapper {min-height: calc(100vh - 340px);}
+.checkout-wrapper {
+  min-height: calc(100vh - 340px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .checkout-wrapper button{
     width: 120px;
@@ -78,10 +83,16 @@
   justify-content: center;
   margin: 40px;
   margin-top: 50px;
-  width:'100%';
+  width:100%;
   max-width: 640px;
   justify-content: space-between;
 }
+
+.stepper-form-container {
+width: 100%;
+max-width: 1080px;
+}
+
 
 .step {
   display: flex;

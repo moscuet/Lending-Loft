@@ -108,15 +108,18 @@ const MultiStepsCheckout = () => {
   return (
     <div className="col-md-12 checkout-wrapper">
 
+
       <div className="stepper-container">
         {stepperItems.map((item, index) => (
           <div key={index} className={`step ${step > index ? 'active' : ''}`}>
             <item.icon fill={step > index ? 'green' : ''} />
+            <span className="step-label">{item.label}</span>
           </div>
         ))}
       </div>
 
-      <div >
+
+      <div className= 'stepper-form-container'>
         <Formik
           initialValues={data}
           validationSchema={validationSchema}
