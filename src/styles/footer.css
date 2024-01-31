@@ -8,7 +8,7 @@
   .footer .footer-content {
     display: flex;
     justify-content: space-around;
-    align-items: start;
+    align-items: flex-start;
     padding: 20px;
   }
   
