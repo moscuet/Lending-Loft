@@ -1,19 +1,23 @@
 import React, { ReactElement } from 'react';
-import { Field, ErrorMessage } from 'formik'
+import { Field, ErrorMessage, useFormikContext } from 'formik'
 import { Button, Container } from 'react-bootstrap'
 import { FormRow } from '../ui/StyledComponenet';
+import { FormValue } from './MultiStepsCheckout';
+import { useNavigate } from 'react-router-dom';
+import '../../styles/checkoutUserDetails.css'
 
 interface ToggleProps {
   nextStep: () => void
-  inputValues: { firstName: string, lastName: string, email: string, phone: string; address: string, city: string, zip: string }
+  inputValues: FormValue
 }
 
 
 const UserDetails = (props: ToggleProps): ReactElement => {
-
+  const navigate = useNavigate();
+  const { isValid, dirty } = useFormikContext<FormValue>();
 
   return (
-    <Container>
+    <Container className='checkout__user-details'>
       <h5>Your Details</h5>
 
       <FormRow>
@@ -123,12 +127,17 @@ const UserDetails = (props: ToggleProps): ReactElement => {
         </div>
 
       </FormRow>
-      <Button variant="secondary" >
-        Back
-      </Button>
-      <Button variant="primary" onClick={props.nextStep}>
-        Next
-      </Button>
+      <div className='button-container'>
+        <Button onClick={() => navigate('/cart')} variant="secondary">
+          <img src={'/resources/arrowLeft.svg'} alt="Left Arrow" />
+          Back
+        </Button>
+        <Button variant="primary" onClick={props.nextStep} disabled={!(isValid && dirty)}>
+          Next
+          <img src={'/resources/arrowRight.svg'} alt="Right Arrow" />
+        </Button>
+      </div>
+
     </Container>
   );
 }

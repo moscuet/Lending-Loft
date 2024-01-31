@@ -8,7 +8,7 @@ const NoDataFound = ({ type }: { type: string }): ReactElement => {
       marginTop: '100px',
       fontWeight: 'bold',
       backgroundColor: 'var(--error-message-bg-color)',
-      color: 'var(--error-message-text-color)'
+      color: 'var(--alert-color)'
     }}>
       {`No ${type} found, please add new ${type} `}
     </div>

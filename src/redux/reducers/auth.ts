@@ -33,13 +33,11 @@ export default function (state = initialState, action:AUTH_ACTION):any  {
       isLoggedIn: false,
     };
   case LOGIN_SUCCESS:
-    console.log('login sucess from auth/redcer: data',payload)
     state ={
       ...state,
       isLoggedIn: true,
       user: payload,
     };
-    console.log('login sucess from auth/redcer: state',state)
     return state
 
   case LOGIN_FAIL:

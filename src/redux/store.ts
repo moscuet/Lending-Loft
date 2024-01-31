@@ -10,7 +10,6 @@ import rootSaga from './sagas'
 
 const initialCart:Product[] = JSON.parse(localStorage.getItem('inCart') || '[]') 
 const initialUser:USER_DATA = JSON.parse(localStorage.getItem('user') || '[]') 
-console.log('initialUser',initialUser)
 export const initState: AppState = {
   auth:{
     isLoggedIn: initialUser? true : false,

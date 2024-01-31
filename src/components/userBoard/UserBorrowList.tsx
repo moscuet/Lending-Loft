@@ -71,18 +71,18 @@ export default function UserBorrowList() {
               </div>
               <div>{getFormattedDate(borrowDate)}</div>
               <div
-                className={!isReturned && isOverDue ? 'red-text' : 'green-text'}
+                className={isOverDue ? 'danger-text' : ''}
               >
                 {getFormattedDate(returnDate)}
               </div>
-              <div>{isReturned ? 'Returned' : 'Not Returned'}</div>
+              <div className={!isReturned && isOverDue ? 'danger-text' : !isReturned ? 'warn-text' : ''} >{isReturned ? 'Returned' : 'Not Returned'}</div>
             </li>
           )
         })}
       </ol>
       <div className="admin__borrowList__book">
         <Switch>
-          <Route path={'/:id'} element = {<  SingleBook   />} /> 
+          <Route path={'/:id'} element={<  SingleBook />} />
         </Switch>
       </div>
     </div>

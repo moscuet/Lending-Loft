@@ -1,4 +1,4 @@
-import { useState, ReactElement } from "react";
+import { useState, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from '../types'
 import { NavLink, Navigate } from "react-router-dom";
@@ -15,8 +15,8 @@ interface RouterProps {
 
 
 const Signin = (props: RouterProps): ReactElement => {
-
-  const { isLoggedIn } = useSelector((state: AppState) => state.auth);
+  const dispatch = useDispatch()
+  const { isLoggedIn, user } = useSelector((state: AppState) => state.auth);
 
   const [userState, setUserState] = useState({
     useremail: "",
@@ -26,6 +26,10 @@ const Signin = (props: RouterProps): ReactElement => {
     message: ''
   })
 
+  const initialValues = {
+    useremail: "",
+    password: "",
+  };
 
   function validationSchema() {
     return Yup.object().shape({
@@ -35,8 +39,6 @@ const Signin = (props: RouterProps): ReactElement => {
       password: Yup.string().required("This field is required!"),
     });
   }
-
-  const dispatch = useDispatch()
 
   const handleSignin = async (formValue: { useremail: string; password: string }) => {
     const { useremail, password } = formValue;
@@ -52,9 +54,6 @@ const Signin = (props: RouterProps): ReactElement => {
         loading: false,
         isLoggedIn: true,
       });
-      props.history.push("/");
-      window.location.reload();
-
     } catch (error) {
       console.log('error', error)
       setUserState({
@@ -65,10 +64,14 @@ const Signin = (props: RouterProps): ReactElement => {
     }
   }
 
-  const initialValues = {
-    useremail: "",
-    password: "",
-  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      user.roles === 'admin' && props.history.push("/admin");
+      user.roles === 'user' && props.history.push("/user");
+      user.roles && window.location.reload()
+    }
+  }, [isLoggedIn,user])
+
 
   if (isLoggedIn) {
     <Navigate to="/login" />

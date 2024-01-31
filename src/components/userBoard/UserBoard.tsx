@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserBorrowList from './UserBorrowList'
 import Setting from './Setting'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import { Outlet } from 'react-router'
 import { useLocation } from 'react-router-dom';
+import { LoaderContainer } from '../ui/StyledComponenet'
+import Loader from 'react-ts-loaders'
 
 const TabButton = styled.button`
   color: var(--navbar-text-color);
@@ -38,16 +40,34 @@ const TabButton = styled.button`
 
 
 const UserBoard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('borrows');
   const location = useLocation()
+
+  const [activeTab, setActiveTab] = useState('borrows');
+  const [isLoading, setIsLoading] = useState(true);
+
+
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
     toast.success("User Settings Updated Succesfully!");
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
   return (
-    <>
-      {location.pathname !== '/user/checkout' && (
+    <div >
+      {isLoading && <LoaderContainer>
+        <Loader type="spinner" color="var(--loader-color)" />
+      </LoaderContainer>
+      }
+
+      {!isLoading && location.pathname !== '/user/checkout' && (
         <div className="userboard-container">
           <div>
             <h2 style={{ textAlign: 'center' }}>User Board</h2>
@@ -75,7 +95,7 @@ const UserBoard: React.FC = () => {
         </div>
       )}
       <Outlet />
-    </>
+    </div>
   );
 };
 

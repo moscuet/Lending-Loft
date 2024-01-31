@@ -3,21 +3,20 @@ import { useSelector } from 'react-redux'
 import { AppState } from '../types'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-
 import { removeProduct } from '../redux/actions'
+import { BUTTON } from './ui/StyledComponenet'
 
 import './cart.css'
-import { BUTTON } from './ui/StyledComponenet'
+
 function Cart() {
   const cartItems = useSelector((state: AppState) => state.order.inCart)
   const dispatch = useDispatch()
-  console.log('cartItems', cartItems)
   return (
 
     <div className="cart" >
       <div>
-        <h5 className="cart_title"> Your Shopping basket </h5>
-        {cartItems.length <= 0 && <div>No products in cart</div>}
+        <h5 className="cart_title"> Your Borrowing basket </h5>
+        {cartItems.length <= 0 && <div>No products in the cart</div>}
         {cartItems.length > 0 && <ul style={{ marginBottom: '40px' }}>
           {cartItems.map((p) => (
             <li key={p._id}>
