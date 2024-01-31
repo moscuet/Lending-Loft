@@ -48,6 +48,9 @@ const SingleBook = () => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const isIncart = useSelector((state: AppState) => state.order.inCart).map(p => p._id).includes(id)
+  const cart = useSelector((state: AppState) => state.order.inCart)
+  console.log('äincart', cart, 'id', id,'isIncart',isIncart )
+
   useEffect(() => {
     userService.getSingleBook(id).then(
       (response) => {
@@ -65,6 +68,8 @@ const SingleBook = () => {
   function handleNavigation() {
     navigate('/');
   }
+
+
   return (
     <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center' }}>
       {book._id ? (

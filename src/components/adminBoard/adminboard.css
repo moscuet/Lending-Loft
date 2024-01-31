@@ -45,6 +45,14 @@
     align-items: center;
 }
 
+.admin__borrowList {
+    width: 100%;  
+    overflow-x: auto;
+}
+
+
+
+
 
 .admin__borrowList ol li div:first-child {
     font-weight: bold;
@@ -224,4 +232,66 @@
 .admin__addauthor button {
     margin-top: 10px;
     ;
+}
+
+
+.nonreturn {
+    width: 120px;
+    background: #e24040;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    color: #FFFFFF;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background: red;
+    }
+}
+
+.return {
+    max-width: 120px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    transition: background-color 0.2s;
+    color: var(--button-primary-text-color);
+    background: var(--button-primary-bg-color);
+
+    &:hover {
+        background: var(--link-hover-color);
+    }
+}
+
+
+.select-button {
+    margin-left: 2px;
+    width: 80px;
+    border-radius: 2px;
+    height: 24px;
+    outline: none;
+    border: none;
+    transition: background-color 0.2s;
+    color: var(--button-primary-text-color);
+    background: var(--button-primary-bg-color);
+
+    &:hover {
+        background: var(--link-hover-color);
+    }
+}
+
+
+.select-dropdown {
+    justify-content: center;
+    width: 80px;
+    height: 24px;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--button-primary-bg-color);
+    color: var(--button-primary-text-color);
+    text-align: center;
 }

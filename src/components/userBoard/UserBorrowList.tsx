@@ -61,7 +61,7 @@ export default function UserBorrowList() {
               <div
                 onClick={() => handleClick(borrow._id ? bookId[0]._id : '')}
                 onKeyPress={() => handleClick(borrow._id ? borrow._id : '')}
-                role="button" // role and tabindex to give div functionality of button: typesript fact
+                role="button" 
                 tabIndex={0}
               >
                 {bookId[0].title}{' '}

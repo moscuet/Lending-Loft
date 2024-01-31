@@ -102,6 +102,16 @@ const BUTTON = styled.button`
     background: var(--button-primary-bg-color);
   }
 
+  &:disabled {
+    background: var(--button-disabled-bg-color, #cccccc); 
+    color: var(--button-disabled-text-color, #666666);
+    cursor: not-allowed;
+    opacity: 0.7; 
+    &:hover {
+      background: var(--button-disabled-bg-color, #cccccc); 
+    }
+  }
+
   margin-right: 1em;
   a {
     color: inherit; 
@@ -109,6 +119,7 @@ const BUTTON = styled.button`
     display: inline-block; 
   }
 `;
+
 
 const SECONDARYBUTTON = styled.button`
   background: var(--accent-color);

@@ -1,7 +1,5 @@
-//import { useState } from 'react'
-
 import { useState } from "react"
-
+import '../userBoard/userboard.css'
 
 const Dropdown = (props:{opts:{label:string, value:string}[], id:string, handleReturnDate:(id:string,day:string)=>void }) => {
   const {opts, handleReturnDate ,id}= props
@@ -10,6 +8,7 @@ const Dropdown = (props:{opts:{label:string, value:string}[], id:string, handleR
   return (
     <div>
       <select
+        className="select-dropdown"
         value={selectedoptsion}
         onChange={(e) => setSelectedoptsion(e.target.value)}
       >
@@ -19,7 +18,7 @@ const Dropdown = (props:{opts:{label:string, value:string}[], id:string, handleR
           </option>
         ))}
       </select>
-      <button onClick={()=>handleReturnDate(id,selectedoptsion)}>confirm</button>
+      <button className="select-button" onClick={()=>handleReturnDate(id,selectedoptsion)}>confirm</button>
     </div>
   )
 }

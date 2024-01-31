@@ -121,11 +121,7 @@ display: inline-block;
 
 
 
-.nonreturn {
-    width:120px;
-    padding:0px;
-    background: red;
-}
+
 .return {
     width:120px;
     background: green;
