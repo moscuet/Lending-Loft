@@ -79,5 +79,9 @@
       "npx prettier --write",
       "eslint --fix"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/moscuet/Lending-Loft.git",
+  "author": "moscuet <mos.cuet@gmail.com>",
+  "license": "MIT"
 }

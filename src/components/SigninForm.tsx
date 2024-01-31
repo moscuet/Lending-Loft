@@ -70,7 +70,7 @@ const Signin = (props: RouterProps): ReactElement => {
       user.roles === 'user' && props.history.push("/user");
       user.roles && window.location.reload()
     }
-  }, [isLoggedIn,user])
+  }, [isLoggedIn,user,props.history])
 
 
   if (isLoggedIn) {
