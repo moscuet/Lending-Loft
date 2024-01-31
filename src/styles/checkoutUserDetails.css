@@ -10,15 +10,12 @@
   color: var(--form-title-text-color);
 }
 
-
-
  .button-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 20px; 
 }
-
   .checkout__user-details .btn {
     margin-top: 10px;
     margin-right: 10px;
@@ -71,3 +68,48 @@
     padding: 0;
   }
   
+
+/* --------------------- STEPPER --------------------- */
+
+
+
+.stepper-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px;
+  margin-top: 50px;
+  width:'100%';
+  max-width: 640px;
+  justify-content: space-between;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  transition: transform 0.3s ease;
+}
+
+.step-label {
+  margin-top: 5px;
+}
+
+.step-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.step.active {
+  transform: scale(1.2);
+}
+
+.step.active .step-icon {
+  color: var(--link-hover-color);
+}
+
+.step.active .step-label {
+  font-weight: bold;
+  color: green;
+}

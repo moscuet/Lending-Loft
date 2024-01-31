@@ -10,6 +10,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import borrowService from '../../services/borrowservice'
 import { EmptyCart } from '../../redux/actions';
 import { toast } from 'react-toastify';
+import { ConfirmIcon, InfoIcon, SuccessIcon } from '../icon/Icon';
+
+type StepperItemType = {
+  label: string;
+  icon: ({ fill }: { fill: string }) => JSX.Element;
+};
+
+const stepperItems: StepperItemType[] = [
+  { label: 'Details', icon: InfoIcon },
+  { label: 'Confirm', icon: ConfirmIcon },
+  { label: 'Success', icon: SuccessIcon }
+];
+
+
 
 export type FormValue = { firstName: string, lastName: string, email: string, phone: string; address: string, city: string, zip: string }
 
@@ -49,22 +63,22 @@ const MultiStepsCheckout = () => {
 
   const handleSubmit = (formValue: FormValue) => {
     const { step } = data
-    console.log('formValue',step, formValue)
+    console.log('formValue', step, formValue)
 
-    const user:{_id:string} = JSON.parse(localStorage.getItem("user") || '{}');
-    if(user._id){
-      cartItems.forEach( prod => {
+    const user: { _id: string } = JSON.parse(localStorage.getItem("user") || '{}');
+    if (user._id) {
+      cartItems.forEach(prod => {
         const borrow = {
-          bookId: [prod._id?prod._id:''],
+          bookId: [prod._id ? prod._id : ''],
           customerId: [user._id],
         }
 
-        borrowService.postBorrow(borrow).then( res=>{
-          dispatch (EmptyCart())
+        borrowService.postBorrow(borrow).then(res => {
+          dispatch(EmptyCart())
           setData({ ...formValue, step: step + 1 })
           toast.success('Your borrowing request was successful.')
 
-        }).catch(error=>{
+        }).catch(error => {
           toast.error('Borrow request failed: ' + error.message)
         })
       })
@@ -87,13 +101,21 @@ const MultiStepsCheckout = () => {
     city: Yup.string()
       .required('City is required'),
     zip: Yup.string()
-      .required('Zip is required'),
+      .required('Post code is required'),
   });
-
 
   const { step } = data
   return (
     <div className="col-md-12 checkout-wrapper">
+
+      <div className="stepper-container">
+        {stepperItems.map((item, index) => (
+          <div key={index} className={`step ${step > index ? 'active' : ''}`}>
+            <item.icon fill={step > index ? 'green' : ''} />
+          </div>
+        ))}
+      </div>
+
       <div >
         <Formik
           initialValues={data}
@@ -110,7 +132,7 @@ const MultiStepsCheckout = () => {
                   inputValues={values}
                 />
               )}
-              {step === 3 && <SuccedCheckout/>}
+              {step === 3 && <SuccedCheckout />}
             </Form>
           )}
         </Formik>
