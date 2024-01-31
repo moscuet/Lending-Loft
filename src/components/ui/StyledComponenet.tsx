@@ -103,6 +103,11 @@ const BUTTON = styled.button`
   }
 
   margin-right: 1em;
+  a {
+    color: inherit; 
+    text-decoration: none; 
+    display: inline-block; 
+  }
 `;
 
 const SECONDARYBUTTON = styled.button`

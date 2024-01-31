@@ -1,79 +1,136 @@
 import React, { ReactElement } from 'react';
 import { Field, ErrorMessage } from 'formik'
 import { Button, Container } from 'react-bootstrap'
-import { useSelector } from 'react-redux';
-import { AppState, USER_DATA } from '../../types';
+import { FormRow } from '../ui/StyledComponenet';
 
 interface ToggleProps {
   nextStep: () => void
-  inputValues: { firstName: string, lastName: string, email: string, address: string, city: string, zip: string }
+  inputValues: { firstName: string, lastName: string, email: string, phone: string; address: string, city: string, zip: string }
 }
 
 
 const UserDetails = (props: ToggleProps): ReactElement => {
 
 
-  const user: USER_DATA = useSelector((state: AppState) => state.auth.user);
-
-  console.log(user)
   return (
-
     <Container>
-      <h1>Your Details</h1>
+      <h5>Your Details</h5>
+
+      <FormRow>
+        <div className="form-group">
+          <label htmlFor="firstName">First Name</label>
+          <Field
+            name="firstName"
+            type="text"
+            className="form-control"
+          />
+          <ErrorMessage
+            name="firstName"
+            component="div"
+            className="alert alert-danger"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name</label>
+          <Field
+            name="lastName"
+            type="text"
+            className="form-control"
+          />
+          <ErrorMessage
+            name="lastName"
+            component="div"
+            className="alert alert-danger"
+          />
+        </div>
+      </FormRow>
+
+      <FormRow>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <Field
+            name="email"
+            type="text"
+            className="form-control"
+          />
+          <ErrorMessage
+            name="email"
+            component="div"
+            className="alert alert-danger"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="phoner">Phone number</label>
+          <Field
+            name="phone"
+            type="text"
+            className="form-control"
+          />
+          <ErrorMessage
+            name="phone"
+            component="div"
+            className="alert alert-danger"
+          />
+        </div>
+      </FormRow>
+
+
+      <h5>Delivery Address</h5>
       <div className="form-group">
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="address">Address</label>
         <Field
-          name="firstName"
+          name="address"
           type="text"
           className="form-control"
-          value={user.firstName}
         />
         <ErrorMessage
-          name="firstName"
+          name="address"
           component="div"
           className="alert alert-danger"
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="lastName">Last Name</label>
-        <Field
-          name="lastName"
-          type="text"
-          className="form-control"
-          value={ user.lastName}
-        />
-        <ErrorMessage
-          name="lastName"
-          component="div"
-          className="alert alert-danger"
-        />
-      </div>
 
-      <div className="form-group">
-        <label htmlFor="email">email</label>
-        <Field
-          name="email"
-          type="text"
-          className="form-control"
-          value={ user.useremail}
+      <FormRow>
+        <div className="form-group">
+          <label htmlFor="city">City</label>
+          <Field
+            name="city"
+            type="text"
+            className="form-control"
+          />
+          <ErrorMessage
+            name="city"
+            component="div"
+            className="alert alert-danger"
+          />
+        </div>
 
-        />
-        <ErrorMessage
-          name="email"
-          component="div"
-          className="alert alert-danger"
-        />
-      </div>
-      <div className="form-group">
-        <Button variant="primary" onClick={props.nextStep}>
-          Next
-        </Button>
-      </div>
+        <div className="form-group">
+          <label htmlFor="zip">Zip</label>
+          <Field
+            name="zip"
+            type="text"
+            className="form-control"
+          />
+          <ErrorMessage
+            name="zip"
+            component="div"
+            className="alert alert-danger"
+          />
+        </div>
 
+      </FormRow>
+      <Button variant="secondary" >
+        Back
+      </Button>
+      <Button variant="primary" onClick={props.nextStep}>
+        Next
+      </Button>
     </Container>
-
-  )
+  );
 }
 
 export default UserDetails;

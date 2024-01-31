@@ -1,3 +1,12 @@
+.cart {
+    display: flex;
+    justify-content: center;
+}
+.cart .cart_title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
 .cart ul li {
     max-width:680px;
     display: grid;
@@ -11,4 +20,5 @@
 
 .cart a {
     text-decoration: none;
+    color: var( --text-color);
 }
