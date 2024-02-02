@@ -21,16 +21,19 @@ export default function AdminBorrowList() {
 
   useEffect(() => {
     setLoading(true)
-    userService.getAllBorrowList().then(
-      (response) => {
-        setBorrowList(response.data)
-      },
-      (error) => {
-        setMessage(error.message);
-      }
-    ).finally(() => {
-      setLoading(false)
-    });
+    userService
+      .getAllBorrowList()
+      .then(
+        (response) => {
+          setBorrowList(response.data)
+        },
+        (error) => {
+          setMessage(error.message)
+        }
+      )
+      .finally(() => {
+        setLoading(false)
+      })
   }, [])
 
   const returnOtion = [
@@ -44,7 +47,6 @@ export default function AdminBorrowList() {
     const consent = window.confirm(
       `${borrow.isReturned ? 'Book did not receive yet' : 'Book received'}`
     )
-
 
     if (consent) {
       const books = borrow.bookId.map((b) => b._id)
@@ -85,15 +87,15 @@ export default function AdminBorrowList() {
 
   return (
     <>
-      {
-        loading && <LoaderContainer>
+      {loading && (
+        <LoaderContainer>
           <Loader type="spinner" color="var(--loader-color)" />
         </LoaderContainer>
-      }
+      )}
 
-      {!loading &&
+      {!loading && (
         <div className="admin__borrowList">
-          <div style={{ minWidth: '920px' }} >
+          <div style={{ minWidth: '920px' }}>
             <ol>
               <li>
                 <div> Book Name</div>
@@ -104,54 +106,85 @@ export default function AdminBorrowList() {
                 <div>Action</div>
                 <div>Extend deadline</div>
               </li>
-              {borrowList.length > 0 ? borrowList.map((borrow: Borrow) => {
-                const { borrowDate, returnDate, isReturned, bookId, _id } = borrow
-                const getFormattedDate = (date: Date) => {
-                  let d = new Date(date)
-                  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
-                }
-                const isOverDue =
-                  new Date().getTime() > new Date(returnDate).getTime()
-                return (
-                  <li key={`key-${_id}`}>
-                    <div
-                      onClick={() => handleClick(borrow._id ? bookId[0]._id : '')}
-                      onKeyPress={() => handleClick(borrow._id ? borrow._id : '')}
-                      role="button"
-                      tabIndex={0}
-                    >
-                      {bookId[0].title}
-                    </div>
-                    <div>
-                      <img src={`${bookId[0].img}`} alt="book pic" />{' '}
-                    </div>
-                    <div>{getFormattedDate(borrowDate)}</div>
-                    <div
-                      className={!isReturned && isOverDue ? 'red-text' : 'green-text'}
-                    >
-                      {getFormattedDate(returnDate)}
-                    </div>
-                    <div className={!isReturned ? 'danger-text' : ''} >{isReturned ? 'Returned' : 'Not Returned'}</div>
-                    <button
-                      className={!isReturned ? 'nonreturn' : 'return'}
-                      onClick={() => handleReturn(borrow)}
-                    >
-                      {isReturned ? 'Not Returned' : 'Returned'}
-                    </button>
-                    <Select
-                      handleReturnDate={handleReturnDate}
-                      id={borrow._id}
-                      opts={returnOtion}
-                    />
-                  </li>
-                )
-              })
+              {borrowList.length > 0 ? (
+                borrowList.map((borrow: Borrow) => {
+                  const { borrowDate, returnDate, isReturned, bookId, _id } =
+                    borrow
+                  const getFormattedDate = (date: Date) => {
+                    let d = new Date(date)
+                    return `${d.getFullYear()}-${
+                      d.getMonth() + 1
+                    }-${d.getDate()}`
+                  }
+                  const isOverDue =
+                    new Date().getTime() > new Date(returnDate).getTime()
+                  return (
+                    <li key={`key-${_id}`}>
+                      <div
+                        onClick={() =>
+                          handleClick(borrow._id ? bookId[0]._id : '')
+                        }
+                        onKeyPress={() =>
+                          handleClick(borrow._id ? borrow._id : '')
+                        }
+                        role="button"
+                        tabIndex={0}
+                      >
+                        {bookId[0].title}
+                      </div>
 
-                :
-                message ? <NotFound message={'No book borrowed yet!'} />
-                  :
-                  <NotFound message={message} />
-              }
+                      <div
+                        style={{
+                          border: '2px solid red',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center', 
+                          overflow: 'hidden', 
+                          height: '60px', 
+                          width: '100%', 
+                        }}
+                      >
+                        <img
+                          src={`${bookId[0].img}`}
+                          alt="book pic"
+                          style={{
+                            height: '100%', // Ensures the image at least fills the height of the div
+                            width: '100%', // Ensures the image at least fills the width of the div
+                            objectFit: 'cover', // Ensures the image covers the div completely, clipping as necessary
+                          }}
+                        />
+                      </div>
+
+                      <div>{getFormattedDate(borrowDate)}</div>
+                      <div
+                        className={
+                          !isReturned && isOverDue ? 'red-text' : 'green-text'
+                        }
+                      >
+                        {getFormattedDate(returnDate)}
+                      </div>
+                      <div className={!isReturned ? 'danger-text' : ''}>
+                        {isReturned ? 'Returned' : 'Not Returned'}
+                      </div>
+                      <button
+                        className={!isReturned ? 'nonreturn' : 'return'}
+                        onClick={() => handleReturn(borrow)}
+                      >
+                        {isReturned ? 'Not Returned' : 'Returned'}
+                      </button>
+                      <Select
+                        handleReturnDate={handleReturnDate}
+                        id={borrow._id}
+                        opts={returnOtion}
+                      />
+                    </li>
+                  )
+                })
+              ) : message ? (
+                <NotFound message={'No book borrowed yet!'} />
+              ) : (
+                <NotFound message={message} />
+              )}
             </ol>
             <div className="admin__borrowList__book">
               <Switch>
@@ -160,7 +193,7 @@ export default function AdminBorrowList() {
             </div>
           </div>
         </div>
-      }
+      )}
     </>
   )
 }

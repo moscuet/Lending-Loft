@@ -55,7 +55,10 @@ export default function Authors() {
         toast.success('Successfully removed the author')
       })
       .catch((error) => {
-        toast.error('Failed to remove the author: ' + error.message)
+        console.log(error.response)
+        if (error?.response?.data?.message) {
+          toast.error( error.response.data.message)
+        } else toast.error('Failed to remove the author: ' + error.message)
       })
       .finally(() => {
         setShowConfirm(false)

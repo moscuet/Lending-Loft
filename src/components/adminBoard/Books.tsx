@@ -52,7 +52,9 @@ export default function Books() {
         toast.success('Successfully deleted the book')
       })
       .catch((error) => {
-        toast.error('Error deleting the book: ' + error.message)
+        if (error?.response?.data?.message) {
+          toast.error(error.response.data.message)
+        } else toast.error('Error deleting the book: ' + error.message)
       })
       .finally(() => {
         setShowConfirm(false)
@@ -92,65 +94,78 @@ export default function Books() {
             />
           )}
           <div className="admin__booksList">
-            <ol>
-              <li>
-                <div> Title </div>
-                <div> Cover </div>
-                <div> Author </div>
-                <div> Action </div>
-              </li>
-              {books.length > 0 ? (
-                books.map((book) => (
-                  <li key={book._id}>
-                    <div>{book.title}</div>
-                    <div
-                      className="book__img"
-                      onClick={() => navigate(`/books/${book._id}`)}
-                      onKeyDown={(event) => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                          navigate(`/books/${book._id}`)
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`View details of ${book.title}`}
-                    >
-                      <img
-                        src={book.img || '/assets/book-placeholder.png'}
-                        alt={book.title}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                        }}
-                        onError={handleImageError}
-                      />
-                    </div>
-                    <div>{`${book.authors
-                      .map((author) => author.firstName + ' ' + author.lastName)
-                      .join(', ')}`}</div>
-                    <div>
-                      <button
-                        className="deleteButton"
-                        onClick={() => requestDeleteBook(book._id)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="editButton"
-                        onClick={() => handleEditBook(book._id)}
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </li>
-                ))
-              ) : message ? (
-                <NotFound message={message} />
-              ) : (
-                <NoDataFound type={'book'} />
-              )}
-            </ol>
+            <div
+              style={{
+                minWidth: '620px',
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <ol>
+                <li>
+                  <div> Title </div>
+                  <div> Cover </div>
+                  <div> Author </div>
+                  <div> Action </div>
+                </li>
+                {books.length > 0 ? (
+                  books.map((book) => (
+                    <li key={book._id}>
+                      <div>{book.title}</div>
+                      <div>
+                        <div
+                          className="book__img"
+                          onClick={() => navigate(`/books/${book._id}`)}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                              navigate(`/books/${book._id}`)
+                            }
+                          }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View details of ${book.title}`}
+                        >
+                          <img
+                            src={book.img || '/assets/book-placeholder.png'}
+                            alt={book.title}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                            }}
+                            onError={handleImageError}
+                          />
+                        </div>
+                      </div>
+
+                      <div>{`${book.authors
+                        .map(
+                          (author) => author.firstName + ' ' + author.lastName
+                        )
+                        .join(', ')}`}</div>
+                      <div style={{ padding: 0 }}>
+                        <button
+                          className="deleteButton"
+                          onClick={() => requestDeleteBook(book._id)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="editButton"
+                          onClick={() => handleEditBook(book._id)}
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </li>
+                  ))
+                ) : message ? (
+                  <NotFound message={message} />
+                ) : (
+                  <NoDataFound type={'book'} />
+                )}
+              </ol>
+            </div>
           </div>
         </>
       )}

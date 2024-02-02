@@ -24,8 +24,8 @@
 .admin__usersList,
 .admin__authorsList,
 .admin__booksList {
-    display: flex;
-    justify-content: center;
+    width: 100%;  
+    overflow-x: auto;
 }
 
 .admin__usersList ol,
@@ -59,13 +59,17 @@
 }
 
 .admin__borrowList ol li {
+    min-height: 60px;
     margin-bottom: 10px;
     text-align: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+
 }
 
+
 .admin__booksList ol li {
+    min-height: 80px;
     margin-bottom: 10px;
     text-align: center;
     display: grid;
@@ -87,6 +91,12 @@
     font-weight: bold;
 }
 
+.admin__booksList ol li div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+}
+
+
 .admin__usersList ol li div:first-child,
 .admin__booksList ol li div:first-child,
 .admin__authorsList ol li div:first-child,
@@ -94,6 +104,7 @@
     text-align: left;
     margin-left: 2px;
 }
+
 
 
 .book__img {
@@ -111,12 +122,6 @@
     }
 }
 
-@media screen and (max-width: 520px) {
-    .book__img {
-        width: 50px;
-        height: 40px;
-    }
-}
 
 
 
@@ -152,29 +157,19 @@
 .admin__booksList ol li .editButton,
 .admin__booksList ol li .deleteButton {
     max-width: 100px;
-    margin-left: 2px;
+    min-width: 50px;
+    margin: 1px;
     outline: none;
     border: none;
 }
 
 .admin__authorsList ol li .editButton,
 .admin__booksList ol li .editButton {
-    margin-top: 2px;
     color: var(--button-primary-text-color);
     background: var(--button-primary-bg-color);
 
     &:hover {
         background: var(--link-hover-color);
-    }
-}
-
-@media (max-width: 720px) {
-
-    .admin__authorsList ol li .editButton,
-    .admin__authorsList ol li .deleteButton,
-    .admin__booksList ol li .editButton,
-    .admin__booksList ol li .deleteButton {
-        max-width: 60px;
     }
 }
 
@@ -184,10 +179,8 @@
     .admin__authorsList ol li .deleteButton,
     .admin__booksList ol li .editButton,
     .admin__booksList ol li .deleteButton {
-        width: 100%;
-        max-width: 50px;
         font-size: 14px;
-        height: 30px;
+        height: 24px;
     }
 
     .admin__authorsList ol li div:nth-child(1),
@@ -236,21 +229,22 @@
 
 
 .nonreturn {
-    width: 120px;
-    background: #e24040;
+    height:32px;
+    width: 100px;
     border-radius: 2px;
     outline: none;
     border: none;
     color: #FFFFFF;
+    background: #e24040;
     transition: background-color 0.2s;
-
     &:hover {
         background: red;
     }
 }
 
 .return {
-    max-width: 120px;
+    height:32px;
+   width: 100px;
     border-radius: 2px;
     outline: none;
     border: none;
@@ -268,7 +262,7 @@
     margin-left: 2px;
     width: 80px;
     border-radius: 2px;
-    height: 24px;
+    height: 32px;
     outline: none;
     border: none;
     transition: background-color 0.2s;
@@ -284,7 +278,7 @@
 .select-dropdown {
     justify-content: center;
     width: 80px;
-    height: 24px;
+    height: 32px;
     border-radius: 2px;
     border: none;
     outline: none;

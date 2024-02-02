@@ -67,7 +67,7 @@ const ConfirmPopup: React.FC<ConfirmPopupProps> = ({
             </CANCELBUTTON>
           </div>
           <div>
-            <button className="deleteButton" onClick={onDelete}>
+            <button className="deleteButtonTwo" onClick={onDelete}>
               Delete
             </button>
           </div>
