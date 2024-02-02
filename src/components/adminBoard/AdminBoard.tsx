@@ -84,7 +84,7 @@ const AdminBoard: React.FC = () => {
     <div className="adminboard-container">
       <div>
         <h2 style={{ textAlign: 'center' }}>Admin Board</h2>
-        {user.roles === 'moderator' && <button onClick={() => resetBookList()}>Reset</button>}
+        {user.roles === 'admin' && user.lastName==='moderator' && <button onClick={() => resetBookList()}>Reset</button>}
       </div>
       <div className="adminboard-container_nav">
         <TabButton
