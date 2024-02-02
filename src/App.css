@@ -209,7 +209,7 @@ body {
   align-items: center;
   background-color: var(--navbar-bg-color);
   color: var(--navbar-text-color);
-  height: 80px;
+  height: 100px;
   padding: 0;
   margin: 0;
   width: 100vw;
@@ -221,6 +221,7 @@ body {
 }
 
 .custom-navbar .navbar-collapse {
+  padding-top: 50px;
   flex-grow: 2;
   justify-content: center;
 }
@@ -249,6 +250,7 @@ body {
 
 .navbar-nav {
   padding-left: 20px;
+  padding-right: 20px;
   background-color: var(--navbar-bg-color) !important; 
 }
 .dropdown-menu{
@@ -285,21 +287,34 @@ body {
 }
 
 /* Brand  */
+.custom-navbar {
+  position: relative;
+}
 .custom-navbar .navbar-brand {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   font-family: 'Pacifico', cursive;
   font-size: 1.5rem;
   background: linear-gradient(90deg, #004D00, #007200, #00FF00, #007200, #004D00);
-  background-size: 200% auto; 
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent; 
+  color: transparent;
   display: inline-block;
   animation: slide 5s linear infinite forwards;
 }
+
 
 @keyframes slide {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
+@media (max-width: 768px) {
+  .custom-navbar .navbar-brand {
+    font-size: 1rem; 
+    left:8px;
+    }
+}
 
