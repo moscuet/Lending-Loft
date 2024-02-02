@@ -204,13 +204,13 @@ body {
 /* Nav bar  */
 
 .custom-navbar {
+  height: 80px;
+  border: 2px solid red;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--navbar-bg-color);
   color: var(--navbar-text-color);
-  height: 100px;
-  padding: 0;
   margin: 0;
   width: 100vw;
 }
@@ -221,7 +221,6 @@ body {
 }
 
 .custom-navbar .navbar-collapse {
-  padding-top: 50px;
   flex-grow: 2;
   justify-content: center;
 }
