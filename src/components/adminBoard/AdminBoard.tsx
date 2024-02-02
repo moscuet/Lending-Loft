@@ -16,8 +16,6 @@ import bookService from '../../services/productService'
 import userService from '../../services/userService'
 import { exampleBook } from '../../common/exampleData'
 
-
-
 const TabButton = styled.button`
   color: var(--navbar-text-color);
   text-decoration: none;
