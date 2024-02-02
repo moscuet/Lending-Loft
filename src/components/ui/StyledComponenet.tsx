@@ -1,6 +1,5 @@
-import { Form } from "formik";
-import styled from "styled-components";
-
+import { Form } from 'formik'
+import styled from 'styled-components'
 
 const CONTAINER = styled.div`
   background: var(--form-bg-color);
@@ -11,17 +10,17 @@ const CONTAINER = styled.div`
   margin: 2rem auto;
   padding: 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  @media(max-width: 420px) {
+  @media (max-width: 420px) {
     width: 95%;
     margin: 0.5rem auto;
   }
-  @media(min-width: 786px) {
+  @media (min-width: 786px) {
     width: 60%;
   }
   h3 {
     text-align: center;
     color: var(--form-title-text-color);
-    padding-top: .5em;
+    padding-top: 0.5em;
   }
   .form-group label {
     color: var(--text-color);
@@ -32,10 +31,9 @@ const CONTAINER = styled.div`
     background-color: transparent;
     border: none;
     margin: 0;
-    padding: 0; 
+    padding: 0;
   }
-`;
-
+`
 
 const MYFORM = styled(Form)`
   text-align: left;
@@ -49,15 +47,15 @@ const MYFORM = styled(Form)`
 
     ::placeholder {
       color: var(--placeholder-color);
-      opacity: .5;
+      opacity: 0.5;
     }
 
     &:focus {
-      outline: none;  
-      box-shadow: none
+      outline: none;
+      box-shadow: none;
     }
 
-    :-ms-input-placeholder { 
+    :-ms-input-placeholder {
       color: var(--placeholder-color);
     }
 
@@ -67,7 +65,7 @@ const MYFORM = styled(Form)`
   }
 
   .form-group {
-    margin-bottom: 1em; 
+    margin-bottom: 1em;
 
     &:last-child {
       margin-bottom: 0;
@@ -80,10 +78,10 @@ const MYFORM = styled(Form)`
     border: none;
     margin: 0;
     margin-top: 0.5em;
-    padding: 0.0em;
+    padding: 0em;
     font-size: 0.85em;
   }
-`;
+`
 
 const BUTTON = styled.button`
   background: var(--button-primary-bg-color);
@@ -103,23 +101,22 @@ const BUTTON = styled.button`
   }
 
   &:disabled {
-    background: var(--button-disabled-bg-color, #cccccc); 
+    background: var(--button-disabled-bg-color, #cccccc);
     color: var(--button-disabled-text-color, #666666);
     cursor: not-allowed;
-    opacity: 0.7; 
+    opacity: 0.7;
     &:hover {
-      background: var(--button-disabled-bg-color, #cccccc); 
+      background: var(--button-disabled-bg-color, #cccccc);
     }
   }
 
   margin-right: 1em;
   a {
-    color: inherit; 
-    text-decoration: none; 
-    display: inline-block; 
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
   }
-`;
-
+`
 
 const SECONDARYBUTTON = styled.button`
   background: var(--accent-color);
@@ -139,8 +136,7 @@ const SECONDARYBUTTON = styled.button`
   }
 
   margin-right: 1em;
-`;
-
+`
 
 const CANCELBUTTON = styled.button`
   background: var(--button-secondary-bg-color);
@@ -153,23 +149,21 @@ const CANCELBUTTON = styled.button`
 
   &:hover {
     background-color: var(--hover-bg-color);
-    cursor: pointer; 
-   }
+    cursor: pointer;
+  }
 
   &:active {
     background: var(--button-primary-bg-color);
   }
 
   margin-right: 1em;
-`;
-
-
+`
 
 const FormRow = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     flex-direction: row;
 
     .form-group {
@@ -179,14 +173,21 @@ const FormRow = styled.div`
       }
     }
   }
-`;
+`
 
 const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 200px);
-`;
+`
 
-
-export { CONTAINER, MYFORM, FormRow, BUTTON, CANCELBUTTON, LoaderContainer,SECONDARYBUTTON }
+export {
+  CONTAINER,
+  MYFORM,
+  FormRow,
+  BUTTON,
+  CANCELBUTTON,
+  LoaderContainer,
+  SECONDARYBUTTON,
+}

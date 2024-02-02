@@ -7,7 +7,8 @@ import Books from './Books'
 import Authors from './Authors'
 import AddBook from './AddBook'
 import AdminBorrowList from './AdminBorrowList'
-import './adminboard.css'
+import '../../styles/adminboard.css'
+
 import { useSelector } from 'react-redux'
 import { AppState } from '../../types'
 

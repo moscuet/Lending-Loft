@@ -10,8 +10,6 @@ import SingleBook from '../SingleBook'
 import { LoaderContainer } from '../ui/StyledComponenet'
 import Loader from 'react-ts-loaders'
 import NotFound from '../ui/NotFound'
-
-import './adminboard.css'
 import '../userBoard/userboard.css'
 
 export default function AdminBorrowList() {

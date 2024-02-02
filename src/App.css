@@ -162,3 +162,29 @@ body {
   color:var(--alert-color);
   opacity: 0.8;
 }
+
+
+
+.deleteButton {
+  color: #FFFFFF;
+  background: #e24040;
+
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+
+    outline: none;
+    border: none;
+    margin-left: 2px;
+    transition: background 0.3s ease-in-out;
+
+    &:hover {
+        background: red;
+    }
+
+    &:disabled {
+        background: #F6B2B5;
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+}
