@@ -17,11 +17,30 @@
       color:green;
     }
 
+/* Borrow list */
+.user__borrowList {
+    width: 100%;  
+    overflow-x: auto;
+}
+.user__borrowList ol li div:first-child {
+    font-weight: bold;
+}
+
 .user__borrowList ol li {  
+    min-height: 60px;
     display: grid;
     text-align: center;
+    align-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin-bottom: 10px;
+}
+
+user__borrowList ol li div{
+    border:2px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .user__borrowList ol li:first-child {
     text-align: center;
@@ -68,13 +87,6 @@ display: inline-block;
   .user__setting button {
       margin-top: 10px;;
   }
-
-
-
-
-
-
-
 
 
 

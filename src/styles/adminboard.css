@@ -26,6 +26,8 @@
 .admin__booksList {
     width: 100%;  
     overflow-x: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .admin__usersList ol,
@@ -272,6 +274,14 @@
     &:hover {
         background: var(--link-hover-color);
     }
+    &:disabled {
+        background: var(--button-secondary-bg-color); 
+        color: var(--button-secondary-text-color);
+        cursor: not-allowed; 
+    
+      &:disabled:hover {
+        background: var(--button-secondary-bg-color); 
+      }
 }
 
 

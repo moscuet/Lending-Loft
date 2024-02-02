@@ -1,6 +1,5 @@
-import { ReactElement } from "react"
 
-const NotFound = ({ message }: { message: string }): ReactElement => {
+const NotFound = ({ message }: { message: string }): JSX.Element => {
   return (
     <div style={{
       display: 'flex',

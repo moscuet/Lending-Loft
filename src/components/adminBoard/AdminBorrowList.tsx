@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import userService from '../../services/userService'
 import borrowService from '../../services/borrowservice'
 import { Borrow } from '../../types'
 import Select from './Select'
 import { Route, Routes as Switch } from 'react-router-dom'
-
 import { useNavigate } from 'react-router-dom'
 import SingleBook from '../SingleBook'
 import { LoaderContainer } from '../ui/StyledComponenet'
 import Loader from 'react-ts-loaders'
 import NotFound from '../ui/NotFound'
-import '../userBoard/userboard.css'
 
 export default function AdminBorrowList() {
   const [borrowList, setBorrowList] = useState<Borrow[]>([])
@@ -135,22 +133,21 @@ export default function AdminBorrowList() {
 
                       <div
                         style={{
-                          border: '2px solid red',
                           display: 'flex',
                           justifyContent: 'center',
-                          alignItems: 'center', 
-                          overflow: 'hidden', 
-                          height: '60px', 
-                          width: '100%', 
+                          alignItems: 'center',
+                          overflow: 'hidden',
+                          height: '80px',
+                          width: '100%',
                         }}
                       >
                         <img
                           src={`${bookId[0].img}`}
                           alt="book pic"
                           style={{
-                            height: '100%', // Ensures the image at least fills the height of the div
-                            width: '100%', // Ensures the image at least fills the width of the div
-                            objectFit: 'cover', // Ensures the image covers the div completely, clipping as necessary
+                            height: '100%',
+                            width: '100%',
+                            objectFit: 'cover',
                           }}
                         />
                       </div>
@@ -176,6 +173,7 @@ export default function AdminBorrowList() {
                         handleReturnDate={handleReturnDate}
                         id={borrow._id}
                         opts={returnOtion}
+                        disabled={!!isReturned}
                       />
                     </li>
                   )

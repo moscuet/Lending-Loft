@@ -1,4 +1,3 @@
-import React, { ReactElement } from 'react';
 import { Button, Container } from 'react-bootstrap';
 import '../../styles/checkoutUserDetails.css'
 import { useFormikContext } from 'formik';
@@ -10,7 +9,7 @@ interface CheckoutProps {
   inputValues: { firstName: string, lastName: string, email: string, address: string, city: string, zip: string }
 }
 
-const Confirmation = (props: CheckoutProps): ReactElement => {
+const Confirmation = (props: CheckoutProps):JSX.Element=> {
   const { inputValues: { lastName, email, address, city, zip } } = props;
   const { isValid, dirty } = useFormikContext<FormValue>();
 

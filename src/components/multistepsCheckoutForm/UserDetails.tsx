@@ -1,4 +1,3 @@
-import React, { ReactElement } from 'react';
 import { Field, ErrorMessage, useFormikContext } from 'formik'
 import { Button, Container } from 'react-bootstrap'
 import { FormRow } from '../ui/StyledComponenet';
@@ -11,8 +10,7 @@ interface ToggleProps {
   inputValues: FormValue
 }
 
-
-const UserDetails = (props: ToggleProps): ReactElement => {
+const UserDetails = (props: ToggleProps): JSX.Element => {
   const navigate = useNavigate();
   const { isValid, dirty } = useFormikContext<FormValue>();
 

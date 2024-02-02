@@ -67,21 +67,23 @@ const MultiStepsCheckout = () => {
 
     const user: { _id: string } = JSON.parse(localStorage.getItem("user") || '{}');
     if (user._id) {
-      cartItems.forEach(prod => {
+      const borrowPromises = cartItems.map(prod => {
         const borrow = {
           bookId: [prod._id ? prod._id : ''],
           customerId: [user._id],
-        }
-
-        borrowService.postBorrow(borrow).then(res => {
-          dispatch(EmptyCart())
-          setData({ ...formValue, step: step + 1 })
-          toast.success('Your borrowing request was successful.')
-
-        }).catch(error => {
-          toast.error('Borrow request failed: ' + error.message)
+        };
+        return borrowService.postBorrow(borrow);
+      });
+    
+      Promise.all(borrowPromises)
+        .then(results => {
+          dispatch(EmptyCart());
+          setData(prevState => ({ ...prevState, step: prevState.step + 1 }));
+          toast.success('Your borrowing request was successful.');
         })
-      })
+        .catch(error => {
+          toast.error('Borrow request failed: ' + error.message);
+        });
     }
   }
 
