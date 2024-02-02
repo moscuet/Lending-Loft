@@ -60,7 +60,7 @@ export default function Users() {
               <div> {`${user.firstName} ${user.lastName}`}</div>
               <div> {`${user.roles} `}</div>
               <div>
-                <button onClick={() => handleDeleteUser(user._id)} disabled={user.roles === 'admin' || user.firstName === 'Test'}>
+                <button onClick={() => handleDeleteUser(user._id)} disabled={user.roles === 'admin' || user.roles === 'moderator' || user.firstName === 'Test'}>
                   Delete
                 </button>
               </div>

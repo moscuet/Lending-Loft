@@ -15,6 +15,9 @@ type Book ={
 
 const API_URL = process.env.REACT_APP_API_URL
 class  productService {
+  createBook(arg0: { title: string; genres: string; ISBN: string; publisherName: string; author: string; publishedYear: string; description: string; edition: string; pageCount: string; img: string; }) {
+    throw new Error('Method not implemented.');
+  }
 
   addBook (formValue:{ISBN:string,title:string,publisherName:string,author:string,publishedYear:number,genres:string,description:string,edition:string,pageCount:number, img:string}){
     return axios.post(API_URL +'/books',formValue)

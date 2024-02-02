@@ -9,7 +9,6 @@ import { commonGenres } from '../../consts'
 import { toast } from 'react-toastify'
 import Loader from 'react-ts-loaders'
 import productService from '../../services/productService'
-// import productService from '../../services/productService'
 
 const initialValues = {
   ISBN: '',

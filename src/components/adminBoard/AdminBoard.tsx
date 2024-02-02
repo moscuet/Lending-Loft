@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
-// import { toast } from 'react-toastify'
 import AddAuthor from './AddAuthor'
 import Users from './Users'
 import Books from './Books'
@@ -9,6 +8,14 @@ import Authors from './Authors'
 import AddBook from './AddBook'
 import AdminBorrowList from './AdminBorrowList'
 import './adminboard.css'
+import { useSelector } from 'react-redux'
+import { AppState } from '../../types'
+
+import borroService from '../../services/borrowservice'
+import bookService from '../../services/productService'
+import userService from '../../services/userService'
+import { exampleBook } from '../../common/exampleData'
+
 
 
 const TabButton = styled.button`
@@ -40,12 +47,45 @@ const TabButton = styled.button`
 
 
 const AdminBoard: React.FC = () => {
+  const user = useSelector((state: AppState) => state.auth.user);
+
   const [activeTab, setActiveTab] = useState('users');
+
+
+  async function resetBookList() {
+    try {
+      const booksResponse = await userService.getPublicContent();
+      const borrowsResponse = await userService.getAllBorrowList();
+
+      const books = booksResponse.data;
+      const borrows = borrowsResponse.data;
+
+      for (const borrow of borrows) {
+        await borroService.deleteBorrow(borrow._id);
+      }
+
+      for (const book of books) {
+        await bookService.deleteBook(book._id);
+      }
+
+      for (const book of exampleBook) {
+        await bookService.addBook(book);
+      }
+
+      console.log('All books and borrows have been deleted.');
+
+    } catch (error) {
+      console.error('Failed to reset book list:', error);
+    }
+  }
 
 
   return (
     <div className="adminboard-container">
-      <div><h2 style={{ textAlign: 'center' }}>Admin Board</h2></div>
+      <div>
+        <h2 style={{ textAlign: 'center' }}>Admin Board</h2>
+        {user.roles === 'moderator' && <button onClick={() => resetBookList()}>Reset</button>}
+      </div>
       <div className="adminboard-container_nav">
         <TabButton
           onClick={() => setActiveTab('users')}

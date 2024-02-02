@@ -64,13 +64,11 @@ export default function AdminBorrowList() {
   }
 
   const handleReturnDate = (id: string, day: string) => {
-    console.log('handle return', id, day)
     const borrow = borrowList.filter((b) => b._id === id)[0]
     const books = borrow.bookId.map((b) => b._id)
     const newReturndate = new Date(
       new Date(borrow.returnDate).getTime() + Number(day) * 24 * 3600 * 1000
     )
-    console.log(newReturndate)
     const newBorrow = {
       ...borrow,
       bookId: books,

@@ -40,7 +40,6 @@ const updateUser =  (user:USER_DATA, id:string) =>{
 }
 
 const getBorrowList = (id:string) =>{
-  console.log(id)
   return axios.get(`${API_URL}/borrows?customerId=${id}`, { headers: authHeader() });
 }
 

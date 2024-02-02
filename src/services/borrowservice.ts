@@ -13,6 +13,9 @@ const API_URL = process.env.REACT_APP_API_URL
 
 
 class  borrowService {
+  deleteBorrow(_id: string) {
+    axios.delete(API_URL+ '/borrows/'+ _id)
+  }
   
   updateBorrow(borrow:Borrow){
     console.log('borrow from borrowservice', borrow)
