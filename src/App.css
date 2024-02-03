@@ -291,7 +291,7 @@ body {
 .custom-navbar .navbar-brand {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 10px;
   font-family: 'Pacifico', cursive;
   font-size: 1.5rem;
   background: linear-gradient(90deg, #004D00, #007200, #00FF00, #007200, #004D00);
@@ -312,7 +312,10 @@ body {
 @media (max-width: 768px) {
   .custom-navbar .navbar-brand {
     font-size: 1rem; 
-    left:8px;
+    left:6px;
+    }
+    .navbar-nav{
+      padding-top: 40px;
     }
 }
 

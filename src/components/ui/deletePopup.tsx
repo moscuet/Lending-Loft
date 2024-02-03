@@ -33,14 +33,14 @@ const Popup = styled.div`
 `
 
 const Message = styled.p`
-margin: 40px 0 20px 0;
-text-align: center;
+  margin: 40px 0 20px 0;
+  text-align: center;
 `
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-    gap: 10px;
+  gap: 10px;
   margin-top: auto;
   margin-bottom: 40px;
 `
@@ -49,12 +49,14 @@ interface ConfirmPopupProps {
   message: string
   onCancel: () => void
   onDelete: () => void
+  buttonText?: string
 }
 
 const ConfirmPopup: React.FC<ConfirmPopupProps> = ({
   message,
   onCancel,
   onDelete,
+  buttonText,
 }) => {
   return (
     <Backdrop>
@@ -68,7 +70,7 @@ const ConfirmPopup: React.FC<ConfirmPopupProps> = ({
           </div>
           <div>
             <button className="deleteButtonTwo" onClick={onDelete}>
-              Delete
+              {buttonText ? buttonText : 'Delete'}
             </button>
           </div>
         </ButtonContainer>

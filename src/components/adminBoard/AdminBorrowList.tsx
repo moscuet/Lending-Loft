@@ -9,11 +9,14 @@ import SingleBook from '../SingleBook'
 import { LoaderContainer } from '../ui/StyledComponenet'
 import Loader from 'react-ts-loaders'
 import NotFound from '../ui/NotFound'
+import ConfirmPopup from '../ui/deletePopup'
 
 export default function AdminBorrowList() {
   const [borrowList, setBorrowList] = useState<Borrow[]>([])
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false)
+  const [selectedBorrow, setSelectedBorrow] = useState<Borrow | null>(null)
 
   const navigate = useNavigate()
 
@@ -41,26 +44,6 @@ export default function AdminBorrowList() {
     { label: '7 day', value: '7' },
   ]
 
-  const handleReturn = (borrow: Borrow) => {
-    const consent = window.confirm(
-      `${borrow.isReturned ? 'Book did not receive yet' : 'Book received'}`
-    )
-
-    if (consent) {
-      const books = borrow.bookId.map((b) => b._id)
-      const newBorrow = {
-        ...borrow,
-        bookId: books,
-        isReturned: !borrow.isReturned,
-      }
-      borrowService.updateBorrow(newBorrow).then((res) => {
-        userService.getAllBorrowList().then((res) => {
-          setBorrowList(res.data)
-        })
-      })
-    }
-  }
-
   const handleReturnDate = (id: string, day: string) => {
     const borrow = borrowList.filter((b) => b._id === id)[0]
     const books = borrow.bookId.map((b) => b._id)
@@ -81,6 +64,34 @@ export default function AdminBorrowList() {
 
   const handleClick = (id: string) => {
     navigate(`/admin/borrows/${id}`)
+  }
+
+  const handleReturn = (borrow: Borrow) => {
+    setSelectedBorrow(borrow)
+    setShowConfirmPopup(true)
+  }
+
+  const handleCancel = () => {
+    setShowConfirmPopup(false)
+    setSelectedBorrow(null) // Reset selected borrow
+  }
+
+  const handleConfirmReturn = () => {
+    if (selectedBorrow) {
+      const books = selectedBorrow.bookId.map((b) => b._id)
+      const newBorrow = {
+        ...selectedBorrow,
+        bookId: books,
+        isReturned: !selectedBorrow.isReturned,
+      }
+      borrowService.updateBorrow(newBorrow).then((res) => {
+        userService.getAllBorrowList().then((res) => {
+          setBorrowList(res.data)
+          setShowConfirmPopup(false) 
+          setSelectedBorrow(null) 
+        })
+      })
+    }
   }
 
   return (
@@ -190,6 +201,20 @@ export default function AdminBorrowList() {
               </Switch>
             </div>
           </div>
+          {showConfirmPopup && selectedBorrow && (
+            <ConfirmPopup
+              message={`The book '${selectedBorrow.bookId
+                .map((b) => b.title)
+                .join(', ')}' ${
+                selectedBorrow.isReturned
+                  ? ' : has not not receive yet'
+                  : ': has been received'
+              }`}
+              onCancel={handleCancel}
+              onDelete={handleConfirmReturn}
+              buttonText='Confirm'
+            />
+          )}
         </div>
       )}
     </>
