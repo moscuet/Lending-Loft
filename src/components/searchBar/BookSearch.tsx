@@ -11,8 +11,8 @@ const ResponsiveForm = styled(Form)`
     transition: border-color 0.15s ease-in-out;
     border: none;
     width:100%;
+    opacity:0.7;
     max-width:420px;
-
     ::placeholder {
       color: var(--placeholder-text-color);
     }
@@ -54,7 +54,7 @@ export default function BookSearch(props: { handleSearch: Handleseacrh }) {
           <Form.Group className="mb-3" controlId="searchInput">
             <Form.Control
               type="text"
-              placeholder="Book, Author, Category"
+              placeholder="name, author, catagory"
               onChange={handleChange}
             />
           </Form.Group>
