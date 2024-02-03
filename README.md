@@ -1,162 +1,86 @@
-Page Body:
-# Color Scheme
-
-## Background Colors
-- Background Color: Light Beige (`#FFFBF5`)
-- Navbar Background Color: Dark Purple (`#7743DB`)
-- Footer Background Color: Soft Lavender (`#C3ACD0`)
-- Signup Form Background Color: Off-White (`#F7EFE5`)
-- Buttons (Primary) Background Color: Dark Purple (`#7743DB`)
-- Buttons (Secondary) Background Color: Soft Lavender (`#C3ACD0`)
-- Hover State Background Color: Off-White (`#F7EFE5`)
-
-## Text Colors
-- General Text Color: Dark Gray (Suggested: `#333333` or `#4a4a4a`)
-- Navbar Text Color: Light Beige (`#FFFBF5`)
-- Footer Text Color: Light Beige (`#FFFBF5`)
-- Form Field Text Color: Dark Gray (Suggested: `#333333` or `#4a4a4a`)
-- Buttons (Primary) Text Color: Light Beige (`#FFFBF5`)
-- Buttons (Secondary) Text Color: Light Beige (`#FFFBF5`)
-- Headings/Links Color: Dark Purple (`#7743DB`)
-- Hover State Text Color: Dark Purple (`#7743DB`)
-
-## Additional Colors
-- Alert Messages Color: Deep Red (`#D32F2F`)
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=react,redux,bootstrap,ts" />
+  <br/>
+  <a href="https://zealous-galileo-0290aa.netlify.app/"><kbd>🟢 Live App</kbd></a>
+  <br/>
+  <span>Netlify</span> | <span>JWT Authentication</span>
+</p>
 
 # Lending Loft
-Full stack library app to manage book borrowing service for a public library. App was developed independently from scratch including designing data structure. Main focus was developing React-redux and express app using typescript.
-All features were not developed yet, work is on progress.
-## Tech stacks:
 
-### Frontend: Typescript, React, Redux, React-bootsrap, Formik-form, Yup validation, JWT
+The front-end application of a full-stack library project, this application enhances the book borrowing experience with an interface built on TypeScript, React, Redux, and React-Bootstrap. It is integrated with a Node.js and Express backend and features secure JWT authentication, all supported by a MongoDB database.
+Check it out at [Lending Loft](https://zealous-galileo-0290aa.netlify.app/)
 
-### Backend: Typescript, Express, mongoose
+<br/>
 
-### Database: Mongodb
+## 🔥 Features
 
-### Deploy: Backend to Heroku & Front End to Netlify
+- User Engagement: Users can browse books, add them to a cart, place borrow orders, and check the status of borrowed items.
+- User Profile Management: Registered users have the ability to update their personal information post-login.
+- Admin Capabilities: Admins can manage the entire book lifecycle, from adding new books and authors to handling borrowing statuses, and even removing users, books, or authors from the system.
+  
+<br/>
 
-[Backend Repo](https://github.com/moscuet/library-server100)
+## 🛠 Tech Stack
 
-## Live App [link](https://festive-albattani-cd3868.netlify.app/)
-**Please be aware that the frontend app is currently not connected to the backend. This is due to recent changes in Heroku's free hosting policy, which led to the suspension of our server deployment.
+- Developed using TypeScript, React, Redux, React-Bootstrap, Formik-Form, and Yup for form validation.
+- Advanced state management with Redux, enhanced by Redux-thunk and Redux-saga for asynchronous actions and side effects.
+- Navigation and routing handled by React-router.
+- User authentication and security facilitated by JWT (JSON Web Token).
+- Code formatting and consistency ensured with Prettier.
+- Enforced coding standards and quality using ESLint for linting.
+- Pre-commit hooks implemented with Husky and lint-staged to maintain code integrity.
+- Backend: Integrated with Node.js and Express, MongoDBand, and uses JWT for secure authentication
+<br/>
 
-# Library-App : Front-end
 
-### Fast Track React app template with TypeScript & Redux 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📸 Feature Highlights
 
-## Installation
-You should use either `npm` or `yarn` but not both. It's recommeded to use `yarn`
 
-This template already comes with all needed packages. In case you want to install manually, check the dependencies in `package.json` file. To install, run:
+User Dashboard: A snapshot of the user interface, displaying how users can manage their book borrowings and account information.
+
+Admin Panel: Illustrates the administrative capabilities, such as managing the book catalog, user activities, and more.
+
+Book Browsing and Borrowing: A view of the book selection and borrowing interface, highlighting ease of use.
+
+Responsive Design: Demonstrates the app’s responsiveness across different devices.
+
+## 🌐 Deployment
+
+Deploy effortlessly on the Netlify Platform to achieve the best performance and scalability. The app is pre-configured for Netlify, enabling continuous deployment straight from the repository.
+<br/>
+
+## 📖 User Journey
+For regular users, the app provides a personalized dashboard to manage their book borrowings and account information. For administrators, it offers comprehensive control over the library's catalog and user activity, making management tasks straightforward and efficient.
+
+<br/>
+
+
+## 🚀 Local Setup
+Clone the project and start it locally with:
+bash
 ```
-yarn install
-```
-
-## Features
-* Redux
-* Redux-thunk
-* Redux-saga
-* React-router
-* Prettier
-* ESLint
-* Husky & lint-staged
-
-The template comes with ready-made code for a very simple working demo (products list). To play around with it, run:
-```
+yarn 
 yarn start
+Visit http://localhost:3000 to interact with the app.
 ```
 
-## Modify or add new features
-Follow the file/folder structure as explained below to make necessary changes. For Redux, most of the time, you can copy existing files, modify something in there to make a new feature.
+<br/>
 
-## Folder structure
-* `src/components`: React components. For each component, it's better to put it in a separate folder. For example:
-  ```
-  src/components/Button/index.tsx
-  src/components/Button/Button.scss
-  src/components/Button/Button.stories.tsx
-  src/components/Button/Button.test.tsx
-  ```
+<br/>
 
-* `src/hooks`: Custom hooks. For example:
-  ```
-  src/hooks/useCountries.ts
-  src/hooks/useUser.ts
-  ```
+## Future development:
 
-* `src/redux`: Everything (such as actions, reducers, sagas etc) related to Redux
-  * `src/redux/actions`: For Redux actions
-  * `src/redux/reducers`: For Redux reducers
-  * `src/redux/sagas`: For Redux sagas
-  * `src/redux/store.ts`: The Redux store
+- password reset
+- Social Login / Federated authentication: Google, github
+- display user photo in user account
+- replace delete button in cart with delete icon
+- feature: email confirmation of the order
 
-  If there are multiple un-related features, split action/reducer/saga into different files. For example:
-  ```
-  src/redux/actions/product.ts
-  src/redux/actions/order.ts
-  src/redux/actions/ui.ts
-  ```
-  ```
-  src/redux/reducers/product.ts
-  src/redux/reducers/order.ts
-  src/redux/actions/ui.ts
-  ```
-  ```
-  src/redux/sagas/product.ts
-  src/redux/sagas/order.ts
-  src/redux/sagas/ui.ts
-  ```
-
-
-
-* `src/pages`: Pages (or views) when using [React router](https://reacttraining.com/react-router/web/guides/quick-start). For example:
-  ```
-  src/pages/Home.tsx
-  src/pages/Product.tsx
-  ```
-  If there are more files than just page's `*.tsx`, a folder structure can be used. For example:
-  ```
-  src/pages/Home/index.tsx
-  src/pages/Home/Home.scss
-  ```
-
-
-* `src/types.ts`: TypeScript's type definitions. For small apps, you can put definitions of all types, interfaces etc and even Redux's actions, action creators, states here.
-
-* `src/Routes.tsx`: Defines all the React router routes to different pages.
-
-This template is suitable for rather small apps. For bigger apps, a better & more organized way is to split the folder structure into features, something like:
-  ```
-  sr/feature1
-  --components
-  --redux
-  ----action.ts
-  ----reducer.ts
-  ----saga.ts
-
-  src/feature2
-  --components
-  --redux
-  ----action.ts
-  ----reducer.ts
-  ----saga.ts
-
-  src/redux
-  --action.ts
-  --reducer.ts
-  --saga.ts
-  --store.ts
-  ```
-
-
-
-
-#############
+  
+#### Instruction for outdated package update:
 
 To fix the dependency tree, try following the steps below in the exact order:
-
   1. Delete package-lock.json (not package.json!) and/or yarn.lock in your project folder.
   2. Delete node_modules in your project folder.
   3. Remove "webpack" from dependencies and/or devDependencies in the package.json file in your project folder.
