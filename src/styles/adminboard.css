@@ -3,32 +3,43 @@
     max-width: 1080px;
 
 }
-
-.adminboard-container_nav {
+.adminboard-container__nav__wrapper{
+    display: flex; 
+    width: 100%;
+    overflow-x: auto;
+}
+.adminboard-container__nav {
     margin-bottom: 2rem;
     justify-content: center;
     display: flex;
 
 }
 
-.adminboard-container_nav a {
+.adminboard-container__nav a {
     padding: 5px;
     text-decoration: none;
     margin: 0px 5px;
 }
 
-.adminboard-container_nav a:active {
+.adminboard-container__nav a:active {
     color: green;
 }
 
-.admin__usersList,
-.admin__authorsList,
+
 .admin__booksList {
+    width: 100%;  
+    overflow-x: auto;
+    display: flex;
+}
+.admin__usersList,
+.admin__authorsList
+{
     width: 100%;  
     overflow-x: auto;
     display: flex;
     justify-content: center;
 }
+
 
 .admin__usersList ol,
 .admin__authorsList ol,

@@ -99,6 +99,8 @@ export default function Books() {
                 minWidth: '620px',
                 display: 'flex',
                 justifyContent: 'center',
+                flexGrow: 1,
+                overflow: 'auto'
               }}
             >
               <ol>

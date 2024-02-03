@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import AddAuthor from './AddAuthor'
@@ -24,104 +23,103 @@ const TabButton = styled.button`
   background: none;
   cursor: pointer;
   position: relative;
-  margin-right: 16px; 
+  margin-right: 16px;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 0;
-    height: 3px; 
-    background-color: var(--link-hover-color); 
-    transition: width 0.3s ease; 
+    height: 3px;
+    background-color: var(--link-hover-color);
+    transition: width 0.3s ease;
   }
 
   &:hover::before,
   &.active-tab::before {
     width: 100%;
   }
-`;
-
-
+`
 
 const AdminBoard: React.FC = () => {
-  const user = useSelector((state: AppState) => state.auth.user);
+  const user = useSelector((state: AppState) => state.auth.user)
 
-  const [activeTab, setActiveTab] = useState('users');
-
+  const [activeTab, setActiveTab] = useState('users')
 
   async function resetBookList() {
     try {
-      const booksResponse = await userService.getPublicContent();
-      const borrowsResponse = await userService.getAllBorrowList();
+      const booksResponse = await userService.getPublicContent()
+      const borrowsResponse = await userService.getAllBorrowList()
 
-      const books = booksResponse.data;
-      const borrows = borrowsResponse.data;
+      const books = booksResponse.data
+      const borrows = borrowsResponse.data
 
       for (const borrow of borrows) {
-        await borroService.deleteBorrow(borrow._id);
+        await borroService.deleteBorrow(borrow._id)
       }
 
       for (const book of books) {
-        await bookService.deleteBook(book._id);
+        await bookService.deleteBook(book._id)
       }
 
       for (const book of exampleBook) {
-        await bookService.addBook(book);
+        await bookService.addBook(book)
       }
 
-      console.log('All books and borrows have been deleted.');
-
+      console.log('All books and borrows have been deleted.')
     } catch (error) {
-      console.error('Failed to reset book list:', error);
+      console.error('Failed to reset book list:', error)
     }
   }
-
 
   return (
     <div className="adminboard-container">
       <div>
         <h2 style={{ textAlign: 'center' }}>Admin Board</h2>
-        {user.roles === 'admin' && user.lastName==='moderator' && <button onClick={() => resetBookList()}>Reset</button>}
+        {user.roles === 'admin' && user.lastName === 'moderator' && (
+          <button onClick={() => resetBookList()}>Reset</button>
+        )}
       </div>
-      <div className="adminboard-container_nav">
-        <TabButton
-          onClick={() => setActiveTab('users')}
-          className={activeTab === 'users' ? 'active-tab' : ''}
-        >
-          Users
-        </TabButton>
-        <TabButton
-          onClick={() => setActiveTab('borrows')}
-          className={activeTab === 'borrows' ? 'active-tab' : ''}
-        >
-          Borrows
-        </TabButton>
-        <TabButton
-          onClick={() => setActiveTab('books')}
-          className={activeTab === 'books' ? 'active-tab' : ''}
-        >
-          Books
-        </TabButton>
-        <TabButton
-          onClick={() => setActiveTab('authors')}
-          className={activeTab === 'authors' ? 'active-tab' : ''}
-        >
-          Authors
-        </TabButton>
-        <TabButton
-          onClick={() => setActiveTab('addbook')}
-          className={activeTab === 'addbook' ? 'active-tab' : ''}
-        >
-          Add Book
-        </TabButton>
-        <TabButton
-          onClick={() => setActiveTab('addauthor')}
-          className={activeTab === 'addauthor' ? 'active-tab' : ''}
-        >
-          Add Author
-        </TabButton>
+      <div className="adminboard-container__nav__wrapper">
+        <div className="adminboard-container__nav">
+          <TabButton
+            onClick={() => setActiveTab('users')}
+            className={activeTab === 'users' ? 'active-tab' : ''}
+          >
+            Users
+          </TabButton>
+          <TabButton
+            onClick={() => setActiveTab('borrows')}
+            className={activeTab === 'borrows' ? 'active-tab' : ''}
+          >
+            Borrows
+          </TabButton>
+          <TabButton
+            onClick={() => setActiveTab('books')}
+            className={activeTab === 'books' ? 'active-tab' : ''}
+          >
+            Books
+          </TabButton>
+          <TabButton
+            onClick={() => setActiveTab('authors')}
+            className={activeTab === 'authors' ? 'active-tab' : ''}
+          >
+            Authors
+          </TabButton>
+          <TabButton
+            onClick={() => setActiveTab('addbook')}
+            className={activeTab === 'addbook' ? 'active-tab' : ''}
+          >
+            Add Book
+          </TabButton>
+          <TabButton
+            onClick={() => setActiveTab('addauthor')}
+            className={activeTab === 'addauthor' ? 'active-tab' : ''}
+          >
+            Add Author
+          </TabButton>
+        </div>
       </div>
       <div>
         {activeTab === 'users' && <Users />}
@@ -132,9 +130,6 @@ const AdminBoard: React.FC = () => {
         {activeTab === 'addauthor' && <AddAuthor />}
       </div>
     </div>
-  );
-
-
+  )
 }
 export default AdminBoard
-
