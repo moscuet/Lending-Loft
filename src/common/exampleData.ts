@@ -2,6 +2,66 @@ const descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. V
 
 export const exampleBook = [
   {
+    "title": "Mystery of the Ancient",
+    "genres": "Mystery,Fiction,Adventure",
+    "ISBN": "9283749283749",
+    "publisherName": "Epoch Publishers",
+    "author": "65bc83128eafa59d87017194",
+    "publishedYear": 2018,
+    "description": "A thrilling adventure that uncovers ancient secrets.",
+    "edition": "first edition",
+    "pageCount": 280,
+    "img": "/assets/book-1.png"
+  },
+  {
+    "title": "Whispers in the Dark",
+    "genres": "Crime,Mystery,Drama",
+    "ISBN": "8273648273648",
+    "publisherName": "Shadow Press",
+    "author": "65bc83128eafa59d87017194",
+    "publishedYear": 2019,
+    "description": "A suspenseful tale of intrigue and investigation.",
+    "edition": "third edition",
+    "pageCount": 320,
+    "img": "/assets/book-2.png"
+  },
+  {
+    "title": "Journey Through Hearts",
+    "genres": "Romance,Fiction,Adventure",
+    "ISBN": "7364827364827",
+    "publisherName": "Lovebound Publications",
+    "author": "65bc83128eafa59d87017194",
+    "publishedYear": 2021,
+    "description": "A romantic saga that spans continents and lifetimes.",
+    "edition": "first edition",
+    "pageCount": 300,
+    "img": "/assets/book-3.png"
+  },
+  {
+    "title": "Echoes of the Past",
+    "genres": "Fiction,Drama,Others",
+    "ISBN": "9485739485739",
+    "publisherName": "Timeless Reads",
+    "author": "65bc83128eafa59d87017194",
+    "publishedYear": 2017,
+    "description": "A historical novel that brings the past vividly to life.",
+    "edition": "second edition",
+    "pageCount": 400,
+    "img": "/assets/book-4.png"
+  },
+  {
+    "title": "The Last Laugh",
+    "genres": "Comedy,Drama,Adventure",
+    "ISBN": "4857394857394",
+    "publisherName": "Humor House",
+    "author": "65bc83128eafa59d87017194",
+    "publishedYear": 2022,
+    "description": "A comedic journey that's sure to bring a smile.",
+    "edition": "first edition",
+    "pageCount": 250,
+    "img": "/assets/book-5.png"
+  },
+  {
     "title": "Endless Time",
     "genres": "mystery,adventure",
     "ISBN": "1223344555667",
