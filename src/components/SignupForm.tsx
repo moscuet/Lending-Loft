@@ -3,18 +3,13 @@ import { Formik, Field, ErrorMessage, FormikState } from 'formik'
 import * as Yup from 'yup'
 import { useSelector } from 'react-redux'
 import { AppState } from '../types'
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import AuthService from '../services/authService'
 import { toast } from 'react-toastify'
 import Loader from 'react-ts-loaders'
 import { BUTTON, CONTAINER, FormRow, MYFORM ,LoaderContainer} from './ui/StyledComponenet'
 
-interface RouterProps {
-  history: {
-    push(url: string): void
-  }
-}
 
 interface FormValues {
   firstName: string;
@@ -27,7 +22,8 @@ interface FormValues {
 }
 
 
-const Signup = (props: RouterProps): ReactElement => {
+const Signup = (): ReactElement => {
+  const navigate = useNavigate()
   const { isLoggedIn } = useSelector((state: AppState) => state.auth)
 
   const [state, setState] = useState({
@@ -82,7 +78,7 @@ const Signup = (props: RouterProps): ReactElement => {
         toast.success("Your registration is successful! We're excited to have you on board.");
         resetForm();
         setTimeout(() => {
-          props.history.push('/signin');
+          navigate('/signin')
           window.location.reload();
         }, 2000);
       })

@@ -64,7 +64,8 @@ const BookCardWrapper = styled.div`
   margin-bottom: 20px; 
 `;
 
-const StyledTextSingleLine = styled.div`
+const StyledTextSingleLine = styled.span`
+  display: block; 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

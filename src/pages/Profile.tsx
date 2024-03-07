@@ -9,7 +9,6 @@ const Profile: React.FC = () : ReactElement=> {
   const currentCustomer = auth.getCurrentCustomer();
   
   if(!currentCustomer) {
-    history.push('/signin')
     window.location.reload();
   }
   console.log('currentCustomer',currentCustomer)
