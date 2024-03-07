@@ -15,7 +15,6 @@ interface ToggleProps {
 }
 
 const AddressDetails = (props: ToggleProps): ReactElement => {
-  console.log('from addres@@@@@@@@@@@@', props.inputValues)
   return (
     <Container>
       <h2> Delivery Address</h2>
@@ -37,7 +36,6 @@ const AddressDetails = (props: ToggleProps): ReactElement => {
           className="alert alert-danger"
         />
       </div>
-
       <div className="form-group">
         <label htmlFor="zip">zip</label>
         <Field name="zip" type="text" className="form-control" />

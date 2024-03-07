@@ -9,10 +9,8 @@ const Profile: React.FC = () : ReactElement=> {
   const currentCustomer = auth.getCurrentCustomer();
   
   if(!currentCustomer) {
-    history.push('/signin')
     window.location.reload();
   }
-  console.log('currentCustomer',currentCustomer)
   return (
     <div className="container">
       <Card bg="primary" text="white" style={{ width: '18rem' }}>

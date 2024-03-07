@@ -1,11 +1,7 @@
-import React, { Fragment, useEffect } from 'react'
+import { Fragment} from 'react'
 import { Routes as Switch, Route } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
-import { useDispatch } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-
-import { clearMessage } from './redux/actions'
 
 import AdminBoard from './components/adminBoard/AdminBoard'
 import UserBoard from './components/userBoard/UserBoard'
@@ -22,15 +18,7 @@ import ToastNotification from './components/ToastNotification'
 import Footer from './components/Footer'
 import MultiStepsCheckout from './components/multistepsCheckoutForm/MultiStepsCheckout'
 
-const App: React.FC = () => {
-  const history = createBrowserHistory()
-  const dispatch = useDispatch()
-  useEffect(() => {
-    history.listen((location) => {
-      dispatch(clearMessage()) // clear message when changing location
-    })
-  }, [dispatch, history])
-
+const App = () => {
   return (
     <Fragment>
       <NavBar />
@@ -45,7 +33,7 @@ const App: React.FC = () => {
                 </AdminRoute >
               }
             />
-
+            
             <Route path='/user/*'
               element={
                 <UserRoute >
@@ -59,8 +47,8 @@ const App: React.FC = () => {
 
             <Route path='/contact-us' element={<ContactForm />} />
             <Route path='/books/catagory/*' element={<Home />} />
-            <Route path='/signup' element={<Signup history={history} />} />
-            <Route path='/signin' element={<Signin history={history} />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/signin' element={<Signin />} />
             <Route path='/books/:id' element={<SingleBook />} />
             <Route path='/cart/:id' element={<SingleBook />} />
             <Route path='/cart' element={<Cart />} />

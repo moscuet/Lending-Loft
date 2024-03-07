@@ -1,20 +1,17 @@
 import { useState, ReactElement, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../types'
-import { NavLink, Navigate } from 'react-router-dom'
+import { NavLink, Navigate,useNavigate } from 'react-router-dom'
 import { Formik, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { login } from '../redux/actions/auth'
 import { BUTTON, CONTAINER, MYFORM } from './ui/StyledComponenet'
 import TestLoginPopup from './ui/InfoPopup'
 
-interface RouterProps {
-  history: {
-    push(url: string): void
-  }
-}
 
-const Signin = (props: RouterProps): ReactElement => {
+const Signin = (): ReactElement => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch()
   const { isLoggedIn, user } = useSelector((state: AppState) => state.auth)
   const [showPopup, setShowPopup] = useState(false);
@@ -59,7 +56,6 @@ const Signin = (props: RouterProps): ReactElement => {
         isLoggedIn: true,
       })
     } catch (error) {
-      console.log('error', error)
       setUserState({
         ...userState,
         loading: false,
@@ -70,11 +66,11 @@ const Signin = (props: RouterProps): ReactElement => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      user.roles === 'admin' && props.history.push('/admin')
-      user.roles === 'user' && props.history.push('/user')
-      user.roles && window.location.reload()
+      user.roles === 'admin' && navigate('/admin')
+      user.roles === 'user' && navigate('/user')
+      
     }
-  }, [isLoggedIn, user, props.history])
+  }, [isLoggedIn, user, navigate])
 
   if (isLoggedIn) {
     ;<Navigate to="/login" />
