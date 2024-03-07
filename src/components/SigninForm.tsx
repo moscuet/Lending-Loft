@@ -56,7 +56,6 @@ const Signin = (): ReactElement => {
         isLoggedIn: true,
       })
     } catch (error) {
-      console.log('error', error)
       setUserState({
         ...userState,
         loading: false,

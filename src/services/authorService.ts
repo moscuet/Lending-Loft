@@ -10,7 +10,7 @@ class  authorService {
   getAuthorById (id:string){
     return  axios.get(API_URL +'/authors/' + id)
   }
-  addAuthor(formValue:{firstName:string, lastName:string,biography:string}){
+  addAuthor(formValue:{firstName:string, lastName:string,biography:string,id?:string}){
     return  axios.post(API_URL +'/authors', formValue)
     
   }

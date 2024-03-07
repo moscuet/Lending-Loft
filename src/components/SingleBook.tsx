@@ -9,20 +9,19 @@ import { addProduct } from '../redux/actions'
 import { AppState } from '../types'
 import { useSelector } from 'react-redux'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 import { BUTTON, SECONDARYBUTTON } from './ui/StyledComponenet'
 
 const CONTAINER = styled.div`
   margin-top: 40px;
   display: flex;
   justify-content: center;
-  flex-direction: row; 
+  flex-direction: row;
 
   @media (max-width: 920px) {
     flex-direction: column;
   }
-`;
-
+`
 
 type QuizParams = {
   id: string
@@ -47,9 +46,9 @@ const SingleBook = () => {
 
   const [errorMessage, setErrorMessage] = useState('')
 
-  const isIncart = useSelector((state: AppState) => state.order.inCart).map(p => p._id).includes(id)
-  const cart = useSelector((state: AppState) => state.order.inCart)
-  console.log('äincart', cart, 'id', id,'isIncart',isIncart )
+  const isIncart = useSelector((state: AppState) => state.order.inCart)
+    .map((p) => p._id)
+    .includes(id)
 
   useEffect(() => {
     userService.getSingleBook(id).then(
@@ -63,20 +62,34 @@ const SingleBook = () => {
   }, [id])
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = '/assets/book-placeholder.png';
-  };
+    e.currentTarget.src = '/assets/book-placeholder.png'
+  }
   function handleNavigation() {
-    navigate('/');
+    navigate('/')
   }
 
-
   return (
-    <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center' }}>
+    <div
+      style={{ marginTop: '40px', display: 'flex', justifyContent: 'center' }}
+    >
       {book._id ? (
-        <Card style={{ width: '85%', maxWidth: '1400px', backgroundColor: 'transparent', border: 'none' }}>
+        <Card
+          style={{
+            width: '85%',
+            maxWidth: '1400px',
+            backgroundColor: 'transparent',
+            border: 'none',
+          }}
+        >
           <CONTAINER>
             <div style={{ maxWidth: '1080px', width: '100%' }}>
-              <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  paddingTop: '56.25%',
+                }}
+              >
                 <Card.Img
                   variant="top"
                   src={book.img}
@@ -86,7 +99,7 @@ const SingleBook = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover'
+                    objectFit: 'cover',
                   }}
                   onError={handleImageError}
                 />
@@ -96,12 +109,20 @@ const SingleBook = () => {
               </Card.Title>
             </div>
 
-            <div style={{ padding: '20px', minWidth: '200px', maxWidth: '300px' }}>
+            <div
+              style={{ padding: '20px', minWidth: '200px', maxWidth: '300px' }}
+            >
               <Card.Text>
-                <strong>Author:</strong> {book.authors && book.authors.length > 0 ? book.authors.map(a => `${a.firstName} ${a.lastName}`).join(', ') : 'Not available'}
+                <strong>Author:</strong>{' '}
+                {book.authors && book.authors.length > 0
+                  ? book.authors
+                    .map((a) => `${a.firstName} ${a.lastName}`)
+                    .join(', ')
+                  : 'Not available'}
               </Card.Text>
               <Card.Text>
-                <strong>Publisher:</strong> {book.publisherName || 'Not available'}
+                <strong>Publisher:</strong>{' '}
+                {book.publisherName || 'Not available'}
               </Card.Text>
               <Card.Text>
                 <strong>Year:</strong> {book.publishedYear || 'Not available'}
@@ -113,14 +134,15 @@ const SingleBook = () => {
                 <strong>Pages:</strong> {book.pageCount || 'Not available'}
               </Card.Text>
               <Card.Text>
-                <strong>Genres:</strong> {book.genres && book.genres.length > 0 ? book.genres.join(', ') : 'Not available'}
+                <strong>Genres:</strong>{' '}
+                {book.genres && book.genres.length > 0
+                  ? book.genres.join(', ')
+                  : 'Not available'}
               </Card.Text>
             </div>
-          </CONTAINER >
+          </CONTAINER>
 
-          <Card.Text >
-            {book.description}
-          </Card.Text>
+          <Card.Text>{book.description}</Card.Text>
           <div>
             <BUTTON
               onClick={() => dispatch(addProduct(book))}
@@ -143,6 +165,6 @@ const SingleBook = () => {
         </div>
       )}
     </div>
-  );
+  )
 }
 export default SingleBook

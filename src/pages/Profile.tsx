@@ -11,7 +11,6 @@ const Profile: React.FC = () : ReactElement=> {
   if(!currentCustomer) {
     window.location.reload();
   }
-  console.log('currentCustomer',currentCustomer)
   return (
     <div className="container">
       <Card bg="primary" text="white" style={{ width: '18rem' }}>

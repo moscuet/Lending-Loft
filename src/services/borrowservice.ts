@@ -13,6 +13,9 @@ const API_URL = process.env.REACT_APP_API_URL
 
 
 class  borrowService {
+  getAllBorrowList() {
+      throw new Error('Method not implemented.');
+  }
   deleteBorrow(_id: string) {
     axios.delete(API_URL+ '/borrows/'+ _id)
   }
