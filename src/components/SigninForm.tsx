@@ -8,7 +8,6 @@ import { login } from '../redux/actions/auth'
 import { BUTTON, CONTAINER, MYFORM } from './ui/StyledComponenet'
 import TestLoginPopup from './ui/InfoPopup'
 
-
 const Signin = (): ReactElement => {
   const navigate = useNavigate();
 
